@@ -1,0 +1,147 @@
+/* ─── v6 About bento grid ────────────────────────────────── */
+.bentogrid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* Row 1 */
+.tileYellow {
+  grid-column: span 5;
+  background: var(--yellow);
+  border-radius: var(--rad);
+  padding: 28px;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+.tilePhoto1 {
+  grid-column: span 4;
+  border-radius: var(--rad);
+  min-height: 360px;
+  overflow: hidden;
+  background: var(--paper-2);
+  position: relative;
+}
+.tileCol3 {
+  grid-column: span 3;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+.tileSmall {
+  background: var(--paper-2);
+  border-radius: var(--rad);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.tileInk {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--rad);
+  padding: 22px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Row 2 */
+.tileStats {
+  grid-column: span 4;
+  background: var(--paper-2);
+  border-radius: var(--rad);
+  padding: 24px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+.tilePhoto2 {
+  grid-column: span 4;
+  border-radius: var(--rad);
+  min-height: 200px;
+  overflow: hidden;
+  background: var(--paper-2);
+  position: relative;
+}
+.tileBlue {
+  grid-column: span 4;
+  background: var(--blue);
+  color: var(--paper);
+  border-radius: var(--rad);
+  padding: 24px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Photo tile content */
+.photoPlaceholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e8e8e0 0%, #d5d5cc 100%);
+}
+.photoPlaceholder svg { opacity: 0.25; }
+.photoLabel {
+  position: absolute;
+  bottom: 14px;
+  left: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.5;
+}
+
+/* H2 stat number */
+.bigNum {
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-top: 8px;
+}
+.bigNumAccent { color: var(--blue); }
+.bigNumYellow { color: var(--yellow); }
+.bigNumCoral { color: var(--coral); }
+
+.tileLabel {
+  font-size: 16px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+.tileText {
+  font-size: 13px;
+  line-height: 1.55;
+  opacity: 0.6;
+  margin-top: 'auto';
+}
+
+.tileActions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .bentogrid { grid-template-columns: 1fr 1fr 1fr; }
+  .tileYellow, .tilePhoto1, .tileCol3,
+  .tileStats, .tilePhoto2, .tileBlue { grid-column: span 1; min-height: 280px; }
+  .tileCol3 { grid-template-rows: auto auto; }
+}
+@media (max-width: 640px) {
+  .bentogrid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tileYellow { grid-column: span 2; }
+  .tilePhoto1 { grid-column: span 1; min-height: 220px; }
+  .tileCol3 { grid-column: span 1; }
+  .tileStats { grid-column: span 2; }
+  .tilePhoto2 { grid-column: span 1; }
+  .tileBlue { grid-column: span 1; }
+}

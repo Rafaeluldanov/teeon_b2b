@@ -1,0 +1,168 @@
+/* ─── v6 Footer: dark 4-column ───────────────────────────── */
+.footer {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.65);
+  border-radius: var(--rad);
+  padding: 52px 52px 0;
+  margin-bottom: 16px;
+}
+
+/* ─── Top grid ────────────────────────────────────────────── */
+.top {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr 1.1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Brand column ────────────────────────────────────────── */
+.brand { display: flex; flex-direction: column; gap: 14px; }
+
+.logo {
+  display: inline-flex;
+  align-items: baseline;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+.logoText { color: var(--paper); }
+.logoAccent { color: var(--yellow); }
+
+.brandDesc {
+  font-size: 13px;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.4);
+  max-width: 280px;
+}
+
+/* Messenger icons */
+.contactsList { display: flex; flex-direction: column; gap: 3px; }
+.contactPhone {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--paper);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.contactPhone:hover { color: var(--yellow); }
+.contactEmail {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.contactEmail:hover { color: rgba(255, 255, 255, 0.8); }
+.address {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.3);
+  line-height: 1.5;
+}
+.messengers { display: flex; gap: 8px; }
+.messengerBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--rad-sm);
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.messengerBtn:hover { border-color: rgba(255,255,255,0.4); color: var(--paper); }
+
+.brandCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 9px 18px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: var(--rad-pill);
+  text-decoration: none;
+  transition: background 0.15s;
+  width: fit-content;
+}
+.brandCta:hover { background: #ffe65a; }
+.brandCtaIc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(10,14,26,0.12);
+}
+
+/* ─── Nav columns ─────────────────────────────────────────── */
+.colTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 14px;
+  display: block;
+}
+.colTitleLink { color: inherit; text-decoration: none; transition: color 0.15s; }
+.colTitleLink:hover { color: rgba(255,255,255,0.65); }
+
+.links { display: flex; flex-direction: column; gap: 8px; }
+.link {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.15s;
+  line-height: 1.4;
+}
+.link:hover { color: var(--paper); }
+.linkPlain {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.4;
+}
+
+/* ─── Bottom ──────────────────────────────────────────────── */
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+.copy { font-size: 12px; color: rgba(255, 255, 255, 0.22); }
+.docs { display: flex; gap: 20px; flex-wrap: wrap; }
+.docLink {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.28);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s;
+}
+.docLink:hover { color: rgba(255, 255, 255, 0.65); }
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .top { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .brand { grid-column: 1 / -1; }
+  .footer { padding: 40px 32px 0; }
+}
+@media (max-width: 640px) {
+  .top { grid-template-columns: 1fr; }
+  .footer { padding: 32px 20px 0; border-radius: var(--rad-md); }
+  .bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .docs { gap: 12px; }
+}

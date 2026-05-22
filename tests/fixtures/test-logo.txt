@@ -1,0 +1,4 @@
+TEEON QA Test Fixture
+This file simulates a logo/TZ attachment for automated form testing.
+Format: TXT (plain text)
+Size: small (safe for tests)

@@ -1,0 +1,32 @@
+node_modules
+.next
+.git
+.gitignore
+.env
+.env.local
+.env.*.local
+.env.local.save
+.tmp
+public/uploads
+audit-reports
+test-results
+playwright-report
+*.log
+.DS_Store
+
+# локальный бинарник minio из репо — не нужен в образе
+minio
+
+# документация и репорты
+QA_REPORT.md
+SEO_AUDIT_REPORT.md
+docs
+
+# сам скрипт синка и dockerfiles не нужны внутри контейнера
+sync-to-server.sh
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# ts build info
+tsconfig.tsbuildinfo

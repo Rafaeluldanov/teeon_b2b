@@ -1,0 +1,29 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# env
+.env
+.env.local
+.env.*.local
+.env.local.save
+
+# runtime / uploads
+.tmp/
+public/uploads/
+
+# tests / reports
+test-results/
+playwright-report/
+audit-reports/
+
+# local binaries (e.g. MinIO single-binary launcher)
+minio
+
+# misc
+.DS_Store
+*.log

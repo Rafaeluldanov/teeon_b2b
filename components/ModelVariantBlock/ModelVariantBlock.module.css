@@ -1,0 +1,323 @@
+/* ─── ModelVariantBlock v6 ────────────────────────────── */
+.wrapper {
+  padding-top: 48px;
+}
+
+/* Section head */
+.headRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 48px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+.headRow h2 {
+  font-size: clamp(26px, 3vw, 44px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -.035em;
+  margin-top: 8px;
+}
+.headRow h2 em { font-style: normal; color: var(--yellow); }
+.headRow p { font-size: 14.5px; color: var(--muted); line-height: 1.6; padding-top: 10px; }
+.kicker {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Model tabs */
+.modelTabsRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+  flex-wrap: wrap;
+}
+.modelTabsRow::-webkit-scrollbar { display: none; }
+
+.modelTab {
+  padding: 8px 18px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--paper-2);
+  border: 1.5px solid transparent;
+  border-radius: var(--rad-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all .15s;
+  letter-spacing: -.005em;
+}
+.modelTab:hover { color: var(--ink); background: var(--paper); border-color: var(--hair); }
+.modelTabActive {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+/* Model description */
+.modelDesc {
+  font-size: 13.5px;
+  color: var(--muted);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  max-width: 660px;
+}
+
+/* Variants grid */
+.variantsLabel {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.variantsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.variantCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 2px solid var(--hair);
+  border-radius: var(--rad-md);
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color .15s, box-shadow .15s;
+  position: relative;
+}
+.variantCard:hover {
+  border-color: rgba(10,14,26,.25);
+  box-shadow: 0 4px 12px rgba(10,14,26,.07);
+}
+.variantCardActive {
+  border-color: var(--yellow);
+  box-shadow: 0 4px 16px rgba(255,214,10,.3);
+}
+
+.variantCardImg {
+  height: 96px;
+  background: var(--paper-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  overflow: hidden;
+}
+.variantCardImgEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.variantCardImgPlaceholder {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.4;
+  opacity: .6;
+}
+.variantCardBody {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.variantCardName { font-size: 12px; font-weight: 800; color: var(--ink); line-height: 1.3; letter-spacing: -.01em; }
+.variantCardSub { font-size: 11px; color: var(--muted); }
+.variantCheckBadge {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 20px; height: 20px;
+  background: var(--yellow);
+  color: var(--ink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+/* Detail panel */
+.detail {
+  border: 1px solid var(--hair);
+  border-radius: var(--rad);
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: 0 4px 24px rgba(10,14,26,.06);
+}
+
+.detailTop {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 0;
+}
+
+.detailImg {
+  background: var(--paper-2);
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.detailImgEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+.detailImgPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  opacity: .35;
+}
+.detailImgPlaceholder svg { width: 56px; height: 56px; }
+.detailImgPlaceholder span { font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+
+.detailInfo {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-left: 1px solid var(--hair);
+}
+.detailName {
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -.025em;
+  line-height: 1.2;
+}
+.detailSub { font-size: 13px; font-weight: 600; color: var(--muted); margin-top: -6px; }
+.detailCode { font-size: 11.5px; color: var(--muted); font-family: monospace; letter-spacing: .02em; }
+.detailDesc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+.featureList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+.featureItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.5;
+}
+.featureDot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--yellow);
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.ctaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: var(--yellow);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: var(--rad-pill);
+  border: none;
+  cursor: pointer;
+  transition: background .15s;
+  align-self: flex-start;
+  margin-top: 4px;
+  letter-spacing: -.01em;
+}
+.ctaBtn:hover { background: var(--yellow-2, #ffe65a); }
+.ctaBtnIc {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(10,14,26,.12);
+}
+
+.savedNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(27,63,202,.08);
+  border: 1px solid rgba(27,63,202,.2);
+  border-radius: var(--rad-sm);
+  font-size: 13px;
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* Sub-sections below detail */
+.detailSections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--hair);
+}
+.subSection {
+  padding: 22px 24px;
+  border-right: 1px solid var(--hair);
+}
+.subSection:last-child { border-right: none; }
+.subSectionTitle {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.checkList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.checkItem { display: flex; align-items: flex-start; gap: 7px; font-size: 12.5px; color: var(--ink); line-height: 1.5; }
+.checkIcon { color: var(--blue); font-size: 10px; font-weight: 900; margin-top: 2px; flex-shrink: 0; }
+
+.brandingList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+.brandingItem { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink); }
+.brandingDot { width: 4px; height: 4px; border-radius: 50%; background: var(--blue); opacity: .5; flex-shrink: 0; }
+
+.configList { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+.configItem { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink); }
+.configDot { width: 4px; height: 4px; border-radius: 50%; background: var(--muted); opacity: .4; flex-shrink: 0; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .headRow { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .detailTop { grid-template-columns: 1fr; }
+  .detailInfo { border-left: none; border-top: 1px solid var(--hair); }
+  .detailSections { grid-template-columns: 1fr; }
+  .subSection { border-right: none; border-bottom: 1px solid var(--hair); }
+  .subSection:last-child { border-bottom: none; }
+  .variantsGrid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+}
+@media (max-width: 480px) {
+  .modelTabsRow { flex-wrap: nowrap; }
+  .variantsGrid { grid-template-columns: 1fr 1fr; }
+}
