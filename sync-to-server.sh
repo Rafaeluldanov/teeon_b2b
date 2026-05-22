@@ -7,7 +7,7 @@ set -euo pipefail
 
 # ============ НАСТРОЙКИ — ПРАВЬ ЗДЕСЬ ============
 # Папка на локальной машине, ОТКУДА копируем (полный путь):
-SRC="/Users/stanislav/path/to/project"
+SRC="/Users/stanislav/Teeon B2b"
 
 # Куда копируем:
 SSH_HOST="ivan@185.225.34.60"
