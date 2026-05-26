@@ -291,7 +291,7 @@ export default async function CategoryPageContent({ category: cat }: Props) {
           <h2 className={styles.relatedTitle}>Также заказывают</h2>
           <ul className={styles.relatedGrid}>
             {related.map((r) => {
-              const rImgs = collectCategoryImages(r.slug, 4);
+              const rImgs = collectCategoryImages(r.slug, 4, modelsData);
               return (
               <li key={r.slug} className={styles.relatedCard}>
                 <div className={styles.relatedImg} role="img" aria-label={r.name}>
