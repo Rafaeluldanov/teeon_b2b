@@ -7,6 +7,7 @@ import JsonLd from '@/components/JsonLd/JsonLd';
 import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
 import ModelVariantBlock from '@/components/ModelVariantBlock/ModelVariantBlock';
+import SafeImg from '@/components/SafeImg/SafeImg';
 import styles from './CategoryPageContent.module.css';
 
 interface Props {
