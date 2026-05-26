@@ -52,6 +52,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru">
       <body>
+        {/* Инжектит данные админки в localStorage пользователя ДО гидратации.
+            Нужен, чтобы Safari/Firefox/любой "новый" браузер видел те же правки,
+            что и Chrome, в котором админ их редактировал. */}
+        <SiteDataBootstrap />
         <JsonLd data={[getOrganizationSchema(), getWebSiteSchema()]} />
         <LocalStorageWebpMigration />
         <Header />
