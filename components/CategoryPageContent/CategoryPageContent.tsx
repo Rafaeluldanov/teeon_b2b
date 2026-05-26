@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { CatalogCategory } from '@/lib/catalog';
 import { getRelatedCategories } from '@/lib/catalog';
 import { collectCategoryImages } from '@/lib/catalogModels';
+import { getMergedCatalogModels, getMergedPortfolioCases } from '@/lib/serverData';
 import JsonLd from '@/components/JsonLd/JsonLd';
 import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
@@ -10,6 +11,57 @@ import styles from './CategoryPageContent.module.css';
 
 interface Props {
   category: CatalogCategory;
+}
+
+interface PortfolioExample {
+  href: string;
+  title: string;
+  subtitle?: string;
+  image?: string;
+  fabric?: string;
+  color?: string;
+}
+
+// Из портфолио вытаскиваем конкретные продукты, помеченные текущей категорией.
+// Если внутри кейсов нет caseProducts (старый формат) — берём сам кейс с тегом.
+function collectPortfolioForCategory(
+  slug: string,
+  cases: Awaited<ReturnType<typeof getMergedPortfolioCases>>,
+  max: number,
+): PortfolioExample[] {
+  const out: PortfolioExample[] = [];
+
+  for (const c of cases) {
+    if (c.isActive === false) continue;
+    const caseTagged =
+      (c.relatedCatalog ?? []).includes(slug) || (c.tags ?? []).includes(slug);
+
+    if (Array.isArray(c.caseProducts) && c.caseProducts.length) {
+      for (const p of c.caseProducts) {
+        if (p.isActive === false) continue;
+        const productTagged =
+          p.categorySlug === slug || (p.tags ?? []).includes(slug);
+        if (!productTagged && !caseTagged) continue;
+        out.push({
+          href: `/portfolio/${c.slug}/`,
+          title: p.title || c.shortTitle || c.title,
+          subtitle: c.shortTitle && p.title !== c.shortTitle ? c.shortTitle : undefined,
+          image: p.images?.[0] || c.coverImage || c.galleryImages?.[0],
+          fabric: p.material,
+          color: p.color,
+        });
+        if (out.length >= max) return out;
+      }
+    } else if (caseTagged) {
+      out.push({
+        href: `/portfolio/${c.slug}/`,
+        title: c.shortTitle || c.title,
+        image: c.coverImage || c.galleryImages?.[0],
+      });
+      if (out.length >= max) return out;
+    }
+  }
+  return out;
 }
 
 const ArrowIc = () => (
