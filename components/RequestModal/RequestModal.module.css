@@ -1,0 +1,79 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 14, 26, 0.55);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5vh 16px;
+  overflow-y: auto;
+  animation: teeon-modal-fade 0.18s ease-out;
+}
+
+@keyframes teeon-modal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.dialog {
+  position: relative;
+  background: var(--paper, #fff);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 720px;
+  box-shadow: 0 20px 60px rgba(10, 14, 26, 0.25);
+  animation: teeon-modal-pop 0.22s cubic-bezier(.16, 1, .3, 1);
+  overflow: hidden;
+}
+
+@keyframes teeon-modal-pop {
+  from { transform: translateY(20px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0) scale(1);     opacity: 1; }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(10, 14, 26, 0.06);
+  border: none;
+  color: var(--ink, #0a0e1a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+  z-index: 2;
+}
+.closeBtn:hover {
+  background: rgba(10, 14, 26, 0.12);
+}
+
+.body {
+  padding: 8px;
+}
+
+/* Внутри модалки RequestForm задумана как полноразмерная секция —
+   ужимаем её, чтобы вписать в диалог. */
+.body :global(.section-spacer) {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 640px) {
+  .backdrop {
+    padding: 0;
+    align-items: stretch;
+  }
+  .dialog {
+    border-radius: 16px 16px 0 0;
+    max-width: 100%;
+    margin-top: auto;
+    min-height: 90vh;
+  }
+}
