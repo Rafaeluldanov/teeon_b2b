@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import Lightbox, { type LightboxState } from '@/components/Lightbox/Lightbox';
 
 interface Props {
