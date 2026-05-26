@@ -270,17 +270,17 @@ export default async function BrandingPageContent({ method: m }: Props) {
           {portfolioExamples.length > 0 ? (
             portfolioExamples.map((ex, idx) => (
               <li key={`${ex.href}-${idx}`} className={styles.exampleCard}>
-                <Link href={ex.href} className={styles.exampleImg} aria-label={`Кейс: ${ex.title}`}>
-                  {ex.image && (
-                    <SafeImg
-                      src={ex.image}
-                      alt={ex.title}
-                      className={styles.exampleImgEl}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  )}
-                </Link>
+                {ex.image ? (
+                  <ZoomableImage
+                    src={ex.image}
+                    alt={ex.title}
+                    wrapperClassName={styles.exampleImg}
+                    imgClassName={styles.exampleImgEl}
+                    ariaLabel={`Открыть фото: ${ex.title}`}
+                  />
+                ) : (
+                  <div className={styles.exampleImg} role="img" aria-label={ex.title} />
+                )}
                 <div className={styles.exampleBody}>
                   <h3 className={styles.exampleTitle}>{ex.title}</h3>
                   {ex.task && <p className={styles.exampleTask}>{ex.task}</p>}
