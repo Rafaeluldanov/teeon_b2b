@@ -37,6 +37,9 @@ export default function ZoomableImage({
         className={wrapperClassName}
         onClick={() => setState({ images: [src], index: 0 })}
         aria-label={ariaLabel ?? `Открыть изображение: ${alt}`}
+        // Сбрасываем дефолтные стили <button>, чтобы он визуально совпадал
+        // с обычным <div>-контейнером карточки (рамка/padding/курсор).
+        style={{ border: 0, padding: 0, background: 'transparent', cursor: 'zoom-in', font: 'inherit', textAlign: 'inherit' }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
