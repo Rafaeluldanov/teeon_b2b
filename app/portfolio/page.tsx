@@ -4,6 +4,7 @@ import JsonLd from '@/components/JsonLd/JsonLd';
 import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema } from '@/lib/schema';
 import PortfolioCasesGrid from './PortfolioCasesGrid';
+import PortfolioFilterBar from './PortfolioFilterBar';
 import styles from './portfolio.module.css';
 
 export const metadata: Metadata = {
@@ -24,23 +25,6 @@ const ArrowIc = () => (
     <path d="M3 11 L11 3 M5 3 L11 3 L11 9" stroke="currentColor" strokeWidth="1.7"/>
   </svg>
 );
-
-const FILTER_TAGS = [
-  { value: 'hudi',         label: 'Худи' },
-  { value: 'futbolki',     label: 'Футболки' },
-  { value: 'svitshoty',    label: 'Свитшоты' },
-  { value: 'sumki',        label: 'Сумки' },
-  { value: 'zhiletki',     label: 'Жилетки' },
-  { value: 'kurtki',       label: 'Куртки' },
-  { value: 'dozhdeviki',   label: 'Дождевики' },
-  { value: 'vyshivka',     label: 'Вышивка' },
-  { value: 'dtf-pechat',   label: 'DTF-печать' },
-  { value: 'shelkografiya',label: 'Шелкография' },
-  { value: 'event',        label: 'Мероприятия' },
-  { value: 'welcome-pack', label: 'Welcome-наборы' },
-  { value: 'forma',        label: 'Форма персонала' },
-  { value: 'promo',        label: 'Промо' },
-];
 
 const TASKS = [
   {
@@ -150,38 +134,12 @@ export default function PortfolioPage({ searchParams }: Props) {
       </section>
 
       {/* ── Фильтры ── */}
-      <div className={styles.filtersBar} role="navigation" aria-label="Фильтры кейсов">
-        <span className={styles.filtersLead}>Фильтр:</span>
-        <Link
-          href="/portfolio/"
-          className={`${styles.filterTag} ${styles.filterTagAll} ${!activeTag ? styles.filterTagActive : ''}`}
-          aria-pressed={!activeTag}
-        >
-          Все кейсы
-        </Link>
-        {FILTER_TAGS.map((f) => (
-          <Link
-            key={f.value}
-            href={`/portfolio/?tag=${f.value}`}
-            className={`${styles.filterTag} ${activeTag === f.value ? styles.filterTagActive : ''}`}
-            aria-pressed={activeTag === f.value}
-          >
-            {f.label}
-          </Link>
-        ))}
-        {activeTag && (
-          <span className={styles.filterResult} aria-live="polite">
-            Результаты по: «{FILTER_TAGS.find((f) => f.value === activeTag)?.label ?? activeTag}»
-          </span>
-        )}
-      </div>
+      <PortfolioFilterBar activeTag={activeTag} />
 
       {/* ── Сетка кейсов ── */}
       <section id="portfolio-cases" aria-labelledby="cases-heading">
         <h2 id="cases-heading" className="v6-section-head" style={{ display: 'none' }}>
-          {activeTag
-            ? `Кейсы: ${FILTER_TAGS.find((f) => f.value === activeTag)?.label ?? activeTag}`
-            : 'Все кейсы'}
+          {activeTag ? `Кейсы: ${activeTag}` : 'Все кейсы'}
         </h2>
         <PortfolioCasesGrid activeTag={activeTag} />
       </section>

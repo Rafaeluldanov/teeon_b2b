@@ -180,7 +180,7 @@ export default function ProductModelExplorer({ categorySlug }: ProductModelExplo
                   <div className={styles.optionCardImg} aria-label={opt.imageLabel}>
                     {opt.imageSrc ? (
                       /* eslint-disable-next-line @next/next/no-img-element */
-                      <img src={opt.imageSrc} alt={opt.imageLabel} className={styles.optionCardImgEl} />
+                      <img src={opt.imageSrc} alt={opt.imageLabel} className={styles.optionCardImgEl} loading="lazy" decoding="async" />
                     ) : (
                       <span className={styles.optionCardImgLabel}>{opt.imageLabel}</span>
                     )}

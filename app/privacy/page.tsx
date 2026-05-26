@@ -87,7 +87,7 @@ export default function PrivacyPage() {
             <h2 className={styles.h2}>7. Обратная связь</h2>
             <p>
               По вопросам обработки персональных данных обращайтесь по email:{' '}
-              <a href="mailto:info@teeon.ru" className={styles.link}>info@teeon.ru</a>
+              <a href="mailto:teeon@upgifts.ru" className={styles.link}>teeon@upgifts.ru</a>
             </p>
           </section>
 

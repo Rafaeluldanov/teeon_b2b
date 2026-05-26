@@ -1,14 +1,32 @@
 import styles from './Clients.module.css';
 
 const clients = [
-  { mark: 'IT', name: 'IT-компания',        type: 'SaaS · 200+ сотр.',    bg: '' },
-  { mark: 'EV', name: 'Event-агентство',    type: 'Фестивали, форумы',    bg: 'yellow' },
-  { mark: 'PR', name: 'Производство',       type: 'Промышленное',         bg: '' },
-  { mark: 'SP', name: 'Спортивный клуб',    type: 'Любительская лига',    bg: 'blue' },
-  { mark: 'RS', name: 'Ресторан',           type: 'HoReCa · 4 точки',     bg: '' },
-  { mark: 'CF', name: 'Кофейня',            type: 'Сеть, 12 точек',       bg: 'yellow' },
-  { mark: 'RT', name: 'Ритейл-сеть',        type: 'Fashion · 30+ маг.',   bg: '' },
-  { mark: 'MA', name: 'Маркетинг-агент.',   type: 'B2B-промо',            bg: 'blue' },
+  { logo: '/clients/gp.webp',      name: 'GRAND PRIX' },
+  { logo: '/clients/ss.webp',      name: 'Sakura S/F' },
+  { logo: '/clients/ni.webp',      name: 'NIBK' },
+  { logo: '/clients/ns.webp',      name: 'Nyberg School' },
+  { logo: '/clients/vc.webp',      name: 'VIC' },
+  { logo: '/clients/ut.webp',      name: 'Уголь-Транс' },
+  { logo: '/clients/ar.webp',      name: 'АРВЭ' },
+  { logo: '/clients/sv.webp',      name: 'Россия — страна возможностей' },
+  { logo: '/clients/ak.webp',      name: 'Агрорус и Ко' },
+  { logo: '/clients/rs.webp',      name: 'Россети' },
+  { logo: '/clients/un.webp',      name: 'Юнармия' },
+  { logo: '/clients/aa.webp',      name: 'Агро-Альянс' },
+  { logo: '/clients/bx.webp',      name: 'brixo' },
+  { logo: '/clients/kp.webp',      name: 'Kompozit' },
+  { logo: '/clients/os.webp',      name: 'Ostendorf' },
+  { logo: '/clients/st.webp',      name: 'Steingot' },
+  { logo: '/clients/rl.webp',      name: 'Росагролизинг' },
+  { logo: '/clients/sb.webp',      name: 'СИБУР' },
+  { logo: '/clients/ol.webp',      name: 'Олимпийский' },
+  { logo: '/clients/bz.webp',      name: 'BIZONE' },
+  { logo: '/clients/mb.webp',      name: 'Мой Бизнес' },
+  { logo: '/clients/mp.webp',      name: 'majorpack' },
+  { logo: '/clients/la.webp',      name: 'Лидеры АПК' },
+  { logo: '/clients/it.webp',      name: 'Итэлма' },
+  { logo: '/clients/ch1.webp',     name: 'Чайхона №1' },
+  { logo: '/clients/mistral.webp', name: 'Мистраль' },
 ];
 
 export default function Clients() {
@@ -16,20 +34,24 @@ export default function Clients() {
     <section id="clients" className="section-spacer" aria-labelledby="clients-title">
       <div className="v6-section-head">
         <div>
-          <div className="v6-kicker">(07) — Клиенты</div>
-          <h2 id="clients-title">Нам доверяют <em>компании</em></h2>
+          <div className="v6-kicker">(07) — Нам доверяют</div>
+          <h2 id="clients-title">Более 300 <em>постоянных</em> заказчиков</h2>
         </div>
-        <p>От стартапов до сетевого ритейла. Логотипы под NDA — покажем по запросу под договор.</p>
+        <p>Промышленность, госструктуры, агросектор, образование и крупный бизнес. Ниже — компании, для которых мы реализовали проекты с брендированием.</p>
       </div>
 
       <ul className={styles.grid} aria-label="Наши клиенты">
         {clients.map((c) => (
-          <li key={c.mark} className={`${styles.card} ${c.bg ? styles[c.bg as keyof typeof styles] : ''}`}>
-            <span className={styles.mark} aria-hidden="true">{c.mark}</span>
-            <div>
-              <div className={styles.name}>{c.name}</div>
-              <div className={styles.type}>{c.type}</div>
-            </div>
+          <li key={c.name} className={styles.tile} title={c.name}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={c.logo}
+              alt={c.name}
+              className={styles.logo}
+              loading="lazy"
+              width={160}
+              height={90}
+            />
           </li>
         ))}
       </ul>

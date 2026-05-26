@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendLeadEmail } from '@/lib/mail';
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+const MAX_FILE_SIZE = 25 * 1024 * 1024; // 25 MB
 
 const ALLOWED_MIME_TYPES = new Set([
   'application/pdf',
@@ -62,7 +62,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   if (fileEntry && fileEntry instanceof File && fileEntry.size > 0) {
     if (fileEntry.size > MAX_FILE_SIZE) {
       return NextResponse.json(
-        { success: false, message: `Файл слишком большой. Максимальный размер — 10 МБ. Ваш файл: ${(fileEntry.size / 1024 / 1024).toFixed(1)} МБ.` },
+        { success: false, message: `Файл слишком большой. Максимальный размер — 25 МБ. Ваш файл: ${(fileEntry.size / 1024 / 1024).toFixed(1)} МБ.` },
         { status: 400 }
       );
     }

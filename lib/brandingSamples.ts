@@ -20,6 +20,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Классическая машинная вышивка нитью прямо на поверхности ткани изделия. Один из наиболее распространённых и долговечных способов брендирования корпоративной одежды.',
       imageLabel: 'Плоская вышивка логотипа',
+      imageSrc: '/branding-samples/vyshivka/vyshivka-flat.webp',
       effect:
         'Классическая вышивка нитью на поверхности ткани. Объёмная фактура, высокая долговечность.',
       bestFor: [
@@ -39,6 +40,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Структурированная вышивка на передней панели кепки — аккуратный и долговечный способ нанесения логотипа на головные уборы. Требует специальной оснастки и программы под форму изделия.',
       imageLabel: 'Вышивка на кепке',
+      imageSrc: '/branding-samples/vyshivka/vyshivka-cap.webp',
       effect:
         'Структурированная вышивка на передней панели кепки.',
       bestFor: [
@@ -74,6 +76,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Металлизированная нить добавляет блестящий праздничный акцент — подходит для торжественного мерча, подарков партнёрам и лимитированных коллекций. Сочетается с обычной нитью для акцентирования отдельных элементов.',
       imageLabel: 'Вышивка металлизированной нитью',
+      imageSrc: '/branding-samples/vyshivka/vyshivka-metallic-thread.webp',
       effect:
         'Металлизированная нить создаёт блестящий праздничный эффект.',
       bestFor: [
@@ -109,6 +112,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Вышивка выполняется на отдельной нашивке (ткань или жаккард), после чего шеврон пришивается или крепится на изделие. Позволяет добавить брендирование на любое изделие без прямого нанесения на ткань.',
       imageLabel: 'Вышивка на шевроне',
+      imageSrc: '/branding-samples/vyshivka/vyshivka-patch.webp',
       effect:
         'Вышивка выполняется на отдельной нашивке (ткань, жаккард), затем шеврон пришивается или крепится на изделие.',
       bestFor: [
@@ -130,6 +134,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Нашивка с машинной вышивкой — пришивается или термоклеится на изделие. Универсальный способ брендирования для куртки, жилетки или рюкзака без прямого нанесения на ткань изделия.',
       imageLabel: 'Вышитый шеврон',
+      imageSrc: '/branding-samples/shevrony/shevron-embroidered.webp',
       effect:
         'Нашивка с вышивкой, пришитая или закреплённая на изделии.',
       bestFor: ['Куртки', 'Жилетки', 'Форма'],
@@ -142,6 +147,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Нашивка из жаккардовой ткани с вплетённым рисунком — детальный, износостойкий и долговечный вариант для корпоративной формы и спортивных команд. Рисунок не выцветает и не отслаивается со временем.',
       imageLabel: 'Жаккардовый шеврон',
+      imageSrc: '/branding-samples/shevrony/shevron-woven.webp',
       effect:
         'Нашивка из жаккардовой ткани с вплетённым рисунком — детальный и износостойкий.',
       bestFor: [
@@ -158,6 +164,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Нашивка из ПВХ с объёмным рельефом — водонепроницаемая и устойчивая к механическим воздействиям. Особенно популярна для outdoor-одежды, сумок и формы, эксплуатируемой в сложных условиях.',
       imageLabel: 'ПВХ-шеврон',
+      imageSrc: '/branding-samples/shevrony/shevron-pvc.webp',
       effect:
         'Нашивка из ПВХ с объёмным рельефом. Водонепроницаемая и долговечная.',
       bestFor: [
@@ -174,6 +181,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Шеврон крепится на velcro-основе — можно снимать, менять и переставлять на другие изделия. Идеально для унифицированной формы с переменным составом команды или временных мероприятий.',
       imageLabel: 'Шеврон на липучке',
+      imageSrc: '/branding-samples/shevrony/shevron-velcro.webp',
       effect:
         'Шеврон крепится на липучке — можно снимать и менять.',
       bestFor: [
@@ -190,6 +198,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Нашивка, пришитая вручную или на машине по всему контуру — максимально надёжная фиксация для изделий с высокими требованиями к долговечности. Подходит для постоянной корпоративной формы.',
       imageLabel: 'Пришивной шеврон',
+      imageSrc: '/branding-samples/shevrony/shevron-sewn.webp',
       effect:
         'Нашивка пришивается вручную или на машине по контуру.',
       bestFor: [
@@ -208,6 +217,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Трафаретная печать пластизолевыми или водными красками — базовый и проверенный метод для промо-тиражей. Яркие, насыщенные цвета с высокой устойчивостью к стирке и механическому воздействию.',
       imageLabel: 'Классическая шелкография',
+      imageSrc: '/branding-samples/shelkografiya/silk-classic.webp',
       effect:
         'Трафаретная печать пластизолевыми или водными красками. Яркие, стойкие цвета.',
       bestFor: [
@@ -281,6 +291,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Поверх красочного слоя наносится металлическая фольга — создаёт яркий металлический блеск в нужных местах принта. Эффектно смотрится на тёмных и нейтральных основах.',
       imageLabel: 'Шелкография с фольгой',
+      imageSrc: '/branding-samples/shelkografiya/silk-foil.webp',
       effect:
         'Поверх красочного слоя наносится фольга — создаёт металлический блеск.',
       bestFor: [
@@ -316,6 +327,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Специальные чернила с микросферами создают светоотражающий эффект при попадании прямого света — видимость в темноте. В обычном освещении выглядит как сдержанный, почти незаметный принт.',
       imageLabel: 'Световозвращающая шелкография',
+      imageSrc: '/branding-samples/shelkografiya/silk-reflective.webp',
       effect:
         'Специальные чернила создают светоотражающий эффект при попадании прямого света.',
       bestFor: [
@@ -336,6 +348,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Перенос полноцветного логотипа с высокой детализацией через горячую плёнку DTF — универсальный метод для малых и средних тиражей. Подходит для любого количества цветов без доплаты за каждый.',
       imageLabel: 'Полноцветный DTF-перенос',
+      imageSrc: '/branding-samples/dtf-pechat/dtf-fullcolor.webp',
       effect:
         'Чёткий, детальный перенос логотипа с любым количеством цветов.',
       bestFor: [
@@ -352,6 +365,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'DTF-печать без ограничений по количеству цветов и сложности переходов — плавные градиенты, тонкие линии и фотореалистичные детали воспроизводятся точно. Идеально для дизайнерского мерча.',
       imageLabel: 'DTF градиентный принт',
+      imageSrc: '/branding-samples/dtf-pechat/dtf-gradient.webp',
       effect:
         'Плавные переходы цветов и тонкие детали без ограничений.',
       bestFor: [
@@ -368,6 +382,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Белая подложка в составе DTF-переноса обеспечивает яркость и насыщенность цветов даже на чёрном и тёмном фоне — без потери деталей. Результат чёткий и контрастный.',
       imageLabel: 'DTF печать на тёмной ткани',
+      imageSrc: '/branding-samples/dtf-pechat/dtf-dark-fabric.webp',
       effect:
         'Белая подложка в переносе обеспечивает яркость цветов даже на чёрном и тёмном фоне.',
       bestFor: [
@@ -384,6 +399,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Перенос DTF на плотные текстильные поверхности — хлопок, оксфорд, нейлон. Хорошо ложится на шопперы и рюкзаки с ровной плоской зоной нанесения. Широкий диапазон материалов без специальной подготовки поверхности.',
       imageLabel: 'DTF на сумке',
+      imageSrc: '/branding-samples/dtf-pechat/dtf-bag.webp',
       effect:
         'Перенос на плотные текстильные изделия с ровной поверхностью.',
       bestFor: [
@@ -400,6 +416,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Крупноформатный полноцветный DTF-принт на всю спину — для back-принтов, lifestyle-коллекций и event-мерча. Без ограничений по цветам и деталям, доступна обрезка по контуру.',
       imageLabel: 'DTF принт на спине',
+      imageSrc: '/branding-samples/dtf-pechat/dtf-back-print.webp',
       effect:
         'Крупноформатный полноцветный принт без ограничений по площади.',
       bestFor: [
@@ -419,6 +436,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Чернила наносятся прямо на хлопковую ткань без промежуточной плёнки — мягкий, «вжитый» в ткань результат. Подходит для образцов, малых тиражей и дизайнов с большим количеством цветов.',
       imageLabel: 'DTG печать по хлопку',
+      imageSrc: '/branding-samples/dtg-pechat/dtg-cotton-tee.webp',
       effect:
         'Чернила наносятся прямо на ткань — нет переноса, плавный результат.',
       bestFor: [
@@ -435,6 +453,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'DTG воспроизводит фотографии, иллюстрации и сложные изображения с высокой детализацией прямо на хлопке. Используется для персонализированного мерча и дизайнерских ограниченных коллекций.',
       imageLabel: 'DTG фото-принт',
+      imageSrc: '/branding-samples/dtg-pechat/dtg-photo.webp',
       effect:
         'Высокая детализация — воспроизводит фотографии, иллюстрации и сложные изображения.',
       bestFor: [
@@ -451,6 +470,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'DTG позволяет быстро изготовить тестовый образец перед запуском крупного тиража другим методом (например, шелкографией). Клиент видит цвет, посадку и читаемость логотипа до принятия решения о тираже.',
       imageLabel: 'DTG тестовый образец',
+      imageSrc: '/branding-samples/dtg-pechat/dtg-sample.webp',
       effect:
         'Используем DTG для быстрого изготовления образца перед запуском крупного тиража другим методом.',
       bestFor: [
@@ -467,6 +487,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Предварительное нанесение праймера на тёмную ткань обеспечивает яркость и чёткость цветов при прямой печати. Обязательно тестирование на конкретном изделии перед тиражом.',
       imageLabel: 'DTG на тёмной ткани',
+      imageSrc: '/branding-samples/dtg-pechat/dtg-dark-fabric.webp',
       effect:
         'Предварительное нанесение праймера обеспечивает яркость цветов на тёмных основах.',
       bestFor: [
@@ -485,6 +506,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Сублимационный краситель под высокой температурой проникает в структуру полиэстеровой ткани и становится её частью — изображение не отслаивается, не трескается и не выцветает при стирке.',
       imageLabel: 'Полноцветная сублимация',
+      imageSrc: '/branding-samples/sublimaciya/sublimation-fullcolor.webp',
       effect:
         'Краситель проникает в структуру ткани — изображение становится частью материала.',
       bestFor: [
@@ -501,6 +523,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Принт покрывает всю поверхность изделия без белых границ — от воротника до манжет. Изделие кроится и шьётся уже из сублимированного полотна, поэтому можно создавать изделия с непрерывным узором.',
       imageLabel: 'All-over сублимация',
+      imageSrc: '/branding-samples/sublimaciya/sublimation-allover.webp',
       effect:
         'Принт покрывает всю поверхность изделия без границ.',
       bestFor: [
@@ -517,6 +540,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Полноцветная спортивная форма с числами, именами, логотипом и дополнительными графическими элементами — всё в одном нанесении, без шовных полос. Идеально для корпоративных спортивных команд и турниров.',
       imageLabel: 'Сублимация на спортивной форме',
+      imageSrc: '/branding-samples/sublimaciya/sublimation-sport.webp',
       effect:
         'Полноцветная форма с числами, именами и логотипом — вся в одном нанесении.',
       bestFor: [
@@ -552,6 +576,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Рельефное изображение создаётся давлением без фольги и краски — результат видим как объёмная текстура на поверхности материала. Сдержанный и элегантный эффект для кожаных биркок и деловой упаковки.',
       imageLabel: 'Блинтовое тиснение',
+      imageSrc: '/branding-samples/tisnenie/emboss-blind.webp',
       effect:
         'Рельефное изображение без фольги и краски — только давление.',
       bestFor: [
@@ -571,6 +596,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Металлическая или цветная фольга прижимается к поверхности через нагретое клише — создаёт блестящее рельефное изображение. Золото, серебро и другие оттенки фольги для праздничной упаковки.',
       imageLabel: 'Тиснение фольгой',
+      imageSrc: '/branding-samples/tisnenie/emboss-foil.webp',
       effect:
         'Металлическая или цветная фольга с рельефом — праздничный и премиальный вид.',
       bestFor: [
@@ -587,6 +613,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Логотип на кожаной или экокожаной бирке — придаёт изделию законченный продуктовый вид и сигнализирует о качестве бренда. Кожаная бирка с тиснением становится частью упаковки и визуальной идентичности.',
       imageLabel: 'Тиснение на кожаной бирке',
+      imageSrc: '/branding-samples/tisnenie/emboss-leather-patch.webp',
       effect:
         'Логотип на кожаной бирке мерча — придаёт продуктовый и премиальный вид.',
       bestFor: [
@@ -603,6 +630,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Брендированная упаковка с рельефным тиснением — финальный акцент, который завершает оформление подарочного набора и усиливает восприятие бренда ещё до открытия коробки.',
       imageLabel: 'Тиснение на упаковке',
+      imageSrc: '/branding-samples/tisnenie/emboss-packaging.webp',
       effect:
         'Брендированная упаковка с рельефом — завершает оформление подарочного набора.',
       bestFor: [
@@ -622,6 +650,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Лазер выжигает изображение на металлической поверхности с высокой точностью — долговечно, без выцветания и не стирается. Подходит для корпоративных аксессуаров, наград и именных подарков.',
       imageLabel: 'Гравировка на металле',
+      imageSrc: '/branding-samples/gravirovka/engraving-metal.webp',
       effect:
         'Лазер выжигает изображение на металлической поверхности — точно и долговечно.',
       bestFor: [
@@ -638,6 +667,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Логотип или текст на металлической кружке или термосе — точная, долговечная гравировка, которая не выцветает при ежедневной мойке. Один из самых популярных корпоративных сувениров.',
       imageLabel: 'Гравировка на термокружке',
+      imageSrc: '/branding-samples/gravirovka/engraving-mug.webp',
       effect:
         'Логотип или текст на металлической кружке — долговечно, без выцветания.',
       bestFor: [
@@ -654,6 +684,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Имя, логотип или короткая фраза на корпусе металлической ручки — персонализированный деловой сувенир с высоким воспринимаемым качеством. Хорошо работает в составе именного welcome-набора.',
       imageLabel: 'Гравировка на ручке',
+      imageSrc: '/branding-samples/gravirovka/engraving-pen.webp',
       effect:
         'Имя, логотип или фраза на корпусе ручки.',
       bestFor: [
@@ -670,6 +701,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Лазерная гравировка на дереве или фанере создаёт натуральный выжженный эффект — органичный и тёплый образ для эко-ориентированного бренда. Подходит для упаковки, подставок и декоративных элементов.',
       imageLabel: 'Гравировка на дереве',
+      imageSrc: '/branding-samples/gravirovka/engraving-wood.webp',
       effect:
         'Естественный древесный эффект с выжженным изображением.',
       bestFor: [
@@ -686,6 +718,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Небольшая металлическая или пластиковая пластина с гравировкой логотипа — крепится на сумки, чемоданы и аксессуары. Добавляет деталь, которая придаёт вещи продуктовый и брендированный вид.',
       imageLabel: 'Гравировка на шильде',
+      imageSrc: '/branding-samples/gravirovka/engraving-tag.webp',
       effect:
         'Небольшая металлическая или пластиковая пластина с логотипом.',
       bestFor: [
@@ -706,6 +739,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Рисунок вплетён в структуру ткани бирки — не выцветает, не отслаивается, выглядит дорого. Придаёт одежде законченный продуктовый вид и сигнализирует о premium-уровне бренда.',
       imageLabel: 'Жаккардовая бирка',
+      imageSrc: '/branding-samples/birki/label-woven.webp',
       effect:
         'Рисунок вплетён в структуру ткани — не выцветает, не отслаивается.',
       bestFor: [
@@ -722,6 +756,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Мягкая гладкая бирка с печатью — классический и широко используемый вариант для любого типа одежды. Хорошо воспринимается кожей, не колет и не натирает. Доступна в широком диапазоне размеров.',
       imageLabel: 'Сатиновая бирка',
+      imageSrc: '/branding-samples/birki/label-satin.webp',
       effect:
         'Гладкая нежная бирка с печатью — классика для одежды.',
       bestFor: [
@@ -738,6 +773,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Бирка с обозначением размера — обязательный элемент комплектации любого изделия. Оформляем в едином стиле с основной биркой или используем стандартный размерник с составом ткани.',
       imageLabel: 'Размерник одежды',
+      imageSrc: '/branding-samples/birki/label-size.webp',
       effect:
         'Бирка с обозначением размера — обязательный элемент комплектации.',
       bestFor: [
@@ -753,6 +789,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Плотная картонная бирка на верёвке или ленте — видимый элемент упаковки для мерч-магазинов и подарочных наборов. Печатаем логотип, описание, цену или QR-код.',
       imageLabel: 'Картонная навесная бирка',
+      imageSrc: '/branding-samples/birki/label-hangtag.webp',
       effect:
         'Плотная картонная бирка на верёвке или ленте — видимый элемент упаковки.',
       bestFor: [
@@ -769,6 +806,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Кожаная или экокожаная навесная бирка с тиснением или печатью — ощущение дорогого продукта и высокий воспринимаемый статус. Хорошо сочетается с премиальными худи, куртками и сумками.',
       imageLabel: 'Бирка из экокожи',
+      imageSrc: '/branding-samples/birki/label-leather.webp',
       effect:
         'Кожаная или экокожаная навесная бирка с тиснением или печатью.',
       bestFor: [
@@ -785,6 +823,7 @@ export const brandingSamples: BrandingSamplesMap = {
       description:
         'Фирменная наклейка для пакетов, коробок и наборов — простой способ добавить брендирование к упаковке без её полной замены. Печатаем любой формат и дизайн.',
       imageLabel: 'Стикер для упаковки',
+      imageSrc: '/branding-samples/birki/label-sticker.webp',
       effect:
         'Фирменная наклейка для пакетов, коробок и наборов.',
       bestFor: [

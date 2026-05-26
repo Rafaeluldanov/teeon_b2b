@@ -32,9 +32,9 @@ export interface ContactsData {
 }
 
 export const contacts: ContactsData = {
-  email: 'info@teeon.ru',
-  phone: '+7 (999) 000-00-00',
-  phoneRaw: '79990000000',
+  email: 'teeon@upgifts.ru',
+  phone: '+7 (495) 152-37-45',
+  phoneRaw: '74951523745',
   telegram: '@teeon_merch',
   whatsapp: '+7 (999) 000-00-00',
   city: 'Москва',
@@ -53,15 +53,15 @@ export const contacts: ContactsData = {
     {
       icon: '📞',
       title: 'Телефон',
-      value: '+7 (999) 000-00-00',
-      href: 'tel:+79990000000',
+      value: '+7 (495) 152-37-45',
+      href: 'tel:+74951523745',
       description: 'Позвоните в рабочее время',
     },
     {
       icon: '✉️',
       title: 'Email',
-      value: 'info@teeon.ru',
-      href: 'mailto:info@teeon.ru',
+      value: 'teeon@upgifts.ru',
+      href: 'mailto:teeon@upgifts.ru',
       description: 'Можно прислать ТЗ и логотип',
     },
     {

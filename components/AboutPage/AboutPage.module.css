@@ -416,6 +416,19 @@
 .pfMedia.pfYellow { background: var(--yellow); color: var(--ink); }
 .pfMedia.pfBlue   { background: var(--blue);   color: var(--paper); }
 .pfMedia.pfInk    { background: var(--ink);     color: var(--paper); }
+.pfMedia { overflow: hidden; }
+.pfMediaImg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.pfMediaCollage {
+  position: absolute; inset: 0;
+  display: grid; gap: 2px;
+  background: var(--paper-2);
+}
+.pfMediaCollage[data-count="1"] { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+.pfMediaCollage[data-count="2"] { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+.pfMediaCollage[data-count="3"] { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.pfMediaCollage[data-count="3"] .pfMediaCollageImg:nth-child(1) { grid-row: span 2; }
+.pfMediaCollage[data-count="4"] { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.pfMediaCollageImg { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pfChip {
   position: absolute; top: 14px; left: 14px;
   background: rgba(255,255,255,.18);

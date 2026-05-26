@@ -205,6 +205,92 @@ function ImageField({ label, value, onChange, folder = 'catalog' }: ImageFieldPr
   );
 }
 
+// ── GalleryEditor ─────────────────────────────────────────────────────────────
+
+interface GalleryEditorProps {
+  label: string;
+  images: string[];
+  onChange: (imgs: string[]) => void;
+  folder?: string;
+  max?: number;
+}
+
+function GalleryEditor({ label, images, onChange, folder = 'catalog', max = 10 }: GalleryEditorProps) {
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState('');
+  const ref = useRef<HTMLInputElement>(null);
+  const atMax = images.length >= max;
+
+  const handleFile = useCallback(async (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (images.length >= max) { setError(`Максимум ${max} изображений`); return; }
+    setUploading(true); setError('');
+    const fd = new FormData(); fd.append('file', file); fd.append('folder', folder);
+    try {
+      const res = await fetch('/api/admin/upload', { method: 'POST', body: fd, credentials: 'same-origin' });
+      const json = await res.json() as { url?: string; message?: string; error?: string };
+      if (res.status === 401) throw new Error('Сессия истекла, войдите заново.');
+      if (!res.ok || !json.url) throw new Error(json.message ?? json.error ?? 'Ошибка загрузки');
+      onChange([...images, json.url]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Ошибка загрузки');
+    } finally {
+      setUploading(false);
+      if (ref.current) ref.current.value = '';
+    }
+  }, [images, folder, max, onChange]);
+
+  const addUrl = () => { if (!atMax) onChange([...images, '']); };
+  const removeImg = (i: number) => onChange(images.filter((_, idx) => idx !== i));
+  const updateUrl = (i: number, val: string) => onChange(images.map((u, idx) => (idx === i ? val : u)));
+  const move = (i: number, dir: -1 | 1) => {
+    const j = i + dir;
+    if (j < 0 || j >= images.length) return;
+    const next = images.slice();
+    [next[i], next[j]] = [next[j], next[i]];
+    onChange(next);
+  };
+
+  return (
+    <div className={styles.imageField}>
+      <label className={styles.fieldLabel}>
+        {label} <span className={styles.fieldHint}>({images.length} / {max})</span>
+      </label>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+        {images.map((url, i) => (
+          <div key={i} style={{ width: 110, display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <div style={{ width: 110, height: 84, borderRadius: 6, overflow: 'hidden', border: '1.5px solid #e2e8f0', background: '#f8fafc', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+              {url ? (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img src={url} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} onError={(e) => { (e.target as HTMLImageElement).style.opacity = '.25'; }} />
+              ) : <span style={{ fontSize: 22, color: '#94a3b8' }}>📷</span>}
+              <span style={{ position: 'absolute', top: 4, left: 4, background: 'rgba(15,23,42,.7)', color: '#fff', fontSize: 10, fontWeight: 700, padding: '2px 6px', borderRadius: 4 }}>#{i + 1}</span>
+            </div>
+            <input style={{ fontSize: 10, padding: '3px 6px', border: '1px solid #e2e8f0', borderRadius: 4, width: '100%', boxSizing: 'border-box' }} value={url} placeholder="URL..." onChange={(e) => updateUrl(i, e.target.value)} />
+            <div style={{ display: 'flex', gap: 4 }}>
+              <button type="button" className={styles.btnSmall} onClick={() => move(i, -1)} disabled={i === 0} style={{ flex: 1, padding: '3px 6px', fontSize: 11 }}>←</button>
+              <button type="button" className={styles.btnSmall} onClick={() => move(i, 1)} disabled={i === images.length - 1} style={{ flex: 1, padding: '3px 6px', fontSize: 11 }}>→</button>
+            </div>
+            <button type="button" className={styles.btnDangerSm} onClick={() => removeImg(i)} style={{ width: '100%', justifyContent: 'center' }}>Удалить</button>
+          </div>
+        ))}
+        {!atMax && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <label style={{ width: 110, height: 84, borderRadius: 6, border: '2px dashed #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: uploading ? 'wait' : 'pointer', flexDirection: 'column', gap: 4, fontSize: 11, color: '#64748b' }}>
+              {uploading ? '…' : <>📁<span>Загрузить</span></>}
+              <input ref={ref} type="file" accept="image/jpeg,image/png,image/webp,image/svg+xml" style={{ display: 'none' }} onChange={handleFile} disabled={uploading} />
+            </label>
+            <button type="button" className={styles.btnSmall} onClick={addUrl} style={{ width: 110, justifyContent: 'center' }}>+ URL</button>
+          </div>
+        )}
+      </div>
+      {atMax && <p className={styles.fieldHint}>Достигнут лимит — удалите изображение, чтобы добавить новое.</p>}
+      {error && <p className={styles.fieldError}>{error}</p>}
+    </div>
+  );
+}
+
 // ── ColorEditor ───────────────────────────────────────────────────────────────
 
 interface ColorEditorProps {
@@ -328,7 +414,14 @@ function VariantForm({ variant, onSave, onCancel, onDelete, onDuplicate }: Varia
           <textarea className={styles.textarea} rows={3} value={d.description} onChange={(e) => set('description', e.target.value)} />
         </div>
 
-        <ImageField label="Изображение варианта" value={d.image ?? ''} onChange={(url) => set('image', url)} />
+        <ImageField label="Главное изображение варианта" value={d.image ?? ''} onChange={(url) => set('image', url)} />
+
+        <GalleryEditor
+          label="Дополнительные изображения варианта"
+          images={d.galleryImages ?? []}
+          onChange={(imgs) => set('galleryImages', imgs)}
+          max={10}
+        />
 
         <div className={styles.sectionDivider}>Характеристики</div>
 

@@ -3,6 +3,15 @@
 import { useState, useEffect, useRef, useCallback, ChangeEvent } from 'react';
 import { portfolioCases } from '@/lib/portfolio';
 import type { PortfolioCase } from '@/lib/portfolio';
+import {
+  DEFAULT_PORTFOLIO_FILTERS,
+  FILTERS_LS_KEY,
+  loadPortfolioFilters,
+  slugifyFilterValue,
+} from '@/lib/portfolioFilters';
+import type { PortfolioFilter } from '@/lib/portfolioFilters';
+import { catalogCategories } from '@/lib/catalog';
+import { brandingMethods } from '@/lib/branding';
 import styles from './AdminPortfolioEditor.module.css';
 
 const LS_KEY = 'teeon_admin_portfolio_cases';
@@ -25,6 +34,7 @@ export interface PortfolioCaseProduct {
   images: string[];
   sortOrder: number;
   isActive: boolean;
+  tags?: string[];
 }
 
 type AdminCase = PortfolioCase & {
@@ -36,7 +46,7 @@ type AdminCase = PortfolioCase & {
 };
 
 function emptyProduct(order = 1): PortfolioCaseProduct {
-  return { id: uid(), title: '', description: '', characteristics: [], images: [], branding: [], sortOrder: order, isActive: true };
+  return { id: uid(), title: '', description: '', characteristics: [], images: [], branding: [], tags: [], sortOrder: order, isActive: true };
 }
 
 function emptyCase(order = 1): AdminCase {
@@ -161,9 +171,135 @@ function GalleryEditor({ images, onChange, folder = 'portfolio' }: GalleryEditor
   );
 }
 
+// ── LineListEditor ─────────────────────────────────────────────────────────────
+interface LineListEditorProps { value: string[]; onChange: (v: string[]) => void; placeholder?: string; }
+function LineListEditor({ value, onChange, placeholder = 'Добавить…' }: LineListEditorProps) {
+  const [text, setText] = useState('');
+  const add = () => {
+    const v = text.trim();
+    if (!v || value.includes(v)) { setText(''); return; }
+    onChange([...value, v]);
+    setText('');
+  };
+  const remove = (i: number) => onChange(value.filter((_, idx) => idx !== i));
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      {value.length > 0 && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          {value.map((item, i) => (
+            <div key={`${i}-${item}`} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 10px', border: '1.5px solid #e2e8f0', borderRadius: 7, background: '#f8fafc' }}>
+              <span style={{ flex: 1, fontSize: 13, color: '#0f172a' }}>{item}</span>
+              <button type="button" className={styles.btnDangerSm} onClick={() => remove(i)} aria-label="Удалить">✕</button>
+            </div>
+          ))}
+        </div>
+      )}
+      <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+        <input
+          className={styles.input}
+          style={{ flex: 1 }}
+          placeholder={placeholder}
+          value={text}
+          onChange={e => setText(e.target.value)}
+          onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); add(); } }}
+        />
+        <button type="button" className={styles.btnSmall} onClick={add}>+ Добавить</button>
+      </div>
+    </div>
+  );
+}
+
+// ── BrandingPicker ─────────────────────────────────────────────────────────────
+interface BrandingPickerProps {
+  branding: string[];
+  tags: string[];
+  onChange: (next: { branding: string[]; tags: string[] }) => void;
+}
+function BrandingPicker({ branding, tags, onChange }: BrandingPickerProps) {
+  const [custom, setCustom] = useState('');
+  const knownTitles = new Set(brandingMethods.map(m => m.title));
+  const has = (t: string) => branding.includes(t);
+  const toggle = (title: string, slug: string) => {
+    const nextBranding = new Set(branding);
+    const nextTags = new Set(tags);
+    if (nextBranding.has(title)) {
+      nextBranding.delete(title);
+      nextTags.delete(slug);
+    } else {
+      nextBranding.add(title);
+      nextTags.add(slug);
+    }
+    onChange({ branding: Array.from(nextBranding), tags: Array.from(nextTags) });
+  };
+  const remove = (t: string) => {
+    const slug = brandingMethods.find(m => m.title === t)?.slug;
+    onChange({
+      branding: branding.filter(v => v !== t),
+      tags: slug ? tags.filter(v => v !== slug) : tags,
+    });
+  };
+  const addCustom = () => {
+    const v = custom.trim();
+    if (!v || branding.includes(v)) { setCustom(''); return; }
+    onChange({ branding: [...branding, v], tags });
+    setCustom('');
+  };
+  const customs = branding.filter(v => !knownTitles.has(v));
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+        {brandingMethods.map(m => {
+          const checked = has(m.title);
+          return (
+            <label
+              key={m.slug}
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: 6,
+                padding: '5px 10px', borderRadius: 999,
+                border: `1.5px solid ${checked ? '#0f172a' : '#e2e8f0'}`,
+                background: checked ? '#0f172a' : '#fff',
+                color: checked ? '#fff' : '#0f172a',
+                fontSize: 12, fontWeight: 600, cursor: 'pointer',
+              }}
+            >
+              <input type="checkbox" checked={checked} onChange={() => toggle(m.title, m.slug)} style={{ margin: 0 }} />
+              {m.title}
+            </label>
+          );
+        })}
+      </div>
+      {customs.length > 0 && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          {customs.map(c => (
+            <span key={c} style={{ display: 'inline-flex', alignItems: 'center', gap: 4, padding: '4px 8px 4px 10px', border: '1.5px solid #94a3b8', borderRadius: 999, background: '#f8fafc', color: '#0f172a', fontSize: 12, fontWeight: 600 }}>
+              {c}
+              <button type="button" onClick={() => remove(c)} aria-label={`Убрать ${c}`} style={{ border: 0, background: 'transparent', cursor: 'pointer', color: '#64748b', fontSize: 14, lineHeight: 1, padding: '0 2px' }}>×</button>
+            </span>
+          ))}
+        </div>
+      )}
+      <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+        <input
+          className={styles.input}
+          style={{ flex: '0 0 220px' }}
+          placeholder="Своё нанесение…"
+          value={custom}
+          onChange={e => setCustom(e.target.value)}
+          onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); addCustom(); } }}
+        />
+        <button type="button" className={styles.btnSmall} onClick={addCustom}>+ Добавить</button>
+      </div>
+    </div>
+  );
+}
+
 // ── ProductEditor ──────────────────────────────────────────────────────────────
-interface ProductEditorProps { products: PortfolioCaseProduct[]; onChange: (p: PortfolioCaseProduct[]) => void; }
-function ProductEditor({ products, onChange }: ProductEditorProps) {
+interface ProductEditorProps {
+  products: PortfolioCaseProduct[];
+  onChange: (p: PortfolioCaseProduct[]) => void;
+  filters: PortfolioFilter[];
+}
+function ProductEditor({ products, onChange, filters }: ProductEditorProps) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState<PortfolioCaseProduct | null>(null);
 
@@ -205,7 +341,34 @@ function ProductEditor({ products, onChange }: ProductEditorProps) {
         <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
           <div className={styles.row2}>
             <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Название изделия *</label><input className={styles.input} value={draft.title} onChange={e => setD('title', e.target.value)} /></div>
-            <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Slug категории</label><input className={styles.input} value={draft.categorySlug ?? ''} placeholder="futbolki" onChange={e => setD('categorySlug', e.target.value)} /></div>
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>Категория товара</label>
+              <select
+                className={styles.input}
+                value={draft.categorySlug ?? ''}
+                onChange={e => {
+                  const nextSlug = e.target.value || undefined;
+                  const knownSlugs = new Set(catalogCategories.map(c => c.slug));
+                  setDraft(d => {
+                    if (!d) return d;
+                    // Drop any previous known-category slug from tags, then add the new one if known.
+                    const filtered = (d.tags ?? []).filter(t => !knownSlugs.has(t) || t === nextSlug);
+                    const nextTags = nextSlug && knownSlugs.has(nextSlug) && !filtered.includes(nextSlug)
+                      ? [...filtered, nextSlug]
+                      : filtered;
+                    return { ...d, categorySlug: nextSlug, tags: nextTags };
+                  });
+                }}
+              >
+                <option value="">— не выбрано —</option>
+                {catalogCategories.map(cat => (
+                  <option key={cat.slug} value={cat.slug}>{cat.name}</option>
+                ))}
+                {draft.categorySlug && !catalogCategories.some(c => c.slug === draft.categorySlug) && (
+                  <option value={draft.categorySlug}>{draft.categorySlug} (старая)</option>
+                )}
+              </select>
+            </div>
           </div>
           <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Описание</label><textarea className={styles.textarea} rows={2} value={draft.description} onChange={e => setD('description', e.target.value)} /></div>
           <div className={styles.row2}>
@@ -214,12 +377,57 @@ function ProductEditor({ products, onChange }: ProductEditorProps) {
           </div>
           <div className={styles.row2}>
             <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Цвет</label><input className={styles.input} value={draft.color ?? ''} onChange={e => setD('color', e.target.value)} /></div>
-            <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Брендирование <span className={styles.fieldHint}>(по строке)</span></label><textarea className={styles.textarea} rows={2} value={toLines(draft.branding ?? [])} onChange={e => setD('branding', fromLines(e.target.value))} /></div>
+            <div className={styles.fieldGroup}>
+              <label className={styles.fieldLabel}>Нанесение <span className={styles.fieldHint}>(тег)</span></label>
+              <BrandingPicker
+                branding={draft.branding ?? []}
+                tags={draft.tags ?? []}
+                onChange={({ branding, tags }) => setDraft(d => d ? { ...d, branding, tags } : d)}
+              />
+            </div>
           </div>
           <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Характеристики <span className={styles.fieldHint}>(по строке)</span></label><textarea className={styles.textarea} rows={3} value={toLines(draft.characteristics)} onChange={e => setD('characteristics', fromLines(e.target.value))} /></div>
           <div className={styles.fieldGroup}>
             <label className={styles.fieldLabel}>Фото изделия</label>
             <GalleryEditor images={draft.images} onChange={imgs => setD('images', imgs)} />
+          </div>
+          <div className={styles.fieldGroup}>
+            <label className={styles.fieldLabel}>
+              Фильтры портфолио <span className={styles.fieldHint}>(в каких фильтрах будет появляться изделие)</span>
+            </label>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+              {filters.map((f) => {
+                const checked = (draft.tags ?? []).includes(f.value);
+                return (
+                  <label
+                    key={f.value}
+                    style={{
+                      display: 'inline-flex', alignItems: 'center', gap: 6,
+                      padding: '5px 10px', borderRadius: 999,
+                      border: `1.5px solid ${checked ? '#0f172a' : '#e2e8f0'}`,
+                      background: checked ? '#0f172a' : '#fff',
+                      color: checked ? '#fff' : '#0f172a',
+                      fontSize: 12, fontWeight: 600, cursor: 'pointer',
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(e) => {
+                        const cur = new Set(draft.tags ?? []);
+                        if (e.target.checked) cur.add(f.value); else cur.delete(f.value);
+                        setD('tags', Array.from(cur));
+                      }}
+                      style={{ margin: 0 }}
+                    />
+                    {f.label}
+                  </label>
+                );
+              })}
+              {filters.length === 0 && (
+                <span className={styles.fieldHint}>Нет фильтров — добавьте их в секции «Фильтры портфолио» вверху.</span>
+              )}
+            </div>
           </div>
           <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Активно <input type="checkbox" checked={draft.isActive} onChange={e => setD('isActive', e.target.checked)} /></label></div>
         </div>
@@ -234,8 +442,13 @@ function ProductEditor({ products, onChange }: ProductEditorProps) {
         <div key={p.id} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '10px 14px', border: '1.5px solid #e2e8f0', borderRadius: 8, background: '#f8fafc' }}>
           <div style={{ flex: 1, minWidth: 0 }}>
             <span style={{ fontSize: 13, fontWeight: 600, color: '#0f172a' }}>{p.title || '(без названия)'}</span>
-            {p.categorySlug && <span style={{ fontSize: 11, color: '#64748b', marginLeft: 8 }}>{p.categorySlug}</span>}
+            {p.categorySlug && <span style={{ fontSize: 11, color: '#64748b', marginLeft: 8 }}>{catalogCategories.find(c => c.slug === p.categorySlug)?.name ?? p.categorySlug}</span>}
             {p.images.length > 0 && <span style={{ fontSize: 11, color: '#94a3b8', marginLeft: 8 }}>{p.images.length} фото</span>}
+            {(p.tags?.length ?? 0) > 0 && (
+              <span style={{ fontSize: 11, color: '#0f172a', marginLeft: 8 }}>
+                · {(p.tags ?? []).map((t) => filters.find((f) => f.value === t)?.label ?? t).join(', ')}
+              </span>
+            )}
           </div>
           <button type="button" className={styles.btnSmall} onClick={() => startEdit(p)}>Редактировать</button>
           <button type="button" className={styles.btnSmall} onClick={() => duplicateProduct(p)}>Копия</button>
@@ -248,8 +461,13 @@ function ProductEditor({ products, onChange }: ProductEditorProps) {
 }
 
 // ── CaseForm ───────────────────────────────────────────────────────────────────
-interface CaseFormProps { caseItem: AdminCase; isNew: boolean; onSave: (c: AdminCase) => void; onCancel: () => void; onDelete: () => void; onDuplicate: () => void; }
-function CaseForm({ caseItem, isNew, onSave, onCancel, onDelete, onDuplicate }: CaseFormProps) {
+interface CaseFormProps {
+  caseItem: AdminCase; isNew: boolean;
+  onSave: (c: AdminCase) => void; onCancel: () => void;
+  onDelete: () => void; onDuplicate: () => void;
+  filters: PortfolioFilter[];
+}
+function CaseForm({ caseItem, isNew, onSave, onCancel, onDelete, onDuplicate, filters }: CaseFormProps) {
   const [d, setD] = useState<AdminCase>(caseItem);
   const set = <K extends keyof AdminCase>(k: K, v: AdminCase[K]) => setD(p => ({ ...p, [k]: v }));
 
@@ -286,21 +504,36 @@ function CaseForm({ caseItem, isNew, onSave, onCancel, onDelete, onDuplicate }: 
         <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Результат</label><textarea className={styles.textarea} rows={2} value={d.result} onChange={e => set('result', e.target.value)} /></div>
         <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Описание</label><textarea className={styles.textarea} rows={3} value={d.description} onChange={e => set('description', e.target.value)} /></div>
 
-        <div className={styles.divider}>Изображения</div>
-        <ImageField label="Главное изображение (cover)" value={d.coverImage ?? ''} onChange={url => set('coverImage', url)} />
+        <div className={styles.divider}>Изделия в заказе</div>
+        <div className={styles.fieldHint} style={{ marginBottom: 10 }}>
+          Главный блок страницы кейса. Картинки изделий показываются здесь и используются
+          как превью в листинге портфолио и на главной (вместо силуэта‑заглушки).
+        </div>
+        <ProductEditor products={d.caseProducts ?? []} onChange={prods => set('caseProducts', prods)} filters={filters} />
+
+        <div className={styles.divider}>Характеристики</div>
+        <div className={styles.row2}>
+          <div className={styles.fieldGroup}>
+            <label className={styles.fieldLabel}>Изделия</label>
+            <LineListEditor value={d.products} onChange={v => set('products', v)} placeholder="Например: Худи, Свитшоты" />
+          </div>
+          <div className={styles.fieldGroup}>
+            <label className={styles.fieldLabel}>Технологии</label>
+            <LineListEditor value={d.technologies} onChange={v => set('technologies', v)} placeholder="Например: Вышивка, Шелкография" />
+          </div>
+        </div>
+
+        <div className={styles.divider}>Изображения (опционально)</div>
+        <div className={styles.fieldHint} style={{ marginBottom: 10 }}>
+          Cover и галерея больше не отображаются над «Изделиями в заказе». Cover используется
+          только как fallback‑превью в листинге, если у кейса нет изделий с фото. Галерея
+          выводится отдельным блоком на странице кейса (если заполнена).
+        </div>
+        <ImageField label="Главное изображение (cover, fallback)" value={d.coverImage ?? ''} onChange={url => set('coverImage', url)} />
         <div className={styles.fieldGroup}>
           <label className={styles.fieldLabel}>Галерея изображений</label>
           <GalleryEditor images={d.galleryImages ?? []} onChange={imgs => set('galleryImages', imgs)} />
         </div>
-
-        <div className={styles.divider}>Характеристики</div>
-        <div className={styles.row2}>
-          <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Изделия <span className={styles.fieldHint}>(по строке)</span></label><textarea className={styles.textarea} rows={3} value={toLines(d.products)} onChange={e => set('products', fromLines(e.target.value))} /></div>
-          <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Технологии <span className={styles.fieldHint}>(по строке)</span></label><textarea className={styles.textarea} rows={3} value={toLines(d.technologies)} onChange={e => set('technologies', fromLines(e.target.value))} /></div>
-        </div>
-
-        <div className={styles.divider}>Изделия в заказе</div>
-        <ProductEditor products={d.caseProducts ?? []} onChange={prods => set('caseProducts', prods)} />
 
         <div className={styles.divider}>SEO</div>
         <div className={styles.seoNotice}>SEO-данные видны только локально. Для публикации нужно перенести в lib/portfolio.ts.</div>
@@ -316,6 +549,132 @@ function CaseForm({ caseItem, isNew, onSave, onCancel, onDelete, onDuplicate }: 
   );
 }
 
+// ── FilterManager ──────────────────────────────────────────────────────────────
+interface FilterManagerProps {
+  filters: PortfolioFilter[];
+  onChange: (next: PortfolioFilter[]) => void;
+  onStatus: (msg: string) => void;
+}
+function FilterManager({ filters, onChange, onStatus }: FilterManagerProps) {
+  const [open, setOpen] = useState(false);
+  const [newLabel, setNewLabel] = useState('');
+  const [newValue, setNewValue] = useState('');
+  const [editIdx, setEditIdx] = useState<number | null>(null);
+  const [editLabel, setEditLabel] = useState('');
+  const [editValue, setEditValue] = useState('');
+
+  const addFilter = () => {
+    const label = newLabel.trim();
+    if (!label) { onStatus('Введите название фильтра'); return; }
+    const value = (newValue.trim() || slugifyFilterValue(label)).trim();
+    if (!value) { onStatus('Не получилось получить slug'); return; }
+    if (filters.some((f) => f.value === value)) { onStatus(`Фильтр «${value}» уже есть`); return; }
+    onChange([...filters, { value, label }]);
+    setNewLabel(''); setNewValue('');
+    onStatus('Фильтр добавлен');
+  };
+
+  const startEdit = (i: number) => {
+    setEditIdx(i);
+    setEditLabel(filters[i].label);
+    setEditValue(filters[i].value);
+  };
+
+  const saveEdit = () => {
+    if (editIdx === null) return;
+    const label = editLabel.trim();
+    const value = editValue.trim();
+    if (!label || !value) { onStatus('Заполните название и slug'); return; }
+    if (filters.some((f, i) => f.value === value && i !== editIdx)) {
+      onStatus(`Slug «${value}» уже занят`); return;
+    }
+    const next = filters.map((f, i) => i === editIdx ? { value, label } : f);
+    onChange(next);
+    setEditIdx(null);
+    onStatus('Фильтр обновлён');
+  };
+
+  const removeFilter = (i: number) => {
+    if (!confirm(`Удалить фильтр «${filters[i].label}»?`)) return;
+    onChange(filters.filter((_, idx) => idx !== i));
+    if (editIdx === i) setEditIdx(null);
+    onStatus('Фильтр удалён');
+  };
+
+  const move = (i: number, dir: -1 | 1) => {
+    const j = i + dir;
+    if (j < 0 || j >= filters.length) return;
+    const next = [...filters];
+    [next[i], next[j]] = [next[j], next[i]];
+    onChange(next);
+  };
+
+  const resetDefaults = () => {
+    if (!confirm('Сбросить фильтры к значениям по умолчанию?')) return;
+    onChange(DEFAULT_PORTFOLIO_FILTERS);
+    onStatus('Фильтры сброшены');
+  };
+
+  return (
+    <details open={open} onToggle={(e) => setOpen((e.currentTarget as HTMLDetailsElement).open)} style={{ marginBottom: 12, border: '1.5px solid #e2e8f0', borderRadius: 10, background: '#fff' }}>
+      <summary style={{ padding: '12px 16px', cursor: 'pointer', fontSize: 14, fontWeight: 700, color: '#0f172a', listStyle: 'none', display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span>Фильтры портфолио</span>
+        <span style={{ fontSize: 11, color: '#64748b', fontWeight: 500 }}>· {filters.length} шт.</span>
+        <span style={{ marginLeft: 'auto', fontSize: 12, color: '#64748b', fontWeight: 500 }}>{open ? 'Свернуть' : 'Развернуть'}</span>
+      </summary>
+      <div style={{ padding: '0 16px 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <p className={styles.fieldHint} style={{ marginTop: 4 }}>
+          Список чипов в фильтре над сеткой кейсов. Изделия попадают в фильтр, если
+          у них проставлен соответствующий тег (выбирается в карточке изделия).
+        </p>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {filters.map((f, i) => (
+            <div key={`${f.value}-${i}`} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 10px', border: '1px solid #e2e8f0', borderRadius: 8, background: '#f8fafc' }}>
+              {editIdx === i ? (
+                <>
+                  <input className={styles.input} value={editLabel} onChange={(e) => setEditLabel(e.target.value)} placeholder="Название" style={{ flex: 2 }} />
+                  <input className={styles.input} value={editValue} onChange={(e) => setEditValue(e.target.value)} placeholder="slug" style={{ flex: 1 }} />
+                  <button type="button" className={styles.btnPrimary} onClick={saveEdit}>Сохранить</button>
+                  <button type="button" className={styles.btnSecondary} onClick={() => setEditIdx(null)}>Отмена</button>
+                </>
+              ) : (
+                <>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: '#0f172a', minWidth: 140 }}>{f.label}</span>
+                  <span style={{ fontSize: 12, color: '#64748b', fontFamily: 'monospace' }}>{f.value}</span>
+                  <div style={{ marginLeft: 'auto', display: 'flex', gap: 4 }}>
+                    <button type="button" className={styles.btnSmall} onClick={() => move(i, -1)} disabled={i === 0}>↑</button>
+                    <button type="button" className={styles.btnSmall} onClick={() => move(i, 1)} disabled={i === filters.length - 1}>↓</button>
+                    <button type="button" className={styles.btnSmall} onClick={() => startEdit(i)}>Редактировать</button>
+                    <button type="button" className={styles.btnDangerSm} onClick={() => removeFilter(i)}>✕</button>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+          {filters.length === 0 && <div className={styles.colEmpty}>Фильтры пусты</div>}
+        </div>
+
+        <div style={{ display: 'flex', alignItems: 'flex-end', gap: 8, padding: '10px', border: '1.5px dashed #cbd5e1', borderRadius: 8 }}>
+          <div className={styles.fieldGroup} style={{ flex: 2 }}>
+            <label className={styles.fieldLabel}>Название</label>
+            <input className={styles.input} value={newLabel} placeholder="Например: Лонгсливы" onChange={(e) => setNewLabel(e.target.value)} />
+          </div>
+          <div className={styles.fieldGroup} style={{ flex: 1 }}>
+            <label className={styles.fieldLabel}>Slug <span className={styles.fieldHint}>(авто из названия)</span></label>
+            <input className={styles.input} value={newValue} placeholder="longslivy" onChange={(e) => setNewValue(e.target.value)} />
+          </div>
+          <button type="button" className={styles.btnPrimary} onClick={addFilter}>+ Добавить</button>
+        </div>
+
+        <div>
+          <button type="button" className={styles.btnSecondary} onClick={resetDefaults}>↩ Сбросить к значениям по умолчанию</button>
+        </div>
+      </div>
+    </details>
+  );
+}
+
 // ── Main ───────────────────────────────────────────────────────────────────────
 export default function AdminPortfolioEditor() {
   const [cases, setCases] = useState<AdminCase[]>(portfolioCases as AdminCase[]);
@@ -323,13 +682,20 @@ export default function AdminPortfolioEditor() {
   const [isNew, setIsNew] = useState(false);
   const [statusMsg, setStatusMsg] = useState('');
   const [exportJson, setExportJson] = useState('');
+  const [filters, setFilters] = useState<PortfolioFilter[]>(DEFAULT_PORTFOLIO_FILTERS);
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem(LS_KEY);
       if (raw) setCases(JSON.parse(raw) as AdminCase[]);
     } catch { /* ignore */ }
+    setFilters(loadPortfolioFilters());
   }, []);
+
+  const persistFilters = (next: PortfolioFilter[]) => {
+    setFilters(next);
+    try { localStorage.setItem(FILTERS_LS_KEY, JSON.stringify(next)); } catch { /* ignore */ }
+  };
 
   const showStatus = (msg: string) => { setStatusMsg(msg); setTimeout(() => setStatusMsg(''), 3000); };
 
@@ -366,6 +732,11 @@ export default function AdminPortfolioEditor() {
   return (
     <div className={styles.editor}>
       {statusMsg && <div className={styles.statusBar}>{statusMsg}</div>}
+      <FilterManager
+        filters={filters}
+        onChange={persistFilters}
+        onStatus={showStatus}
+      />
       <div className={styles.layout}>
         <div className={styles.listCol}>
           <div className={styles.colHeader}>
@@ -374,12 +745,18 @@ export default function AdminPortfolioEditor() {
           </div>
           <div className={styles.itemList}>
             {cases.length === 0 && <div className={styles.colEmpty}>Нет кейсов</div>}
-            {cases.map(c => (
+            {cases.map(c => {
+              const firstProductImg = (c.caseProducts ?? [])
+                .filter((p) => p.isActive !== false)
+                .flatMap((p) => p.images ?? [])
+                .find(Boolean);
+              const thumb = c.coverImage || firstProductImg;
+              return (
               <div key={c.slug} className={`${styles.item} ${c.slug === selectedId && !isNew ? styles.itemActive : ''} ${c.isActive === false ? styles.itemInactive : ''}`}
                 onClick={() => { setSelectedId(c.slug); setIsNew(false); }}>
                 <div className={styles.itemImg}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  {c.coverImage ? <img src={c.coverImage} alt={c.title} className={styles.itemImgEl} /> : '📋'}
+                  {thumb ? <img src={thumb} alt={c.title} className={styles.itemImgEl} /> : '📋'}
                 </div>
                 <div className={styles.itemBody}>
                   <span className={styles.itemName}>{c.title || c.slug}</span>
@@ -387,7 +764,8 @@ export default function AdminPortfolioEditor() {
                 </div>
                 {c.isActive === false && <span className={styles.inactiveBadge}>Выкл</span>}
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
         <div className={styles.formCol}>
@@ -397,6 +775,7 @@ export default function AdminPortfolioEditor() {
               onSave={handleSave} onCancel={() => { setSelectedId(null); setIsNew(false); }}
               onDelete={() => handleDelete(selectedCase!.slug)}
               onDuplicate={() => handleDuplicate(selectedCase!.slug)}
+              filters={filters}
             />
           )}
         </div>

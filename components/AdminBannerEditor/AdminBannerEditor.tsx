@@ -27,7 +27,7 @@ interface UploadFieldProps {
   label: string; value: string; onChange: (url: string) => void;
   folder?: string; accept?: string; maxMb?: number; hint?: string;
 }
-function UploadField({ label, value, onChange, folder = 'banner', accept = 'image/*', maxMb = 10, hint }: UploadFieldProps) {
+function UploadField({ label, value, onChange, folder = 'banner', accept = 'image/*', maxMb = 50, hint }: UploadFieldProps) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const ref = useRef<HTMLInputElement>(null);
@@ -351,8 +351,8 @@ export default function AdminBannerEditor() {
                   onChange={url => set('videoSrc', url)}
                   folder="banner"
                   accept="video/mp4,video/webm,video/quicktime"
-                  maxMb={100}
-                  hint="Рекомендуется MP4, до 100 МБ"
+                  maxMb={500}
+                  hint="Рекомендуется MP4, до 500 МБ"
                 />
                 <UploadField
                   label="Постер (изображение для паузы/загрузки)"
@@ -373,8 +373,8 @@ export default function AdminBannerEditor() {
                 onChange={url => set('imageSrc', url)}
                 folder="banner"
                 accept="image/jpeg,image/png,image/webp,image/svg+xml"
-                maxMb={10}
-                hint="JPG, PNG, WebP или SVG, до 10 МБ"
+                maxMb={50}
+                hint="JPG, PNG, WebP или SVG, до 50 МБ"
               />
             )}
           </div>

@@ -89,9 +89,14 @@ lib/
 - Затем прописать `imageSrc` в `lib/catalogSamples.ts`
 
 ### Для брендирования
-- Путь: `public/images/branding/<slug>/<filename>.jpg`
-- Например: `public/images/branding/vyshivka/3d-cap.jpg`
-- Затем прописать `imageSrc` в `lib/brandingSamples.ts`
+- Путь: `public/branding-samples/<method-slug>/<filename>.webp`
+- Например: `public/branding-samples/vyshivka/vyshivka-cap.webp`
+- Состояние на 2026-05-25: загружено 39 из 46 фото (все Unsplash License, иллюстративные стоки). Это **временные мокапы** — перед публикацией продакшна рекомендуется заменить на собственные фото работ TEEON через админку.
+- `imageSrc` прописан в `lib/brandingSamples.ts` для тех 39 вариантов, у которых файл есть на диске. Остальные 7 рендерятся CSS-плейсхолдером «Фото не добавлено» и ждут собственной съёмки.
+- Что ещё нужно добавить: [docs/BRANDING_IMAGE_TODO.md](docs/BRANDING_IMAGE_TODO.md)
+- Что уже добавлено и под какой лицензией: [docs/BRANDING_IMAGE_SOURCES.md](docs/BRANDING_IMAGE_SOURCES.md) + [public/branding-samples/sources.json](public/branding-samples/sources.json)
+- Замена/загрузка через админку: `/admin/catalog-editor/` → вкладка «Нанесение» → метод → вариант → поле «Фото варианта» (файл уйдёт в `/uploads/branding/`).
+- Запрещено: случайные картинки из Google, превью со стоков с водяными знаками, фото с чужими логотипами, фото конкурентов, hotlink на внешние CDN.
 
 ## Редактирование характеристик товаров
 

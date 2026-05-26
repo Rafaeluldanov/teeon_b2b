@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { portfolioCases } from '@/lib/portfolio';
 import type { PortfolioCase } from '@/lib/portfolio';
+import { DEFAULT_TAG_ALIASES } from '@/lib/portfolioFilters';
+import Lightbox, { type LightboxState } from '@/components/Lightbox/Lightbox';
 import styles from './portfolio.module.css';
 
 const LS_KEY = 'teeon_admin_portfolio_cases';
@@ -42,11 +44,96 @@ function Silhouette({ kind, opacity }: { kind: CaseKind; opacity: number }) {
   );
 }
 
+interface CaseProductLite {
+  id?: string;
+  title?: string;
+  description?: string;
+  quantity?: string;
+  material?: string;
+  color?: string;
+  characteristics?: string[];
+  images: string[];
+  isActive?: boolean;
+  sortOrder?: number;
+  categorySlug?: string;
+  branding?: string[];
+  tags?: string[];
+}
+
 type AdminCase = PortfolioCase & {
   coverImage?: string;
   sortOrder?: number;
   isActive?: boolean;
+  caseProducts?: CaseProductLite[];
 };
+
+// Алиасы (русские слова) для fallback-матча по свободному тексту:
+// названию изделия, технологиям кейса, полю «Брендирование».
+const TAG_ALIASES = DEFAULT_TAG_ALIASES;
+
+function norm(s: string): string {
+  return s.toLowerCase().replace(/ё/g, 'е').trim();
+}
+
+function caseMatchesTag(c: AdminCase, tag: string): boolean {
+  if (!tag) return true;
+  // Кейс виден в фильтре только если у него есть хотя бы одно подходящее по строгому матчу изделие.
+  const products = (c.caseProducts ?? []).filter((p) => p.isActive !== false);
+  return products.some((p) => productMatchesTag(p, c, tag));
+}
+
+function productMatchesTag(p: CaseProductLite, _parent: AdminCase, tag: string): boolean {
+  if (!tag) return true;
+
+  // Строгий матч: только данные самого изделия. Тег родительского кейса/его технологии
+  // больше не наследуются — иначе в фильтре «Вышивка» оказывались изделия без вышивки.
+  if (p.tags?.includes(tag)) return true;
+  if (p.categorySlug === tag) return true;
+
+  // Fallback для старых данных без явного тега — ищем алиас в названии и брендировании изделия.
+  const aliases = TAG_ALIASES[tag] ?? [];
+  if (aliases.length > 0) {
+    const haystack = [p.title ?? '', ...(p.branding ?? [])].map(norm);
+    if (aliases.some((a) => haystack.some((h) => h.includes(a)))) return true;
+  }
+
+  return false;
+}
+
+interface ProductWithCase {
+  product: CaseProductLite;
+  parent: AdminCase;
+  key: string;
+}
+
+function collectMatchingProducts(cases: AdminCase[], tag: string): ProductWithCase[] {
+  const out: ProductWithCase[] = [];
+  for (const c of cases) {
+    if (c.isActive === false) continue;
+    const products = (c.caseProducts ?? [])
+      .filter((p) => p.isActive !== false)
+      .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
+    for (const p of products) {
+      if (!productMatchesTag(p, c, tag)) continue;
+      out.push({ product: p, parent: c, key: `${c.slug}__${p.id ?? p.title ?? out.length}` });
+    }
+  }
+  return out;
+}
+
+function collectProductImages(c: AdminCase, max = 4): string[] {
+  const out: string[] = [];
+  const prods = (c.caseProducts ?? [])
+    .filter((p) => p.isActive !== false)
+    .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
+  for (const p of prods) {
+    for (const img of p.images ?? []) {
+      if (img && !out.includes(img)) out.push(img);
+      if (out.length >= max) return out;
+    }
+  }
+  return out;
+}
 
 interface Props {
   activeTag: string;
@@ -54,6 +141,7 @@ interface Props {
 
 export default function PortfolioCasesGrid({ activeTag }: Props) {
   const [cases, setCases] = useState<AdminCase[]>(portfolioCases as AdminCase[]);
+  const [lightbox, setLightbox] = useState<LightboxState | null>(null);
 
   useEffect(() => {
     try {
@@ -62,14 +150,105 @@ export default function PortfolioCasesGrid({ activeTag }: Props) {
     } catch { /* ignore */ }
   }, []);
 
-  const filtered = cases
-    .filter((c) => c.isActive !== false)
-    .filter((c) => !activeTag || c.tags.includes(activeTag));
+  // Активен фильтр — показываем отдельные карточки изделий из кейсов.
+  if (activeTag) {
+    const visibleCases = cases.filter((c) => c.isActive !== false && caseMatchesTag(c, activeTag));
+    const items = collectMatchingProducts(visibleCases, activeTag);
+
+    if (items.length === 0) {
+      return (
+        <div className={styles.emptyState}>
+          <p className={styles.emptyText}>По выбранному фильтру изделий пока нет.</p>
+          <Link href="/portfolio/" className="v6-btn v6-btn--ghost-d">Смотреть все кейсы</Link>
+        </div>
+      );
+    }
+
+    return (
+      <>
+        <p className={styles.filterResult} aria-live="polite">
+          Найдено изделий: {items.length}
+        </p>
+        <ul className={styles.productsGrid}>
+          {items.map(({ product: p, parent, key }) => (
+            <li key={key} className={styles.productCard}>
+              {p.images && p.images.length > 0 ? (
+                <div className={styles.productImgs} data-count={Math.min(p.images.length, 3)}>
+                  {p.images.slice(0, 3).map((img, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      className={styles.productImgWrap}
+                      onClick={() => setLightbox({ images: p.images, index: i })}
+                      aria-label={`Открыть фото: ${p.title ?? parent.title} ${i + 1}`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={img}
+                        alt={`${p.title ?? parent.title} фото ${i + 1}`}
+                        className={styles.productImgEl}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className={`${styles.productImgs} ${styles.productImgsEmpty}`}>
+                  <Silhouette
+                    kind={(SLUG_META[parent.slug]?.kind ?? 'tee') as CaseKind}
+                    opacity={0.4}
+                  />
+                </div>
+              )}
+              <div className={styles.productBody}>
+                <Link href={`/portfolio/${parent.slug}/`} className={styles.productCaseChip}>
+                  {parent.clientType || parent.title}
+                </Link>
+                <h3 className={styles.productTitle}>{p.title || parent.title}</h3>
+                {p.description && <p className={styles.productDesc}>{p.description}</p>}
+                {(p.quantity || p.material || p.color) && (
+                  <dl className={styles.productMeta}>
+                    {p.quantity && (
+                      <div className={styles.productMetaRow}><dt>Количество</dt><dd>{p.quantity}</dd></div>
+                    )}
+                    {p.material && (
+                      <div className={styles.productMetaRow}><dt>Материал</dt><dd>{p.material}</dd></div>
+                    )}
+                    {p.color && (
+                      <div className={styles.productMetaRow}><dt>Цвет</dt><dd>{p.color}</dd></div>
+                    )}
+                  </dl>
+                )}
+                {p.branding && p.branding.length > 0 && (
+                  <p className={styles.productBranding}>Брендирование: {p.branding.join(', ')}</p>
+                )}
+                {p.characteristics && p.characteristics.length > 0 && (
+                  <ul className={styles.productChars}>
+                    {p.characteristics.map((ch) => <li key={ch}>{ch}</li>)}
+                  </ul>
+                )}
+                <div className={styles.productActions}>
+                  <Link href={`/portfolio/${parent.slug}/`} className={styles.caseBtn}>
+                    Смотреть кейс
+                  </Link>
+                  <a href="/#request" className={styles.caseQuote}>Рассчитать похожий →</a>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <Lightbox state={lightbox} onChange={setLightbox} />
+      </>
+    );
+  }
+
+  // Фильтр не активен — старая сетка кейсов.
+  const filtered = cases.filter((c) => c.isActive !== false);
 
   if (filtered.length === 0) {
     return (
       <div className={styles.emptyState}>
-        <p className={styles.emptyText}>По выбранному фильтру кейсов пока нет.</p>
+        <p className={styles.emptyText}>Кейсов пока нет.</p>
         <Link href="/portfolio/" className="v6-btn v6-btn--ghost-d">Смотреть все кейсы</Link>
       </div>
     );
@@ -77,20 +256,18 @@ export default function PortfolioCasesGrid({ activeTag }: Props) {
 
   return (
     <>
-      {activeTag && (
-        <p className={styles.filterResult} aria-live="polite">
-          Найдено кейсов: {filtered.length}
-        </p>
-      )}
       <ul className={styles.casesGrid}>
         {filtered.map((c) => {
           const meta = SLUG_META[c.slug] ?? { kind: 'tee' as CaseKind, bg: 'bgPaper2' };
           const bgClass = styles[meta.bg as keyof typeof styles] ?? styles.bgPaper2;
           const opacity = meta.bg === 'bgPaper2' ? 0.5 : 0.4;
 
+          const productImgs = collectProductImages(c, 4);
+          const hasMedia = c.coverImage || productImgs.length > 0;
+
           return (
             <li key={c.slug} className={styles.caseCard}>
-              <div className={`${styles.caseMedia} ${bgClass}`}>
+              <div className={`${styles.caseMedia} ${hasMedia ? '' : bgClass}`}>
                 <span className={styles.caseChip}>{c.clientType}</span>
                 <span className={styles.caseYear}>{c.year}</span>
                 {c.coverImage ? (
@@ -101,6 +278,19 @@ export default function PortfolioCasesGrid({ activeTag }: Props) {
                     className={styles.caseMediaImg}
                     onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                   />
+                ) : productImgs.length > 0 ? (
+                  <div className={styles.caseMediaCollage} data-count={Math.min(productImgs.length, 4)}>
+                    {productImgs.slice(0, 4).map((img, i) => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        key={i}
+                        src={img}
+                        alt=""
+                        className={styles.caseMediaCollageImg}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    ))}
+                  </div>
                 ) : (
                   <Silhouette kind={meta.kind} opacity={opacity} />
                 )}

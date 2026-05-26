@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import { portfolioCases, getPortfolioCase } from '@/lib/portfolio';
 import PortfolioCasePage from '@/components/PortfolioCasePage/PortfolioCasePage';
+import PortfolioCaseLoader from '@/components/PortfolioCasePage/PortfolioCaseLoader';
 import { siteConfig } from '@/lib/seo';
 
 interface Props {
   params: { slug: string };
 }
+
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return portfolioCases.map((c) => ({ slug: c.slug }));
@@ -14,7 +16,12 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const c = getPortfolioCase(params.slug);
-  if (!c) return {};
+  if (!c) {
+    return {
+      title: 'Кейс портфолио | TEEON',
+      robots: { index: false, follow: false },
+    };
+  }
   const url = `${siteConfig.url}/portfolio/${c.slug}/`;
   return {
     title: c.seoTitle,
@@ -30,6 +37,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default function Page({ params }: Props) {
   const c = getPortfolioCase(params.slug);
-  if (!c) notFound();
-  return <PortfolioCasePage caseItem={c} />;
+  if (c) return <PortfolioCasePage caseItem={c} />;
+  return <PortfolioCaseLoader slug={params.slug} />;
 }

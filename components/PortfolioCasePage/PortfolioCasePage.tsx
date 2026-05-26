@@ -7,6 +7,7 @@ import { getRelatedPortfolioCases } from '@/lib/portfolio';
 import { catalogCategories } from '@/lib/catalog';
 import { brandingMethods } from '@/lib/branding';
 import JsonLd from '@/components/JsonLd/JsonLd';
+import Lightbox, { type LightboxState } from '@/components/Lightbox/Lightbox';
 import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getPortfolioCaseSchema } from '@/lib/schema';
 import styles from './PortfolioCasePage.module.css';
@@ -89,14 +90,31 @@ interface Props {
   caseItem: PortfolioCase;
 }
 
+function collectProductImages(c: AdminCase, max = 4): string[] {
+  const out: string[] = [];
+  const prods = (c.caseProducts ?? [])
+    .filter((p) => p.isActive !== false)
+    .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
+  for (const p of prods) {
+    for (const img of p.images ?? []) {
+      if (img && !out.includes(img)) out.push(img);
+      if (out.length >= max) return out;
+    }
+  }
+  return out;
+}
+
 export default function PortfolioCasePage({ caseItem }: Props) {
   const [c, setC] = useState<AdminCase>(caseItem as AdminCase);
+  const [allCases, setAllCases] = useState<AdminCase[]>([]);
+  const [lightbox, setLightbox] = useState<LightboxState | null>(null);
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem(LS_KEY);
       if (raw) {
         const cases = JSON.parse(raw) as AdminCase[];
+        setAllCases(cases);
         const override = cases.find((x) => x.slug === caseItem.slug);
         if (override) setC(override);
       }
@@ -114,8 +132,6 @@ export default function PortfolioCasePage({ caseItem }: Props) {
   const activeProducts = (c.caseProducts ?? []).filter((p) => p.isActive !== false);
   const galleryImages = (c.galleryImages ?? []).filter(Boolean);
 
-  const meta = SLUG_META[c.slug] ?? { kind: 'hoodie' as CaseKind, bg: '' };
-
   return (
     <main className="v6-page">
       {/* ── Breadcrumb ── */}
@@ -127,69 +143,6 @@ export default function PortfolioCasePage({ caseItem }: Props) {
         <span aria-current="page">{c.shortTitle}</span>
       </nav>
 
-      {/* ── Hero ── */}
-      <section className={styles.hero} aria-label={c.title}>
-        <div className={styles.heroContent}>
-          <div className={styles.heroMeta}>
-            <span className={styles.heroChip}>{c.clientType}</span>
-            <span className={`${styles.heroChip} ${styles.heroChipYear}`}>{c.year}</span>
-          </div>
-          <h1 className={styles.heroTitle}>{c.title}</h1>
-          <p className={styles.heroIndustry}>{c.industry}</p>
-          <p className={styles.heroDesc}>{c.description}</p>
-          <div className={styles.heroActions}>
-            <a href="/#request" className="v6-btn v6-btn--yellow">
-              Рассчитать похожий проект
-              <span className="v6-ic" aria-hidden="true"><ArrowIc /></span>
-            </a>
-            <Link href="/portfolio/" className={styles.backLink}>
-              ← Все кейсы
-            </Link>
-          </div>
-        </div>
-
-        <dl className={styles.heroStats}>
-          <div className={styles.statItem}>
-            <dt className={styles.statLabel}>Тираж</dt>
-            <dd className={`${styles.statValue} ${styles.statValueLarge}`}>{c.quantity}</dd>
-          </div>
-          <div className={styles.statItem}>
-            <dt className={styles.statLabel}>Срок</dt>
-            <dd className={styles.statValue}>{c.timeline}</dd>
-          </div>
-          <div className={styles.statItem}>
-            <dt className={styles.statLabel}>Год</dt>
-            <dd className={styles.statValue}>{c.year}</dd>
-          </div>
-          <div className={styles.statItem}>
-            <dt className={styles.statLabel}>Технологии</dt>
-            <dd className={styles.statValueSmall}>{c.technologies.join(', ')}</dd>
-          </div>
-        </dl>
-      </section>
-
-      {/* ── Cover ── */}
-      <div
-        className={`${styles.cover} ${meta.bg ? styles[meta.bg as keyof typeof styles] : ''}`}
-        role="img"
-        aria-label={`Обложка кейса: ${c.coverLabel}`}
-      >
-        {c.coverImage ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={c.coverImage}
-            alt={c.coverLabel || c.title}
-            className={styles.coverImg}
-            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-          />
-        ) : (
-          <>
-            <Silhouette kind={meta.kind} opacity={0.18} />
-            <span className={styles.coverLabel}>{c.coverLabel}</span>
-          </>
-        )}
-      </div>
-
       {/* ── Gallery ── */}
       {galleryImages.length > 0 && (
         <ul
@@ -200,16 +153,24 @@ export default function PortfolioCasePage({ caseItem }: Props) {
             <li
               key={i}
               style={{ aspectRatio: '4/3', borderRadius: 'var(--rad-md)', overflow: 'hidden', background: 'var(--paper-2)' }}
-              role="img"
-              aria-label={c.galleryLabels[i] ?? `Фото ${i + 1}`}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={url}
-                alt={c.galleryLabels[i] ?? `Фото ${i + 1}`}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-              />
+              <button
+                type="button"
+                onClick={() => setLightbox({ images: galleryImages, index: i })}
+                aria-label={`Открыть: ${c.galleryLabels[i] ?? `Фото ${i + 1}`}`}
+                style={{ display: 'block', width: '100%', height: '100%', padding: 0, border: 0, background: 'transparent', cursor: 'zoom-in' }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={url}
+                  alt={c.galleryLabels[i] ?? `Фото ${i + 1}`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
+                  {...(i === 0 ? { fetchPriority: 'high' as const } : {})}
+                  onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                />
+              </button>
             </li>
           ))}
         </ul>
@@ -230,15 +191,23 @@ export default function PortfolioCasePage({ caseItem }: Props) {
                 {p.images.length > 0 && (
                   <div className={styles.caseProductImgs}>
                     {p.images.slice(0, 3).map((img, i) => (
-                      <div key={i} className={styles.caseProductImgWrap}>
+                      <button
+                        key={i}
+                        type="button"
+                        className={styles.caseProductImgWrap}
+                        onClick={() => setLightbox({ images: p.images, index: i })}
+                        aria-label={`Открыть фото: ${p.title} ${i + 1}`}
+                      >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={img}
                           alt={`${p.title} фото ${i + 1}`}
                           className={styles.caseProductImgEl}
+                          loading="lazy"
+                          decoding="async"
                           onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                         />
-                      </div>
+                      </button>
                     ))}
                   </div>
                 )}
@@ -370,11 +339,41 @@ export default function PortfolioCasePage({ caseItem }: Props) {
                 coverInk:    'relCaseMediaInk',
               };
               const rBg = rBgMap[rMeta.bg] ?? '';
+              const rAdmin = allCases.find((x) => x.slug === r.slug) ?? (r as AdminCase);
+              const rImgs = collectProductImages(rAdmin, 4);
+              const rHasMedia = rAdmin.coverImage || rImgs.length > 0;
               return (
                 <li key={r.slug} className={styles.relCaseCard}>
-                  <div className={`${styles.relCaseMedia} ${rBg ? styles[rBg as keyof typeof styles] : ''}`}>
+                  <div className={`${styles.relCaseMedia} ${rHasMedia ? '' : (rBg ? styles[rBg as keyof typeof styles] : '')}`}>
                     <span className={styles.relCaseChip}>{r.clientType}</span>
-                    <Silhouette kind={rMeta.kind} opacity={rBg ? 0.4 : 0.45} />
+                    {rAdmin.coverImage ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={rAdmin.coverImage}
+                        alt={r.title}
+                        className={styles.relCaseMediaImg}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    ) : rImgs.length > 0 ? (
+                      <div className={styles.relCaseMediaCollage} data-count={Math.min(rImgs.length, 4)}>
+                        {rImgs.slice(0, 4).map((img, i) => (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            key={i}
+                            src={img}
+                            alt=""
+                            className={styles.relCaseMediaCollageImg}
+                            loading="lazy"
+                            decoding="async"
+                            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <Silhouette kind={rMeta.kind} opacity={rBg ? 0.4 : 0.45} />
+                    )}
                   </div>
                   <div className={styles.relCaseBody}>
                     <h3 className={styles.relCaseTitle}>{r.shortTitle}</h3>
@@ -419,6 +418,8 @@ export default function PortfolioCasePage({ caseItem }: Props) {
         ]),
         getPortfolioCaseSchema(caseItem),
       ]} />
+
+      <Lightbox state={lightbox} onChange={setLightbox} />
     </main>
   );
 }

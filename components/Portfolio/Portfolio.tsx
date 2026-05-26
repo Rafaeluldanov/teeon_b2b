@@ -9,8 +9,33 @@ import type { PortfolioCase } from '@/lib/portfolio';
 const LS_KEY = 'teeon_admin_portfolio_cases';
 const DISPLAY_COUNT = 6;
 
-type AdminCase = PortfolioCase & { coverImage?: string; sortOrder?: number; isActive?: boolean };
+interface CaseProductLite {
+  images: string[];
+  isActive?: boolean;
+  sortOrder?: number;
+}
+
+type AdminCase = PortfolioCase & {
+  coverImage?: string;
+  sortOrder?: number;
+  isActive?: boolean;
+  caseProducts?: CaseProductLite[];
+};
 type CaseKind = 'tee' | 'hoodie' | 'sweat' | 'longsleeve' | 'bag' | 'vest' | 'jacket' | 'raincoat';
+
+function collectProductImages(c: AdminCase, max = 4): string[] {
+  const out: string[] = [];
+  const prods = (c.caseProducts ?? [])
+    .filter((p) => p.isActive !== false)
+    .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0));
+  for (const p of prods) {
+    for (const img of p.images ?? []) {
+      if (img && !out.includes(img)) out.push(img);
+      if (out.length >= max) return out;
+    }
+  }
+  return out;
+}
 
 const SLUG_META: Record<string, { kind: CaseKind; bg: string }> = {
   'hudi-futbolki-komanda':      { kind: 'hoodie',   bg: 'bg-paper2' },
@@ -71,13 +96,30 @@ export default function Portfolio() {
           const meta = SLUG_META[c.slug] ?? { kind: 'tee' as CaseKind, bg: 'bg-paper2' };
           const bgClass = styles[meta.bg as keyof typeof styles] ?? '';
           const opacity = meta.bg === 'bg-paper2' ? 0.55 : 0.45;
+          const productImgs = collectProductImages(c, 4);
+          const hasMedia = c.coverImage || productImgs.length > 0;
           return (
             <li key={c.slug} className={styles.card}>
-              <div className={`${styles.media} ${bgClass}`}>
+              <div className={`${styles.media} ${hasMedia ? '' : bgClass}`}>
                 <span className={styles.chip}>{c.clientType}</span>
                 {c.coverImage ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={c.coverImage} alt={c.title} className={styles.mediaImg} />
+                  <img src={c.coverImage} alt={c.title} className={styles.mediaImg} loading="lazy" decoding="async" />
+                ) : productImgs.length > 0 ? (
+                  <div className={styles.mediaCollage} data-count={Math.min(productImgs.length, 4)}>
+                    {productImgs.slice(0, 4).map((img, i) => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        key={i}
+                        src={img}
+                        alt=""
+                        className={styles.mediaCollageImg}
+                        loading="lazy"
+                        decoding="async"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    ))}
+                  </div>
                 ) : (
                   <Silhouette kind={meta.kind} opacity={opacity} />
                 )}

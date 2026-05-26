@@ -38,17 +38,17 @@ export interface HomeBannerContent {
 }
 
 export const defaultHomeBanner: HomeBannerContent = {
-  title: 'Создаём мерч, который носят не только в офисе',
-  subtitle: 'Промо-одежда и корпоративный мерч под ключ: от идеи, дизайна и образца до пошива, нанесения логотипа, упаковки и доставки.',
-  mediaType: 'video',
-  videoSrc: '/videos/hero-production.mp4',
-  posterSrc: '/images/hero-poster.jpg',
+  title: 'Корпоративный мерч полного цикла — <em>от идеи до поставки</em>',
+  subtitle: 'Создаём корпоративную и рекламную продукцию с нанесением логотипа: собственное производство 1000 м² в Москве, 15+ станков персонализации и швейный цех на 50 машин Juki. Вся продукция произведена в России.',
+  // Без медиа по умолчанию: реальные файлы /videos/hero-production.mp4 и /images/hero-poster.jpg
+  // никогда не лежали в /public/ — баннер настраивается через админку (UploadFile -> WebP).
+  mediaType: 'image',
   mediaLabel: 'Видео производства',
   badges: [
-    { title: '🏭', text: 'Собственный швейный цех' },
-    { title: '🎨', text: '9 методов нанесения' },
-    { title: '✅', text: 'Образец перед тиражом' },
-    { title: '🏢', text: 'Работаем с юрлицами' },
+    { title: '🏭', text: 'Производство 1000 м² в Москве' },
+    { title: '⚙️', text: '15+ станков персонализации' },
+    { title: '🧵', text: '50 машин Juki, 150 000 изд/мес' },
+    { title: '🤝', text: '300+ постоянных клиентов' },
   ],
   ctas: [
     { label: 'Рассчитать стоимость', href: '#request', variant: 'primary' },

@@ -81,37 +81,41 @@ public/uploads/catalog/<filename>.jpg
 
 ---
 
-## Фотографии брендирования
+## Фотографии брендирования (варианты нанесения)
+
+Подробности — в [08-branding-section.md → Изображения вариантов нанесения](./08-branding-section.md#изображения-вариантов-нанесения) и в выделенном разделе ниже («Изображения вариантов нанесения (branding samples)»).
 
 ### Куда класть
 ```
-public/images/branding/<slug>/<filename>.jpg
+public/branding-samples/<method-slug>/<file>.webp
 ```
 
 Примеры:
 ```
-public/images/branding/vyshivka/3d-cap.jpg
-public/images/branding/vyshivka/logo-hoodie.jpg
-public/images/branding/shelkografiya/puff-print.jpg
-public/images/branding/dtf-pechat/gradient-logo.jpg
+public/branding-samples/vyshivka/vyshivka-cap.webp
+public/branding-samples/shelkografiya/silk-classic.webp
+public/branding-samples/dtf-pechat/dtf-fullcolor.webp
 ```
 
 ### Как прописать
 
-В `lib/brandingSamples.ts`:
+В `lib/brandingSamples.ts` уже описаны 46 вариантов; для 39 из них прописан `imageSrc` и файл лежит на диске. Если добавляешь новый вариант — структура такая (тип `BrandingSample`):
+
 ```ts
 {
-  slug: 'vyshivka',
-  samples: [
-    {
-      name: '3D-вышивка на кепке',
-      imageSrc: '/images/branding/vyshivka/3d-cap.jpg',
-      description: '...',
-      tags: ['3D', 'Кепки'],
-    }
-  ]
+  title: '3D-вышивка с подъёмом',
+  description: '…',
+  imageLabel: '3D-вышивка с подъёмом',
+  imageSrc: '/branding-samples/vyshivka/vyshivka-3d.webp', // опционально
+  effect: '…',
+  bestFor: ['…'],
+  materials: ['…'],
+  limitations: ['…'],
+  relatedProducts: ['hudi'],
 }
 ```
+
+Источник и лицензию каждого добавленного файла записываем в [docs/BRANDING_IMAGE_SOURCES.md](./BRANDING_IMAGE_SOURCES.md) и [public/branding-samples/sources.json](../public/branding-samples/sources.json).
 
 ---
 
@@ -260,3 +264,19 @@ export const portfolioCases: PortfolioCase[] = [
 | Фото кейсов в портфолио | Добавить реальные фото проектов |
 | Фото производства в «О нас» | 3 фото: цех, оборудование, готовая партия |
 | `public/og-default.svg` | Реальный баннер 1200×630 px |
+
+---
+
+## Изображения вариантов нанесения (branding samples)
+
+Отдельная категория медиа — фото для раздела `/branding/<method>/`. Подробности в [08-branding-section.md](./08-branding-section.md#изображения-вариантов-нанесения).
+
+| Где лежит | Откуда подгружается | Что делать |
+|---|---|---|
+| `public/branding-samples/<method>/*.webp` | Путь захардкожен в `lib/brandingSamples.ts` (`imageSrc`) | Положить файл с именем из [BRANDING_IMAGE_TODO.md](./BRANDING_IMAGE_TODO.md) |
+| `public/uploads/branding/*` | Подставляется через `/api/admin/upload` из админки | Загрузить через `/admin/catalog-editor/` → «Нанесение» |
+
+**Состояние на 2026-05-25:** 39 из 46 фото загружены (все Unsplash License), 7 ждут собственной съёмки TEEON.
+**Полный список и статус по каждому файлу:** [BRANDING_IMAGE_TODO.md](./BRANDING_IMAGE_TODO.md) (что осталось) и [BRANDING_IMAGE_SOURCES.md](./BRANDING_IMAGE_SOURCES.md) (что уже есть).
+
+⚠ Все изображения должны храниться локально (`public/`), hotlink на внешние CDN запрещён. Перед добавлением — убедиться, что лицензия источника допускает коммерческое использование (Unsplash, Pexels, Pixabay, Wikimedia CC0–CC-BY, собственные фото). Запрещено: случайные картинки из Google, превью со стоков с водяными знаками, фото с чужими логотипами, фото конкурентов.

@@ -4,6 +4,7 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import JsonLd from '@/components/JsonLd/JsonLd';
 import YandexMetrika from '@/components/YandexMetrika/YandexMetrika';
+import LocalStorageWebpMigration from '@/components/LocalStorageWebpMigration/LocalStorageWebpMigration';
 import { siteConfig } from '@/lib/seo';
 import { getOrganizationSchema, getWebSiteSchema } from '@/lib/schema';
 
@@ -51,6 +52,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru">
       <body>
         <JsonLd data={[getOrganizationSchema(), getWebSiteSchema()]} />
+        <LocalStorageWebpMigration />
         <Header />
         {children}
         <Footer />

@@ -21,23 +21,23 @@ export default function About() {
       <div className="v6-section-head">
         <div>
           <div className="v6-kicker">(02) — О компании</div>
-          <h2 id="about-title">Шьём с&nbsp;<em>нуля</em>,<br />а&nbsp;не закупаем</h2>
+          <h2 id="about-title">Производим в&nbsp;<em>Москве</em>,<br />полный цикл под&nbsp;ключ</h2>
         </div>
         <p>
-          Свой цех в Подмосковье — 24 швеи, своё нанесение, своя упаковка. Все этапы под одной крышей: лекало, раскрой, пошив, брендирование, отгрузка. Без посредников и потерь времени между подрядчиками.
+          Собственное производство 1000 м² в Москве с 2018 года: швейный цех на 50 промышленных машин Juki и 15+ станков по персонализации. Идея → дизайн → персонализация → пошив → упаковка → поставка — всё внутри одной производственной площадки.
         </p>
       </div>
 
       <div className={styles.bentogrid}>
         {/* Tile 1: yellow — main stat */}
         <div className={styles.tileYellow}>
-          <div className="v6-kicker on-yellow">с 2014 года</div>
+          <div className="v6-kicker on-yellow">с 2018 года</div>
           <div className={styles.bigNum} style={{ marginTop: 14 }}>
-            240<span className={styles.bigNumAccent}>+</span>
+            3000<span className={styles.bigNumAccent}>+</span>
           </div>
-          <div className={styles.tileLabel}>проектов в год</div>
+          <div className={styles.tileLabel}>реализованных кейсов</div>
           <p className={styles.tileText} style={{ marginTop: 12, maxWidth: 380 }}>
-            От welcome-наборов IT-стартапов до тиражей в 1 200 шопперов для ритейл-сетей. Каждый заказ — один менеджер, один договор, одна площадка.
+            От подарочных наборов госструктур и брендированной формы СИБУР до welcome-паков агросектора. Каждый проект — один менеджер, один договор, одна площадка.
           </p>
           <div className={styles.tileActions}>
             <Link href="/about/" className="v6-btn v6-btn--ink">
@@ -53,7 +53,7 @@ export default function About() {
         <div className={styles.tilePhoto1} role="img" aria-label="Фото швейного цеха">
           <div className={styles.photoPlaceholder}>
             <PhotoSvg />
-            <span className={styles.photoLabel}>Цех · Подмосковье</span>
+            <span className={styles.photoLabel}>Швейный цех · Москва</span>
           </div>
         </div>
 
@@ -62,26 +62,26 @@ export default function About() {
           <div className={styles.tileSmall}>
             <div className="v6-kicker">Площадь</div>
             <div className={styles.bigNum} style={{ fontSize: 52, marginTop: 8 }}>
-              600<span className={styles.bigNumCoral} style={{ fontSize: 20 }}>м²</span>
+              1000<span className={styles.bigNumCoral} style={{ fontSize: 20 }}>м²</span>
             </div>
-            <div className="v6-kicker" style={{ marginTop: 'auto', paddingTop: 12 }}>производство + склад</div>
+            <div className="v6-kicker" style={{ marginTop: 'auto', paddingTop: 12 }}>производство + склад 300 м²</div>
           </div>
           <div className={styles.tileInk}>
-            <div className="v6-kicker on-dark">Команда</div>
+            <div className="v6-kicker on-dark">Швейный цех</div>
             <div className={styles.bigNum} style={{ fontSize: 52, marginTop: 8 }}>
-              24<span className={styles.bigNumYellow} style={{ fontSize: 18 }}>швеи</span>
+              50<span className={styles.bigNumYellow} style={{ fontSize: 18 }}>Juki</span>
             </div>
-            <div className="v6-kicker on-dark" style={{ marginTop: 'auto', paddingTop: 12 }}>+ 6 чел. нанесение</div>
+            <div className="v6-kicker on-dark" style={{ marginTop: 'auto', paddingTop: 12 }}>+ 15 станков персонализации</div>
           </div>
         </div>
 
         {/* Row 2 */}
         <div className={styles.tileStats}>
-          <div className="v6-kicker">За 11 лет</div>
-          <div className={styles.bigNum} style={{ marginTop: 12, fontSize: 44 }}>≈ 320 000</div>
-          <div className={styles.tileLabel} style={{ marginTop: 4 }}>единиц пошито</div>
+          <div className="v6-kicker">Мощность</div>
+          <div className={styles.bigNum} style={{ marginTop: 12, fontSize: 44 }}>150 000</div>
+          <div className={styles.tileLabel} style={{ marginTop: 4 }}>изделий в месяц</div>
           <p className={styles.tileText} style={{ marginTop: 'auto', paddingTop: 12 }}>
-            от 30-шт. пилотов до 5 000-шт. сетевых партий
+            от единичных образцов до крупных тиражей — любой уровень сложности
           </p>
         </div>
 
@@ -93,12 +93,12 @@ export default function About() {
         </div>
 
         <div className={styles.tileBlue}>
-          <div className="v6-kicker on-dark">Документы</div>
+          <div className="v6-kicker on-dark">Клиенты</div>
           <div className={styles.bigNum} style={{ marginTop: 12, fontSize: 36 }}>
-            УПД,<br />договор,<br />отсрочка
+            300+<br />компаний<br />с 2018
           </div>
           <p className={styles.tileText} style={{ marginTop: 'auto', paddingTop: 12, opacity: 0.8 }}>
-            работаем с юрлицами, маркировка для WB/Ozon
+            СИБУР, Россети, Юнармия, Агрорус и Ко, Уголь-Транс и др.
           </p>
         </div>
       </div>

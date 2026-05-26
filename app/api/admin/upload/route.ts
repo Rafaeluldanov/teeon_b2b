@@ -1,25 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAdminToken, ADMIN_SESSION_COOKIE } from '@/lib/adminAuth';
 import { uploadFile } from '@/lib/storage';
+import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
 export const runtime = 'nodejs';
 
+const WEBP_QUALITY = 80;
+
+// Raster formats are transcoded to WebP server-side; SVG is preserved as-is.
 const ALLOWED_IMAGE: Record<string, string> = {
   'image/jpeg': 'jpg',
   'image/png': 'png',
   'image/webp': 'webp',
   'image/svg+xml': 'svg',
 };
+const TRANSCODE_TO_WEBP = new Set(['image/jpeg', 'image/png', 'image/webp']);
 const ALLOWED_VIDEO: Record<string, string> = {
   'video/mp4': 'mp4',
   'video/webm': 'webm',
   'video/quicktime': 'mov',
 };
 const VALID_FOLDERS = new Set(['catalog', 'portfolio', 'branding', 'banner', 'pages', 'hero']);
-const MAX_IMAGE = 10 * 1024 * 1024;  // 10 МБ
-const MAX_VIDEO = 100 * 1024 * 1024; // 100 МБ
+const MAX_IMAGE = 50 * 1024 * 1024;  // 50 МБ
+const MAX_VIDEO = 500 * 1024 * 1024; // 500 МБ
 
 function isS3Configured(): boolean {
   return !!(process.env.S3_ENDPOINT && process.env.S3_ACCESS_KEY && process.env.S3_SECRET_KEY);
@@ -59,7 +64,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
   const maxBytes = isVideo ? MAX_VIDEO : MAX_IMAGE;
   if (file.size > maxBytes) {
-    return NextResponse.json({ success: false, message: `Файл слишком большой (${(file.size / 1024 / 1024).toFixed(1)} МБ). Максимум: ${isVideo ? '100' : '10'} МБ.` }, { status: 400 });
+    return NextResponse.json({ success: false, message: `Файл слишком большой (${(file.size / 1024 / 1024).toFixed(1)} МБ). Максимум: ${isVideo ? '500' : '50'} МБ.` }, { status: 400 });
   }
 
   const safeName = file.name
@@ -68,14 +73,32 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     .replace(/-+/g, '-')
     .replace(/^-|-$/g, '')
     .slice(0, 80);
-  const filename = `${Date.now()}-${safeName || 'file'}`;
+  let filename = `${Date.now()}-${safeName || 'file'}`;
+  let buffer: Buffer = Buffer.from(await file.arrayBuffer());
+  let contentType = file.type;
+
+  // Transcode raster images to WebP (quality 80) to keep MinIO/payload light.
+  if (isImage && TRANSCODE_TO_WEBP.has(file.type)) {
+    try {
+      const webp = await sharp(buffer, { failOn: 'none' })
+        .rotate()
+        .webp({ quality: WEBP_QUALITY, effort: 4 })
+        .toBuffer();
+      buffer = Buffer.from(webp);
+      contentType = 'image/webp';
+      filename = filename.replace(/\.(jpe?g|png|webp)$/i, '') + '.webp';
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'unknown';
+      return NextResponse.json({ success: false, message: `Не удалось обработать изображение: ${msg}` }, { status: 400 });
+    }
+  }
+
   const key = `${folder}/${filename}`;
-  const buffer = Buffer.from(await file.arrayBuffer());
 
   // ── S3/MinIO ──
   if (isS3Configured()) {
     try {
-      const url = await uploadFile(key, buffer, file.type);
+      const url = await uploadFile(key, buffer, contentType);
       return NextResponse.json({ success: true, url, filename, key, storage: 's3' });
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Ошибка загрузки';

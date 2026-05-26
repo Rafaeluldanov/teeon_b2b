@@ -171,7 +171,7 @@ export default function AdminImageUploader() {
                 {dragging ? 'Отпустите файл' : 'Нажмите или перетащите изображение'}
               </span>
               <span className={styles.dropzoneHint}>
-                JPEG · PNG · WEBP · SVG · до 10 МБ · папка: {folderLabel}
+                JPEG · PNG · WEBP · SVG · до 50 МБ · папка: {folderLabel}
               </span>
             </>
           )}

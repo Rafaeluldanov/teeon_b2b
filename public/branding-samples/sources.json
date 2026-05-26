@@ -1,0 +1,412 @@
+{
+  "$schema": "Item shape: { methodSlug, sampleSlug, file, sourceUrl, author, license, downloadDate, notes }",
+  "items": [
+    {
+      "methodSlug": "vyshivka",
+      "sampleSlug": "vyshivka-flat",
+      "file": "/branding-samples/vyshivka/vyshivka-flat.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1771479452306-6dad4a9fbec0",
+      "author": "Truong Tuyet Ly",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Пяльцы с вышивкой розы и катушки ниток — иллюстрация плоской вышивки нитью."
+    },
+    {
+      "methodSlug": "vyshivka",
+      "sampleSlug": "vyshivka-cap",
+      "file": "/branding-samples/vyshivka/vyshivka-cap.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1560774358-d727658f457c",
+      "author": "Angel Monsanto III",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Кепка с вышитой горой — реальная вышивка на головном уборе."
+    },
+    {
+      "methodSlug": "vyshivka",
+      "sampleSlug": "vyshivka-metallic-thread",
+      "file": "/branding-samples/vyshivka/vyshivka-metallic-thread.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1547056391-a8d5e1b05fc7",
+      "author": "Karly Santiago",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Цветные нити мулине — иллюстрация металлизированной/декоративной нити. Желательно заменить на фото с реальной золотой вышивкой TEEON."
+    },
+    {
+      "methodSlug": "vyshivka",
+      "sampleSlug": "vyshivka-patch",
+      "file": "/branding-samples/vyshivka/vyshivka-patch.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1770733530182-cf94277c3cf7",
+      "author": "Marija Zaric",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Винтажные нашивки на кожаной куртке — отлично иллюстрирует вышивку на шевроне."
+    },
+
+    {
+      "methodSlug": "shevrony",
+      "sampleSlug": "shevron-embroidered",
+      "file": "/branding-samples/shevrony/shevron-embroidered.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1761682719755-d745218bbdab",
+      "author": "Jason Leung",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Вышитые нашивки в белой коробке-органайзере — групповой ассортимент."
+    },
+    {
+      "methodSlug": "shevrony",
+      "sampleSlug": "shevron-woven",
+      "file": "/branding-samples/shevrony/shevron-woven.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1764025851206-286bb8b8c0d0",
+      "author": "Duskfall Crew",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Парные тканые нашивки — пример жаккардового шеврона."
+    },
+    {
+      "methodSlug": "shevrony",
+      "sampleSlug": "shevron-pvc",
+      "file": "/branding-samples/shevrony/shevron-pvc.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1747542760117-4a999f77d105",
+      "author": "Eric Dahm",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Сумка с россыпью нашивок — иллюстрация ПВХ/нашивных шевронов."
+    },
+    {
+      "methodSlug": "shevrony",
+      "sampleSlug": "shevron-velcro",
+      "file": "/branding-samples/shevrony/shevron-velcro.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1482649571333-dcd81558ecfe",
+      "author": "Thomas Tucker",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Тактический патч в стиле morale patch — пример velcro-шеврона."
+    },
+    {
+      "methodSlug": "shevrony",
+      "sampleSlug": "shevron-sewn",
+      "file": "/branding-samples/shevrony/shevron-sewn.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1779359823015-8d53c62cacaf",
+      "author": "Smithsonian",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Пэчворк с пришитыми элементами — иллюстрация пришивных нашивок."
+    },
+
+    {
+      "methodSlug": "shelkografiya",
+      "sampleSlug": "silk-classic",
+      "file": "/branding-samples/shelkografiya/silk-classic.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1456456496250-d5e7c0a9b44d",
+      "author": "emarts emarts",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Печатный трафарет (screen) на свету — иллюстрация процесса шелкографии."
+    },
+    {
+      "methodSlug": "shelkografiya",
+      "sampleSlug": "silk-foil",
+      "file": "/branding-samples/shelkografiya/silk-foil.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1622134336272-f294c0abdec4",
+      "author": "Matthias Oberholzer",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Чёрная футболка с белым принтом — иллюстративное фото для эффекта металлической печати."
+    },
+    {
+      "methodSlug": "shelkografiya",
+      "sampleSlug": "silk-reflective",
+      "file": "/branding-samples/shelkografiya/silk-reflective.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1647394166281-713a8d923728",
+      "author": "Greg Rosenke",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Велосипедисты в светоотражающей одежде ночью — иллюстрация светоотражающего эффекта."
+    },
+
+    {
+      "methodSlug": "dtf-pechat",
+      "sampleSlug": "dtf-fullcolor",
+      "file": "/branding-samples/dtf-pechat/dtf-fullcolor.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1732414601271-0b63b575a795",
+      "author": "Tees Please",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Крупный план полноцветного дизайна на футболке."
+    },
+    {
+      "methodSlug": "dtf-pechat",
+      "sampleSlug": "dtf-gradient",
+      "file": "/branding-samples/dtf-pechat/dtf-gradient.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1624260118246-03b0fc92390f",
+      "author": "Marija Zaric",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Чёрно-оранжево-голубой текстиль с градиентом."
+    },
+    {
+      "methodSlug": "dtf-pechat",
+      "sampleSlug": "dtf-dark-fabric",
+      "file": "/branding-samples/dtf-pechat/dtf-dark-fabric.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a",
+      "author": "Faith & Yarn",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Чистая чёрная футболка — основа-mockup для печати на тёмной ткани."
+    },
+    {
+      "methodSlug": "dtf-pechat",
+      "sampleSlug": "dtf-bag",
+      "file": "/branding-samples/dtf-pechat/dtf-bag.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1574365569389-a10d488ca3fb",
+      "author": "Brando Makes Branding",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Белая хлопковая сумка-шоппер на сером фоне."
+    },
+    {
+      "methodSlug": "dtf-pechat",
+      "sampleSlug": "dtf-back-print",
+      "file": "/branding-samples/dtf-pechat/dtf-back-print.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1535979737658-bda006980c4f",
+      "author": "Fabian Albert",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Куртка с крупным цветным дизайном на спине."
+    },
+
+    {
+      "methodSlug": "dtg-pechat",
+      "sampleSlug": "dtg-cotton-tee",
+      "file": "/branding-samples/dtg-pechat/dtg-cotton-tee.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1581655353564-df123a1eb820",
+      "author": "Haryo Setyadi",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Чистая белая хлопковая футболка — основа для DTG."
+    },
+    {
+      "methodSlug": "dtg-pechat",
+      "sampleSlug": "dtg-photo",
+      "file": "/branding-samples/dtg-pechat/dtg-photo.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1464490826362-59825a4f51df",
+      "author": "Inspirationfeed",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Графическая футболка с большим художественным принтом — DTG-style."
+    },
+    {
+      "methodSlug": "dtg-pechat",
+      "sampleSlug": "dtg-sample",
+      "file": "/branding-samples/dtg-pechat/dtg-sample.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1562157873-818bc0726f68",
+      "author": "Md Salman",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Сложенные разноцветные футболки — иллюстрация тиража-образца."
+    },
+    {
+      "methodSlug": "dtg-pechat",
+      "sampleSlug": "dtg-dark-fabric",
+      "file": "/branding-samples/dtg-pechat/dtg-dark-fabric.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1610502778270-c5c6f4c7d575",
+      "author": "Ryan Hoffman",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Чёрная футболка — основа для DTG на тёмной ткани."
+    },
+
+    {
+      "methodSlug": "sublimaciya",
+      "sampleSlug": "sublimation-fullcolor",
+      "file": "/branding-samples/sublimaciya/sublimation-fullcolor.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1644175563233-ef4cd92531dc",
+      "author": "Andrea Qoqonga",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Красно-белая спортивная форма — пример полноцветной сублимации."
+    },
+    {
+      "methodSlug": "sublimaciya",
+      "sampleSlug": "sublimation-allover",
+      "file": "/branding-samples/sublimaciya/sublimation-allover.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1773355579207-4bc7a0915e74",
+      "author": "Yuta Koike",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Полки с яркими майками — all-over print изделия."
+    },
+    {
+      "methodSlug": "sublimaciya",
+      "sampleSlug": "sublimation-sport",
+      "file": "/branding-samples/sublimaciya/sublimation-sport.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1773355578777-7cbbff303bdf",
+      "author": "Yuta Koike",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Бейсбольные майки с номерами на стене — пример сублимации на спортивной форме."
+    },
+
+    {
+      "methodSlug": "tisnenie",
+      "sampleSlug": "emboss-blind",
+      "file": "/branding-samples/tisnenie/emboss-blind.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1564842505181-8862a3b9b173",
+      "author": "James Lee",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Стёганая коричневая кожа с рельефом — иллюстрация блинтового тиснения."
+    },
+    {
+      "methodSlug": "tisnenie",
+      "sampleSlug": "emboss-foil",
+      "file": "/branding-samples/tisnenie/emboss-foil.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1559897888-1740aa4d9f49",
+      "author": "Pawel Lopatka",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Книга с тиснением фольгой на обложке."
+    },
+    {
+      "methodSlug": "tisnenie",
+      "sampleSlug": "emboss-leather-patch",
+      "file": "/branding-samples/tisnenie/emboss-leather-patch.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1770999161570-f1bf386f3c7a",
+      "author": "Jessica Donnelly",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Крупный план джинсов с кожаной нашивкой на поясе."
+    },
+    {
+      "methodSlug": "tisnenie",
+      "sampleSlug": "emboss-packaging",
+      "file": "/branding-samples/tisnenie/emboss-packaging.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1674620213535-9b2a2553ef40",
+      "author": "Javier Miranda",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Чёрно-белые подарочные коробки с золотыми бантами — премиальная упаковка."
+    },
+
+    {
+      "methodSlug": "gravirovka",
+      "sampleSlug": "engraving-metal",
+      "file": "/branding-samples/gravirovka/engraving-metal.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1699274060374-9dddf479676c",
+      "author": "Jon Hodl",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Пачка пронумерованных металлических бирок — гравировка на металле."
+    },
+    {
+      "methodSlug": "gravirovka",
+      "sampleSlug": "engraving-mug",
+      "file": "/branding-samples/gravirovka/engraving-mug.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1777500301273-b73640dc490e",
+      "author": "Milos Lopusina",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Стальная термокружка с гравированной надписью."
+    },
+    {
+      "methodSlug": "gravirovka",
+      "sampleSlug": "engraving-pen",
+      "file": "/branding-samples/gravirovka/engraving-pen.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1585336261022-680e295ce3fe",
+      "author": "Liviu C.",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Серебристо-синяя металлическая ручка крупным планом — заготовка под гравировку."
+    },
+    {
+      "methodSlug": "gravirovka",
+      "sampleSlug": "engraving-wood",
+      "file": "/branding-samples/gravirovka/engraving-wood.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1733253870445-a969301c8943",
+      "author": "Frugal Flyer",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Деревянная визитка с лазерной гравировкой компаса."
+    },
+    {
+      "methodSlug": "gravirovka",
+      "sampleSlug": "engraving-tag",
+      "file": "/branding-samples/gravirovka/engraving-tag.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1716974004436-178c43152fd5",
+      "author": "Marek Studzinski",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Металлический шильд с гравированным символом."
+    },
+
+    {
+      "methodSlug": "birki",
+      "sampleSlug": "label-woven",
+      "file": "/branding-samples/birki/label-woven.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1633435417986-b066179ebc5a",
+      "author": "Stanimir Filipov",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Свитер с белой нашивной биркой — иллюстрация жаккардовой бирки."
+    },
+    {
+      "methodSlug": "birki",
+      "sampleSlug": "label-satin",
+      "file": "/branding-samples/birki/label-satin.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1655105742471-cca7195b12da",
+      "author": "Andrzej Gdula",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Крупный план бирки на одежде — пример сатиновой бирки."
+    },
+    {
+      "methodSlug": "birki",
+      "sampleSlug": "label-size",
+      "file": "/branding-samples/birki/label-size.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1666402667676-a273d65cdc42",
+      "author": "Elsa Olofsson",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Деталь бирки внутри одежды — пример размерника."
+    },
+    {
+      "methodSlug": "birki",
+      "sampleSlug": "label-hangtag",
+      "file": "/branding-samples/birki/label-hangtag.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1758307886981-3793418ce163",
+      "author": "Avesta",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Картонные навесные бирки на бечёвках."
+    },
+    {
+      "methodSlug": "birki",
+      "sampleSlug": "label-leather",
+      "file": "/branding-samples/birki/label-leather.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1734453195022-b0cbc53229ee",
+      "author": "Sameer Srivastava",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Джинсы с кожаной биркой на заднем кармане."
+    },
+    {
+      "methodSlug": "birki",
+      "sampleSlug": "label-sticker",
+      "file": "/branding-samples/birki/label-sticker.webp",
+      "sourceUrl": "https://images.unsplash.com/photo-1776718374116-6f1e5d7b1183",
+      "author": "Ian ODonnell",
+      "license": "Unsplash License",
+      "downloadDate": "2026-05-25",
+      "notes": "Стикер в руке — пример упаковочной наклейки."
+    }
+  ],
+  "missing": [
+    { "methodSlug": "vyshivka",      "sampleSlug": "vyshivka-3d",         "reason": "Нет фото 3D-вышивки с подъёмом крупным планом в Unsplash. Нужна собственная фотосъёмка TEEON." },
+    { "methodSlug": "vyshivka",      "sampleSlug": "vyshivka-tonal",      "reason": "Нет специфических фото тон-в-тон вышивки в open-license. Нужна собственная съёмка или Wikimedia." },
+    { "methodSlug": "shelkografiya", "sampleSlug": "silk-puff",           "reason": "Нет фото puff-краски крупным планом в open-license. Нужна собственная съёмка TEEON." },
+    { "methodSlug": "shelkografiya", "sampleSlug": "silk-high-density",   "reason": "Нет фото high-density печати в open-license. Нужна собственная съёмка." },
+    { "methodSlug": "shelkografiya", "sampleSlug": "silk-discharge",      "reason": "Нет фото вытравной (discharge) печати в open-license. Нужна собственная съёмка." },
+    { "methodSlug": "shelkografiya", "sampleSlug": "silk-glitter",        "reason": "Нет фото глиттер-печати на ткани в open-license. Нужна собственная съёмка." },
+    { "methodSlug": "sublimaciya",   "sampleSlug": "sublimation-buff",    "reason": "Нет open-license фото баффов с сублимацией. Можно использовать собственное фото из портфолио." }
+  ]
+}

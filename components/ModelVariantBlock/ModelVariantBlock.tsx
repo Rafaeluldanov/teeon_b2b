@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { catalogModelsData } from '@/lib/catalogModels';
 import type { CatalogModelsMap, CatalogModel, CatalogVariant } from '@/lib/catalogModels';
+import Lightbox, { type LightboxState } from '@/components/Lightbox/Lightbox';
 import styles from './ModelVariantBlock.module.css';
 
 const ADMIN_MODELS_KEY = 'teeon_admin_catalog_models';
@@ -33,7 +34,9 @@ export default function ModelVariantBlock({ categorySlug }: ModelVariantBlockPro
   const [modelsData, setModelsData] = useState<CatalogModelsMap>(catalogModelsData);
   const [activeModelIdx, setActiveModelIdx] = useState(0);
   const [activeVariantIdx, setActiveVariantIdx] = useState(0);
+  const [galleryIdx, setGalleryIdx] = useState(0);
   const [saved, setSaved] = useState(false);
+  const [lightbox, setLightbox] = useState<LightboxState | null>(null);
 
   useEffect(() => {
     try {
@@ -55,14 +58,22 @@ export default function ModelVariantBlock({ categorySlug }: ModelVariantBlockPro
   const activeVariants = activeModel.variants.filter((v) => v.isActive);
   const activeVariant: CatalogVariant | undefined = activeVariants[activeVariantIdx];
 
+  const variantImages: string[] = activeVariant
+    ? [activeVariant.image, ...(activeVariant.galleryImages ?? [])].filter((s): s is string => Boolean(s))
+    : [];
+  const safeGalleryIdx = Math.min(galleryIdx, Math.max(0, variantImages.length - 1));
+  const currentImage = variantImages[safeGalleryIdx];
+
   const handleModelChange = (idx: number) => {
     setActiveModelIdx(idx);
     setActiveVariantIdx(0);
+    setGalleryIdx(0);
     setSaved(false);
   };
 
   const handleVariantChange = (idx: number) => {
     setActiveVariantIdx(idx);
+    setGalleryIdx(0);
     setSaved(false);
   };
 
@@ -135,7 +146,7 @@ export default function ModelVariantBlock({ categorySlug }: ModelVariantBlockPro
                 <div className={styles.variantCardImg}>
                   {variant.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={variant.image} alt={variant.name} className={styles.variantCardImgEl} />
+                    <img src={variant.image} alt={variant.name} className={styles.variantCardImgEl} loading="lazy" decoding="async" />
                   ) : (
                     <span className={styles.variantCardImgPlaceholder}>{variant.name}</span>
                   )}
@@ -162,11 +173,16 @@ export default function ModelVariantBlock({ categorySlug }: ModelVariantBlockPro
           <div className={styles.detailTop}>
             {/* Image */}
             <div className={styles.detailImg}>
-              {activeVariant.image ? (
-                <>
+              {currentImage ? (
+                <button
+                  type="button"
+                  className={styles.detailImgBtn}
+                  onClick={() => setLightbox({ images: variantImages, index: safeGalleryIdx })}
+                  aria-label={`Открыть фото: ${activeVariant.name}`}
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={activeVariant.image}
+                    src={currentImage}
                     alt={activeVariant.name}
                     className={styles.detailImgEl}
                     onError={(e) => {
@@ -178,11 +194,30 @@ export default function ModelVariantBlock({ categorySlug }: ModelVariantBlockPro
                   <div className={styles.detailImgPlaceholder} style={{ display: 'none' }}>
                     <ImagePlaceholderSvg />
                   </div>
-                </>
+                </button>
               ) : (
                 <div className={styles.detailImgPlaceholder}>
                   <ImagePlaceholderSvg />
                 </div>
+              )}
+
+              {variantImages.length > 1 && (
+                <ul className={styles.thumbStrip} aria-label="Фотографии варианта">
+                  {variantImages.map((img, i) => (
+                    <li key={i}>
+                      <button
+                        type="button"
+                        className={`${styles.thumbBtn} ${i === safeGalleryIdx ? styles.thumbBtnActive : ''}`}
+                        onClick={() => setGalleryIdx(i)}
+                        aria-label={`Фото ${i + 1}`}
+                        aria-current={i === safeGalleryIdx}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={img} alt="" className={styles.thumbImg} loading="lazy" decoding="async" />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               )}
             </div>
 
@@ -269,6 +304,8 @@ export default function ModelVariantBlock({ categorySlug }: ModelVariantBlockPro
           )}
         </div>
       )}
+
+      <Lightbox state={lightbox} onChange={setLightbox} />
     </section>
   );
 }

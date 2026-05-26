@@ -1,0 +1,37 @@
+.icon {
+  width: 100%;
+  height: 100%;
+  color: inherit;
+  display: block;
+  overflow: visible;
+}
+
+.iconFill {
+  fill: currentColor;
+  opacity: 0.16;
+  stroke: none;
+}
+
+.iconStroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.iconStrokeThin {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.iconDrop {
+  fill: currentColor;
+  opacity: 0.55;
+  stroke: none;
+}

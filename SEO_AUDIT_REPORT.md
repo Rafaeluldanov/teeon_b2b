@@ -1,6 +1,6 @@
 # SEO Аудит — TEEON
 
-**Дата:** 20.05.2026, 19:45:32
+**Дата:** 25.05.2026, 13:17:37
 **BASE_URL:** http://localhost:3000
 **Страниц проверено:** 26
 **Ошибок:** 0 | **Предупреждений:** 0
@@ -43,8 +43,8 @@
 **OK:**
 - ✅ Title: "Пошив промо-одежды и мерча на заказ | TEEON"
 - ✅ Description (154 симв.)
-- ✅ Canonical: http://localhost:3000
-- ✅ H1: "Создаём мерч, который носят не только в офисе"
+- ✅ Canonical: https://teeon.ru
+- ✅ H1: "Корпоративный мерч полного цикла — от идеи до поставки"
 - ✅ H2: 8 шт.
 - ✅ og:title есть
 - ✅ og:description есть
@@ -55,7 +55,7 @@
 **OK:**
 - ✅ Title: "Каталог промо-одежды и корпоративного мерча на заказ | TEEON"
 - ✅ Description (145 симв.)
-- ✅ Canonical: http://localhost:3000/catalog/
+- ✅ Canonical: https://teeon.ru/catalog/
 - ✅ H1: "Каталог промо-одеждыи мерча"
 - ✅ H2: 3 шт.
 - ✅ og:title есть
@@ -67,7 +67,7 @@
 **OK:**
 - ✅ Title: "Футболки с логотипом на заказ | Пошив промо-футболок | TEEON"
 - ✅ Description (144 симв.)
-- ✅ Canonical: http://localhost:3000/catalog/futbolki/
+- ✅ Canonical: https://teeon.ru/catalog/futbolki/
 - ✅ H1: "Футболки с логотипом на заказ"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -79,7 +79,7 @@
 **OK:**
 - ✅ Title: "Худи с логотипом на заказ | Корпоративные худи | TEEON"
 - ✅ Description (127 симв.)
-- ✅ Canonical: http://localhost:3000/catalog/hudi/
+- ✅ Canonical: https://teeon.ru/catalog/hudi/
 - ✅ H1: "Худи с логотипом на заказ"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -91,7 +91,7 @@
 **OK:**
 - ✅ Title: "Свитшоты с логотипом на заказ | Корпоративные свитшоты | TEEON"
 - ✅ Description (137 симв.)
-- ✅ Canonical: http://localhost:3000/catalog/svitshoty/
+- ✅ Canonical: https://teeon.ru/catalog/svitshoty/
 - ✅ H1: "Свитшоты с логотипом на заказ"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -103,7 +103,7 @@
 **OK:**
 - ✅ Title: "Лонгсливы с логотипом на заказ | Пошив лонгсливов | TEEON"
 - ✅ Description (136 симв.)
-- ✅ Canonical: http://localhost:3000/catalog/longslivy/
+- ✅ Canonical: https://teeon.ru/catalog/longslivy/
 - ✅ H1: "Лонгсливы с логотипом на заказ"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -115,7 +115,7 @@
 **OK:**
 - ✅ Title: "Сумки с логотипом на заказ | Шопперы и промо-сумки | TEEON"
 - ✅ Description (136 симв.)
-- ✅ Canonical: http://localhost:3000/catalog/sumki/
+- ✅ Canonical: https://teeon.ru/catalog/sumki/
 - ✅ H1: "Сумки с логотипом на заказ"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -127,7 +127,7 @@
 **OK:**
 - ✅ Title: "Жилетки с логотипом на заказ | Корпоративные жилетки | TEEON"
 - ✅ Description (117 симв.)
-- ✅ Canonical: http://localhost:3000/catalog/zhiletki/
+- ✅ Canonical: https://teeon.ru/catalog/zhiletki/
 - ✅ H1: "Жилетки с логотипом на заказ"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -139,7 +139,7 @@
 **OK:**
 - ✅ Title: "Куртки с логотипом на заказ | Корпоративные куртки | TEEON"
 - ✅ Description (119 симв.)
-- ✅ Canonical: http://localhost:3000/catalog/kurtki/
+- ✅ Canonical: https://teeon.ru/catalog/kurtki/
 - ✅ H1: "Куртки с логотипом на заказ"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -151,7 +151,7 @@
 **OK:**
 - ✅ Title: "Дождевики с логотипом на заказ | Промо-дождевики | TEEON"
 - ✅ Description (114 симв.)
-- ✅ Canonical: http://localhost:3000/catalog/dozhdeviki/
+- ✅ Canonical: https://teeon.ru/catalog/dozhdeviki/
 - ✅ H1: "Дождевики с логотипом на заказ"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -163,7 +163,7 @@
 **OK:**
 - ✅ Title: "Нанесение и брендирование одежды | Вышивка, шелкография, DTF | TEEON"
 - ✅ Description (141 симв.)
-- ✅ Canonical: http://localhost:3000/branding/
+- ✅ Canonical: https://teeon.ru/branding/
 - ✅ H1: "Нанесение ибрендированиеодежды"
 - ✅ H2: 6 шт.
 - ✅ og:title есть
@@ -175,7 +175,7 @@
 **OK:**
 - ✅ Title: "Вышивка логотипа на одежде | Машинная вышивка для мерча | TEEON"
 - ✅ Description (150 симв.)
-- ✅ Canonical: http://localhost:3000/branding/vyshivka/
+- ✅ Canonical: https://teeon.ru/branding/vyshivka/
 - ✅ H1: "Вышивка логотипа на одежде"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -187,7 +187,7 @@
 **OK:**
 - ✅ Title: "Шевроны на заказ для одежды | Брендированные нашивки | TEEON"
 - ✅ Description (153 симв.)
-- ✅ Canonical: http://localhost:3000/branding/shevrony/
+- ✅ Canonical: https://teeon.ru/branding/shevrony/
 - ✅ H1: "Шевроны на заказ для одежды"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -199,7 +199,7 @@
 **OK:**
 - ✅ Title: "Шелкография на одежде | Печать логотипа по текстилю | TEEON"
 - ✅ Description (138 симв.)
-- ✅ Canonical: http://localhost:3000/branding/shelkografiya/
+- ✅ Canonical: https://teeon.ru/branding/shelkografiya/
 - ✅ H1: "Шелкография на одежде"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -211,7 +211,7 @@
 **OK:**
 - ✅ Title: "DTF-печать на одежде | Полноцветное нанесение логотипа | TEEON"
 - ✅ Description (149 симв.)
-- ✅ Canonical: http://localhost:3000/branding/dtf-pechat/
+- ✅ Canonical: https://teeon.ru/branding/dtf-pechat/
 - ✅ H1: "DTF-печать на одежде"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -223,7 +223,7 @@
 **OK:**
 - ✅ Title: "DTG-печать на одежде | Прямая печать по текстилю | TEEON"
 - ✅ Description (145 симв.)
-- ✅ Canonical: http://localhost:3000/branding/dtg-pechat/
+- ✅ Canonical: https://teeon.ru/branding/dtg-pechat/
 - ✅ H1: "DTG-печать на одежде"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -235,7 +235,7 @@
 **OK:**
 - ✅ Title: "Сублимация на одежде | Печать на форме и синтетике | TEEON"
 - ✅ Description (138 симв.)
-- ✅ Canonical: http://localhost:3000/branding/sublimaciya/
+- ✅ Canonical: https://teeon.ru/branding/sublimaciya/
 - ✅ H1: "Сублимация на одежде"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -247,7 +247,7 @@
 **OK:**
 - ✅ Title: "Тиснение на изделиях | Брендирование премиального мерча | TEEON"
 - ✅ Description (140 симв.)
-- ✅ Canonical: http://localhost:3000/branding/tisnenie/
+- ✅ Canonical: https://teeon.ru/branding/tisnenie/
 - ✅ H1: "Тиснение на изделиях"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -259,7 +259,7 @@
 **OK:**
 - ✅ Title: "Гравировка на сувенирной продукции | Персонализация мерча | TEEON"
 - ✅ Description (113 симв.)
-- ✅ Canonical: http://localhost:3000/branding/gravirovka/
+- ✅ Canonical: https://teeon.ru/branding/gravirovka/
 - ✅ H1: "Гравировка на сувенирной продукции"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -271,7 +271,7 @@
 **OK:**
 - ✅ Title: "Брендированные бирки для одежды | Ярлыки и размерники | TEEON"
 - ✅ Description (120 симв.)
-- ✅ Canonical: http://localhost:3000/branding/birki/
+- ✅ Canonical: https://teeon.ru/branding/birki/
 - ✅ H1: "Брендированные бирки для одежды"
 - ✅ H2: 7 шт.
 - ✅ og:title есть
@@ -283,7 +283,7 @@
 **OK:**
 - ✅ Title: "Портфолио промо-одежды и мерча | Кейсы производства | TEEON"
 - ✅ Description (179 симв.)
-- ✅ Canonical: http://localhost:3000/portfolio/
+- ✅ Canonical: http://185.225.34.60:3000/portfolio/
 - ✅ H1: "Портфолио B2B-проектови кейсов"
 - ✅ H2: 3 шт.
 - ✅ og:title есть
@@ -295,7 +295,7 @@
 **OK:**
 - ✅ Title: "О компании TEEON | Производство промо-одежды и мерча | TEEON"
 - ✅ Description (148 симв.)
-- ✅ Canonical: http://localhost:3000/about/
+- ✅ Canonical: https://teeon.ru/about/
 - ✅ H1: "О компании TEEON"
 - ✅ H2: 9 шт.
 - ✅ og:title есть
@@ -307,7 +307,7 @@
 **OK:**
 - ✅ Title: "Контакты TEEON | Заявка на пошив промо-одежды и мерча | TEEON"
 - ✅ Description (152 симв.)
-- ✅ Canonical: http://localhost:3000/contacts/
+- ✅ Canonical: https://teeon.ru/contacts/
 - ✅ H1: "Контакты TEEON"
 - ✅ H2: 6 шт.
 - ✅ og:title есть
@@ -319,7 +319,7 @@
 **OK:**
 - ✅ Title: "Сувенирная продукция и корпоративные подарки | UP Gifts | TEEON"
 - ✅ Description (164 симв.)
-- ✅ Canonical: http://localhost:3000/suvenirnaya-produkciya/
+- ✅ Canonical: https://teeon.ru/suvenirnaya-produkciya/
 - ✅ H1: "Сувенирная продукция для бизнеса"
 - ✅ H2: 6 шт.
 - ✅ og:title есть
@@ -331,7 +331,7 @@
 **OK:**
 - ✅ Title: "Политика обработки персональных данных | TEEON"
 - ✅ Description (98 симв.)
-- ✅ Canonical: http://localhost:3000/privacy/
+- ✅ Canonical: https://teeon.ru/privacy/
 - ✅ H1: "Политика обработки персональных данных"
 - ✅ H2: 8 шт.
 - ✅ og:title есть
@@ -343,7 +343,7 @@
 **OK:**
 - ✅ Title: "Реквизиты компании | TEEON"
 - ✅ Description (109 симв.)
-- ✅ Canonical: http://localhost:3000/requisites/
+- ✅ Canonical: https://teeon.ru/requisites/
 - ✅ H1: "Реквизиты TEEON"
 - ✅ H2: 2 шт.
 - ✅ og:title есть
@@ -353,7 +353,7 @@
 
 ## Sitemap (/sitemap.xml)
 
-- ✅ Доступен, 36 URL
+- ✅ Доступен, 40 URL
 - ✅ Не содержит /admin/ и /api/
 
 ## Robots (/robots.txt)

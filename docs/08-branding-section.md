@@ -83,20 +83,22 @@ export default function Page() {
 
 ## Образцы работ (lib/brandingSamples.ts)
 
-Каждый метод может иметь образцы — карточки с примерами работ. Структура образца:
+У каждого метода в [lib/brandingSamples.ts](../lib/brandingSamples.ts) есть массив вариантов. Структура одного варианта (тип `BrandingSample`):
 ```ts
 {
-  slug: 'vyshivka',
-  samples: [
-    {
-      name: '3D-вышивка на кепке',
-      imageSrc: '/images/branding/vyshivka/3d-cap.jpg',  // или null для заглушки
-      description: '...',
-      tags: ['3D', 'Кепки'],
-    }
-  ]
+  title: '3D-вышивка с подъёмом',
+  description: '…',                // развёрнутое описание
+  imageLabel: '3D-вышивка с подъёмом',
+  imageSrc: '/branding-samples/vyshivka/vyshivka-3d.webp', // опционально
+  effect: '…',                     // что именно даёт техника
+  bestFor: ['Кепки и худи', …],    // когда уместна
+  materials: ['Хлопок', …],        // на каких тканях/материалах
+  limitations: ['…'],              // ограничения и оговорки
+  relatedProducts: ['hudi', …],    // slugs категорий каталога
 }
 ```
+
+Если `imageSrc` не задан или файла по пути нет — публичная страница рендерит CSS-плейсхолдер «Фото не добавлено».
 
 ---
 
@@ -118,18 +120,9 @@ export default function Page() {
 
 ## Где хранить изображения брендирования
 
-```
-public/images/branding/<slug>/<filename>.jpg
-```
+Фото вариантов нанесения для страниц `/branding/<method>/` лежат в `public/branding-samples/<method-slug>/<file>.webp` — см. ниже раздел «Изображения вариантов нанесения». Все пути уже прописаны в `lib/brandingSamples.ts` для 39 из 46 вариантов; ещё 7 отрисовываются плейсхолдером до загрузки реального фото.
 
-Примеры:
-```
-public/images/branding/vyshivka/3d-cap.jpg
-public/images/branding/shelkografiya/puff-print.jpg
-public/images/branding/dtf-pechat/gradient-logo.jpg
-```
-
-Рекомендуемый размер: **800×600 px** или **600×400 px**.
+Рекомендуемые параметры файла: `.webp`, ширина 1200–1600 px, вес до 600 KB.
 
 ---
 
@@ -147,3 +140,47 @@ public/images/branding/dtf-pechat/gradient-logo.jpg
 | Аксессуары из металла | Гравировка |
 | Кожаные изделия | Тиснение, Гравировка |
 | Спортивная форма | Сублимация, DTF |
+
+---
+
+## Изображения вариантов нанесения
+
+Каждый метод нанесения (вышивка, шелкография, DTF и т.д.) содержит несколько **вариантов** (puff, high density, на тёмной ткани и т.п.). У каждого варианта есть поле `imageSrc` в [lib/brandingSamples.ts](../lib/brandingSamples.ts).
+
+### Расположение файлов
+```
+public/branding-samples/<method-slug>/<file-name>.webp
+```
+
+Например: `public/branding-samples/vyshivka/vyshivka-3d.webp`
+
+### Как добавить фото варианта
+
+**Способ 1 — через админку (рекомендуется):**
+1. Зайти в `/admin/catalog-editor/` → вкладка **«Нанесение»**.
+2. Выбрать метод (например, «Вышивка»).
+3. Нажать на нужный вариант → «Редактировать».
+4. В поле «Фото варианта» нажать кнопку загрузки 📁 → выбрать файл.
+5. Файл уйдёт в `/uploads/branding/` через `/api/admin/upload`.
+6. Нажать «Сохранить вариант» → данные попадают в `localStorage` (`teeon_admin_branding_samples`) и сразу видны на публичной странице метода.
+
+**Способ 2 — через файловую систему (для деплоя):**
+1. Положить файл с нужным именем в `public/branding-samples/<method-slug>/`.
+2. Имена файлов уже прописаны в `lib/brandingSamples.ts` — путь не нужно менять.
+3. После пересборки (`npm run build` + рестарт контейнера) картинка появится на сайте.
+
+### Текущее состояние (2026-05-25)
+
+- Всего слотов: **46** (9 методов × несколько вариантов)
+- Загружено фото с лицензией Unsplash License: **39** (см. [BRANDING_IMAGE_SOURCES.md](./BRANDING_IMAGE_SOURCES.md))
+- Открытое фото найти не удалось: **7** (см. [BRANDING_IMAGE_TODO.md](./BRANDING_IMAGE_TODO.md) — `vyshivka-3d`, `vyshivka-tonal`, `silk-puff`, `silk-high-density`, `silk-discharge`, `silk-glitter`, `sublimation-buff`)
+
+Все 39 загруженных фото — стоковые иллюстрации, подходящие для адаптивной вёрстки и SEO. **Перед публикацией продакшна имеет смысл заменить их на собственные снимки работ TEEON** через админку — это повысит доверие и точно отразит реальный продукт.
+
+### Лицензии и источники
+- Перед добавлением картинки убедиться, что лицензия допускает коммерческое использование (Unsplash / Pexels / Pixabay / Wikimedia CC0–CC-BY / собственные фото).
+- **НЕЛЬЗЯ:** случайные картинки из Google, фото с чужими логотипами, фото конкурентов, превью со стоков с водяными знаками, hotlink на внешние CDN.
+- Каждую добавленную картинку записать в [docs/BRANDING_IMAGE_SOURCES.md](./BRANDING_IMAGE_SOURCES.md) и [public/branding-samples/sources.json](../public/branding-samples/sources.json).
+
+### Заглушка
+Если `imageSrc` указан, но файла нет (или 404) — компонент [BrandingSampleTabs](../components/BrandingSampleTabs/BrandingSampleTabs.tsx) автоматически показывает аккуратный placeholder «Фото не добавлено» (CSS-иконка + текст), а не битую картинку.

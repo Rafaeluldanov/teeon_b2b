@@ -5,6 +5,7 @@ import { brandingSamples } from '@/lib/brandingSamples';
 import type { BrandingSample } from '@/lib/brandingSamples';
 import { BRANDING_SAMPLES_LS_KEY } from '@/lib/editableBrandingSamples';
 import type { EditableBrandingSamplesMap } from '@/lib/editableBrandingSamples';
+import Lightbox, { type LightboxState } from '@/components/Lightbox/Lightbox';
 import styles from './BrandingSampleTabs.module.css';
 
 interface Props {
@@ -25,6 +26,7 @@ const ImagePlaceholderSvg = () => (
 export default function BrandingSampleTabs({ methodSlug }: Props) {
   const [samples, setSamples] = useState<BrandingSample[]>(brandingSamples[methodSlug] ?? []);
   const [activeIdx, setActiveIdx] = useState(0);
+  const [lightbox, setLightbox] = useState<LightboxState | null>(null);
 
   useEffect(() => {
     try {
@@ -58,6 +60,7 @@ export default function BrandingSampleTabs({ methodSlug }: Props) {
 
   const active = samples[activeIdx];
   const panelId = `branding-panel-${methodSlug}`;
+  const allImages = samples.map((s) => s.imageSrc).filter((s): s is string => Boolean(s));
 
   return (
     <section className={styles.wrapper} aria-labelledby={`branding-tabs-title-${methodSlug}`}>
@@ -100,17 +103,27 @@ export default function BrandingSampleTabs({ methodSlug }: Props) {
             {/* Image */}
             <div className={styles.imageWrapper} aria-label={s.imageLabel}>
               {s.imageSrc ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={s.imageSrc}
-                  alt={s.imageLabel}
-                  className={styles.image}
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.display = 'none';
-                    const fallback = (e.currentTarget as HTMLImageElement).nextElementSibling as HTMLElement | null;
-                    if (fallback) fallback.style.display = 'flex';
+                <button
+                  type="button"
+                  className={styles.imageBtn}
+                  onClick={() => {
+                    const idx = allImages.indexOf(s.imageSrc!);
+                    setLightbox({ images: allImages, index: idx >= 0 ? idx : 0 });
                   }}
-                />
+                  aria-label={`Открыть фото: ${s.imageLabel}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={s.imageSrc}
+                    alt={s.imageLabel}
+                    className={styles.image}
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).style.display = 'none';
+                      const fb = (e.currentTarget.parentElement?.parentElement?.querySelector(`.${styles.imagePlaceholder}`)) as HTMLElement | null;
+                      if (fb) fb.style.display = 'flex';
+                    }}
+                  />
+                </button>
               ) : null}
               {!s.imageSrc && (
                 <div className={styles.imagePlaceholder}>
@@ -189,6 +202,7 @@ export default function BrandingSampleTabs({ methodSlug }: Props) {
       <p className={styles.srOnly} aria-live="polite">
         {active.title} — выбрана вкладка {activeIdx + 1} из {samples.length}
       </p>
+      <Lightbox state={lightbox} onChange={setLightbox} />
     </section>
   );
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { contacts } from '@/lib/contacts';
 import { CONTACTS_LS_KEY } from '@/lib/editableContacts';
 import type { EditableContacts } from '@/lib/editableContacts';
@@ -16,10 +17,15 @@ const ChevronIcon = () => (
   </svg>
 );
 
-const TelegramIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.16 13.63l-2.966-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.994.929z"/>
-  </svg>
+const MaxIcon = () => (
+  <Image
+    src="/max-icon.webp"
+    alt=""
+    width={30}
+    height={30}
+    className="max-icon-img"
+    priority
+  />
 );
 
 export default function Header() {
@@ -174,13 +180,13 @@ export default function Header() {
             <a href={`tel:+${phoneRaw}`} className={styles.contactPhone}>{phone}</a>
           </div>
           <a
-            href={`https://t.me/${telegram.replace('@', '')}`}
+            href={`https://max.ru/${telegram.replace('@', '')}`}
             className={styles.messengerBtn}
-            aria-label="Написать в Telegram"
+            aria-label="Написать в МАКС"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <TelegramIcon />
+            <MaxIcon />
           </a>
           <a href="/#request" className={styles.ctaBtn}>Проконсультироваться</a>
         </div>

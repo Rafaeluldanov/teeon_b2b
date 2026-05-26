@@ -1939,3 +1939,36 @@ export const catalogModelsData: CatalogModelsMap = {
     ],
   },
 };
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+export function collectCategoryImages(
+  categorySlug: string,
+  max = 4,
+  source: CatalogModelsMap = catalogModelsData,
+): string[] {
+  const cat = source[categorySlug];
+  if (!cat) return [];
+  const out: string[] = [];
+  const models = cat.models.filter((m) => m.isActive).sort((a, b) => a.sortOrder - b.sortOrder);
+  for (const m of models) {
+    if (m.coverImage && !out.includes(m.coverImage)) {
+      out.push(m.coverImage);
+      if (out.length >= max) return out;
+    }
+    const variants = m.variants.filter((v) => v.isActive).sort((a, b) => a.sortOrder - b.sortOrder);
+    for (const v of variants) {
+      if (v.image && !out.includes(v.image)) {
+        out.push(v.image);
+        if (out.length >= max) return out;
+      }
+      for (const g of v.galleryImages ?? []) {
+        if (g && !out.includes(g)) {
+          out.push(g);
+          if (out.length >= max) return out;
+        }
+      }
+    }
+  }
+  return out;
+}

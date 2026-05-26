@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { CatalogCategory } from '@/lib/catalog';
 import { getRelatedCategories } from '@/lib/catalog';
+import { collectCategoryImages } from '@/lib/catalogModels';
 import JsonLd from '@/components/JsonLd/JsonLd';
 import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
@@ -19,6 +20,7 @@ const ArrowIc = () => (
 
 export default function CategoryPageContent({ category: cat }: Props) {
   const related = getRelatedCategories(cat.related);
+  const productImgs = collectCategoryImages(cat.slug, Math.max(cat.productExamples.length, 4));
 
   return (
     <main className="v6-page">
@@ -134,14 +136,26 @@ export default function CategoryPageContent({ category: cat }: Props) {
           <p>Конкретные модели и характеристики уточняем при расчёте — подбираем под ваш тираж и задачу.</p>
         </div>
         <ul className={styles.productGrid}>
-          {cat.productExamples.map((p) => (
+          {cat.productExamples.map((p, idx) => {
+            const img = productImgs[idx % Math.max(productImgs.length, 1)];
+            return (
             <li key={p.name} className={styles.productCard}>
               <div
                 className={styles.productImg}
                 role="img"
                 aria-label={`Фото: ${p.name}`}
               >
-                <span className={styles.productImgText}>{cat.name}</span>
+                {img ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={img}
+                    alt={p.name}
+                    className={styles.productImgEl}
+                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                  />
+                ) : (
+                  <span className={styles.productImgText}>{cat.name}</span>
+                )}
               </div>
               <div className={styles.productBody}>
                 <h3 className={styles.productName}>{p.name}</h3>
@@ -162,7 +176,8 @@ export default function CategoryPageContent({ category: cat }: Props) {
                 <a href="/#request" className={styles.productCta}>Запросить расчёт →</a>
               </div>
             </li>
-          ))}
+          );
+          })}
         </ul>
       </div>
 
@@ -183,10 +198,21 @@ export default function CategoryPageContent({ category: cat }: Props) {
         <div className={styles.relatedSection}>
           <h2 className={styles.relatedTitle}>Также заказывают</h2>
           <ul className={styles.relatedGrid}>
-            {related.map((r) => (
+            {related.map((r) => {
+              const rImgs = collectCategoryImages(r.slug, 4);
+              return (
               <li key={r.slug} className={styles.relatedCard}>
                 <div className={styles.relatedImg} role="img" aria-label={r.name}>
-                  {r.name}
+                  {rImgs.length > 0 ? (
+                    <div className={styles.relatedImgCollage} data-count={Math.min(rImgs.length, 4)}>
+                      {rImgs.slice(0, 4).map((src, i) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img key={i} src={src} alt="" className={styles.relatedImgCollageImg} loading="lazy" decoding="async" />
+                      ))}
+                    </div>
+                  ) : (
+                    <span>{r.name}</span>
+                  )}
                 </div>
                 <div className={styles.relatedBody}>
                   <h3 className={styles.relatedName}>{r.name}</h3>
@@ -196,7 +222,8 @@ export default function CategoryPageContent({ category: cat }: Props) {
                   </Link>
                 </div>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </div>
       )}

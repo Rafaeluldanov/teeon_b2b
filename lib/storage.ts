@@ -32,8 +32,19 @@ export async function uploadFile(
   body: Buffer,
   contentType: string,
 ): Promise<string> {
+  // Long-lived cache: image/video filenames are timestamped (`${Date.now()}-...`),
+  // so a fresh upload always gets a new URL — immutable is safe.
+  const cacheControl = contentType.startsWith('image/') || contentType.startsWith('video/')
+    ? 'public, max-age=31536000, immutable'
+    : undefined;
   await makeClient().send(
-    new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: body, ContentType: contentType }),
+    new PutObjectCommand({
+      Bucket: BUCKET,
+      Key: key,
+      Body: body,
+      ContentType: contentType,
+      ...(cacheControl ? { CacheControl: cacheControl } : {}),
+    }),
   );
   return `${PUBLIC_URL}/${key}`;
 }

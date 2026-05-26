@@ -45,14 +45,14 @@ async function getHmacKey(secret: string): Promise<CryptoKey> {
 async function hmacSign(data: string, secret: string): Promise<Uint8Array> {
   const key = await getHmacKey(secret);
   const dataBytes = new TextEncoder().encode(data);
-  const sig = await crypto.subtle.sign('HMAC', key, dataBytes);
+  const sig = await crypto.subtle.sign('HMAC', key, dataBytes as unknown as BufferSource);
   return new Uint8Array(sig);
 }
 
 async function hmacVerify(data: string, signature: Uint8Array, secret: string): Promise<boolean> {
   const key = await getHmacKey(secret);
   const dataBytes = new TextEncoder().encode(data);
-  return crypto.subtle.verify('HMAC', key, signature.buffer as ArrayBuffer, dataBytes.buffer as ArrayBuffer);
+  return crypto.subtle.verify('HMAC', key, signature as unknown as BufferSource, dataBytes as unknown as BufferSource);
 }
 
 export async function createAdminToken(username: string, secret: string): Promise<string> {
@@ -84,4 +84,11 @@ export async function verifyAdminToken(
   } catch {
     return false;
   }
+}
+
+export function buildRedirectUrl(request: Request, pathWithQuery: string): URL {
+  const reqUrl = new URL(request.url);
+  const host = request.headers.get('host') ?? reqUrl.host;
+  const proto = request.headers.get('x-forwarded-proto') ?? reqUrl.protocol.replace(':', '');
+  return new URL(pathWithQuery, `${proto}://${host}`);
 }

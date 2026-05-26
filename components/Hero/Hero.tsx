@@ -15,17 +15,17 @@ const BADGE_ICONS = [
 ];
 
 const DEFAULT_BADGES = [
-  { title: 'Свой цех', text: 'от лекала до отгрузки' },
-  { title: '9 методов нанесения', text: 'от вышивки до DTF' },
-  { title: 'Образец до тиража', text: 'pre-production sample' },
-  { title: 'Доставка по РФ', text: 'УПД, маркировка' },
+  { title: 'Производство 1000 м²', text: 'собственное в Москве' },
+  { title: '15+ станков', text: 'вышивка, лазер, UV, DTF' },
+  { title: '50 машин Juki', text: 'до 150 000 изделий/мес' },
+  { title: 'Полный цикл под ключ', text: 'идея → дизайн → поставка' },
 ];
 
 const DEFAULT_STATS = [
-  { kicker: '⏱ Сроки', val: '10–14', unit: 'дней', desc: 'стандартный тираж от лекала до отгрузки', cls: '' },
-  { kicker: '⌂ Производство', val: '600', unit: 'м²', desc: 'собственный швейный цех в Подмосковье', cls: 'yellow' },
-  { kicker: '✦ Брендирование', val: '9', unit: 'методов', desc: 'от вышивки и шелкографии до DTF и тиснения', cls: 'blue' },
-  { kicker: '∑ Расчёт', val: 'от 30', unit: 'шт', desc: 'минимальный тираж под расчёт и образец', cls: '' },
+  { kicker: '⏳ На рынке', val: 'с 2018', unit: 'года', desc: 'производство полного цикла в Москве', cls: '' },
+  { kicker: '⌂ Производство', val: '1000', unit: 'м²', desc: 'собственный цех в Москве', cls: 'yellow' },
+  { kicker: '✦ Реализовано', val: '3000', unit: '+ кейсов', desc: 'успешных проектов с брендированием', cls: 'blue' },
+  { kicker: '🤝 Клиентов', val: '300', unit: '+', desc: 'постоянных корпоративных заказчиков', cls: '' },
 ];
 
 const V_CLASS: Record<string, string> = {
@@ -85,14 +85,14 @@ export default function Hero() {
           <div className={styles.mediaLayer} aria-hidden="true">
             {banner.mediaType === 'image' && banner.imageSrc ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={banner.imageSrc} alt="" className={styles.mediaBg} />
+              <img src={banner.imageSrc} alt="" className={styles.mediaBg} decoding="async" fetchPriority="high" />
             ) : (
               <video
                 className={styles.mediaBg}
                 autoPlay muted loop playsInline preload="none"
-                poster={banner.posterSrc ?? '/images/hero-poster.jpg'}
+                {...(banner.posterSrc ? { poster: banner.posterSrc } : {})}
               >
-                <source src={banner.videoSrc ?? '/videos/hero-production.mp4'} type="video/mp4" />
+                {banner.videoSrc && <source src={banner.videoSrc} type="video/mp4" />}
               </video>
             )}
           </div>

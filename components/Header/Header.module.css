@@ -33,7 +33,7 @@
   align-items: baseline;
   gap: 0;
   flex-shrink: 0;
-  font-size: 22px;
+  font-size: 28px;
   font-weight: 900;
   letter-spacing: -0.04em;
   color: var(--ink);
@@ -205,14 +205,16 @@
   justify-content: center;
   width: 34px;
   height: 34px;
-  border-radius: 50%;
-  background: var(--paper-2);
+  border-radius: 8px;
+  background: transparent;
   color: var(--ink);
   flex-shrink: 0;
-  transition: background 0.15s, color 0.15s;
+  transition: transform 0.15s ease;
   text-decoration: none;
 }
-.messengerBtn:hover { background: #d8f0e8; color: #0a9b6d; }
+.messengerBtn svg,
+.messengerBtn img { width: 30px; height: 30px; display: block; border-radius: 7px; }
+.messengerBtn:hover { transform: scale(1.06); }
 
 .ctaBtn {
   display: inline-flex;

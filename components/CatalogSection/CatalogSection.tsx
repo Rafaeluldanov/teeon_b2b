@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import styles from './CatalogSection.module.css';
 import { catalogCategories } from '@/lib/catalog';
+import { collectCategoryImages } from '@/lib/catalogModels';
+import CatalogCategoryIcon from '@/components/CatalogCategoryIcon/CatalogCategoryIcon';
 
 const ArrowIc = () => (
   <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
@@ -8,18 +10,17 @@ const ArrowIc = () => (
   </svg>
 );
 
-type CatKind = 'tee' | 'hoodie' | 'sweat' | 'longsleeve' | 'bag' | 'vest' | 'jacket' | 'raincoat';
 type BgKey  = 'paper-2' | 'yellow' | 'blue' | 'mint' | 'coral' | 'ink';
 
-const CAT_META: Record<string, { kind: CatKind; bg: BgKey; num: string }> = {
-  futbolki:   { kind: 'tee',        bg: 'paper-2', num: '01' },
-  hudi:       { kind: 'hoodie',     bg: 'yellow',  num: '02' },
-  svitshoty:  { kind: 'sweat',      bg: 'paper-2', num: '03' },
-  longslivy:  { kind: 'longsleeve', bg: 'blue',    num: '04' },
-  sumki:      { kind: 'bag',        bg: 'mint',    num: '05' },
-  zhiletki:   { kind: 'vest',       bg: 'paper-2', num: '06' },
-  kurtki:     { kind: 'jacket',     bg: 'ink',     num: '07' },
-  dozhdeviki: { kind: 'raincoat',   bg: 'coral',   num: '08' },
+const CAT_META: Record<string, { bg: BgKey; num: string }> = {
+  futbolki:   { bg: 'paper-2', num: '01' },
+  hudi:       { bg: 'yellow',  num: '02' },
+  svitshoty:  { bg: 'paper-2', num: '03' },
+  longslivy:  { bg: 'blue',    num: '04' },
+  sumki:      { bg: 'mint',    num: '05' },
+  zhiletki:   { bg: 'paper-2', num: '06' },
+  kurtki:     { bg: 'ink',     num: '07' },
+  dozhdeviki: { bg: 'coral',   num: '08' },
 };
 
 const BG_CLASS: Record<BgKey, string> = {
@@ -30,26 +31,6 @@ const BG_CLASS: Record<BgKey, string> = {
   coral:     styles['bg-coral'],
   ink:       styles['bg-ink'],
 };
-
-function Silhouette({ kind, opacity = 0.45 }: { kind: CatKind; opacity?: number }) {
-  return (
-    <svg
-      viewBox="0 0 200 240"
-      preserveAspectRatio="xMidYMid slice"
-      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity }}
-      aria-hidden="true"
-    >
-      {kind === 'tee'        && <g fill="currentColor"><path d="M52 78 L74 56 L86 64 Q100 76 114 64 L126 56 L148 78 L138 96 L122 88 L122 188 L78 188 L78 88 L62 96 Z"/></g>}
-      {kind === 'hoodie'     && <g fill="currentColor"><path d="M70 70 Q70 50 100 50 Q130 50 130 70 L150 78 L142 100 L130 94 L130 188 L70 188 L70 94 L58 100 L50 78 Z"/></g>}
-      {kind === 'sweat'      && <g fill="currentColor"><path d="M52 78 L78 58 Q100 68 122 58 L148 78 L140 100 L128 94 L128 188 L72 188 L72 94 L60 100 Z"/></g>}
-      {kind === 'longsleeve' && <g fill="currentColor"><path d="M40 70 L78 58 Q100 68 122 58 L160 70 L158 130 L140 124 L140 188 L60 188 L60 124 L42 130 Z"/></g>}
-      {kind === 'bag'        && <g fill="currentColor"><path d="M70 92 L130 92 L138 192 L62 192 Z"/><path d="M84 92 Q84 60 100 60 Q116 60 116 92" fill="none" stroke="currentColor" strokeWidth="6"/></g>}
-      {kind === 'vest'       && <g fill="currentColor"><path d="M58 78 L86 60 L100 70 L114 60 L142 78 L142 188 L114 188 L114 96 L86 96 L86 188 L58 188 Z"/></g>}
-      {kind === 'jacket'     && <g fill="currentColor"><path d="M50 78 L78 56 L98 60 L98 188 L60 188 Z"/><path d="M150 78 L122 56 L102 60 L102 188 L140 188 Z"/></g>}
-      {kind === 'raincoat'   && <g fill="currentColor"><path d="M64 80 Q64 56 100 56 Q136 56 136 80 L154 88 L144 110 L132 104 L132 196 L68 196 L68 104 L56 110 L46 88 Z"/></g>}
-    </svg>
-  );
-}
 
 export default function CatalogSection() {
   return (
@@ -64,15 +45,32 @@ export default function CatalogSection() {
 
       <ul className={styles.grid}>
         {catalogCategories.map((cat) => {
-          const meta = CAT_META[cat.slug] ?? { kind: 'tee' as CatKind, bg: 'paper-2' as BgKey, num: '—' };
+          const meta = CAT_META[cat.slug] ?? { bg: 'paper-2' as BgKey, num: '—' };
           const bgClass = BG_CLASS[meta.bg] ?? '';
-          const opacity = meta.bg === 'paper-2' ? 0.55 : 0.45;
+          const imgs = collectCategoryImages(cat.slug, 4);
           return (
             <li key={cat.slug} className={styles.card}>
-              <div className={`${styles.media} ${bgClass}`}>
+              <div className={`${styles.media} ${imgs.length > 0 ? '' : bgClass}`}>
                 <span className={styles.mediaNum}>{meta.num} /</span>
                 <span className={styles.mediaPill}>✦ Брендирование</span>
-                <Silhouette kind={meta.kind} opacity={opacity} />
+                {imgs.length > 0 ? (
+                  <div className={styles.mediaCollage} data-count={Math.min(imgs.length, 4)}>
+                    {imgs.slice(0, 4).map((src, i) => (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        key={i}
+                        src={src}
+                        alt=""
+                        className={styles.mediaCollageImg}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    ))}
+                  </div>
+                ) : (
+                  <span className={styles.iconWrap} aria-hidden="true">
+                    <CatalogCategoryIcon slug={cat.slug} className={styles.cardIconSvg} />
+                  </span>
+                )}
               </div>
               <div className={styles.body}>
                 <div className={styles.name}>{cat.name}</div>
