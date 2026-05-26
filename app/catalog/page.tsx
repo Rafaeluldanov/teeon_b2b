@@ -158,7 +158,7 @@ export default async function CatalogPage() {
         <ul className={styles.grid}>
           {catalogCategories.map((cat) => {
             const meta = CAT_META[cat.slug] ?? { bg: 'bgPaper2' as BgKey, num: '—' };
-            const imgs = collectCategoryImages(cat.slug, 4);
+            const imgs = collectCategoryImages(cat.slug, 4, modelsData);
             return (
               <li key={cat.slug} className={styles.card}>
                 <div className={`${styles.cardMedia} ${imgs.length > 0 ? '' : styles[meta.bg]}`}>
