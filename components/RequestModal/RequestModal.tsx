@@ -24,6 +24,32 @@ export default function RequestModal() {
     return () => window.removeEventListener(REQUEST_MODAL_OPEN_EVENT, handler);
   }, []);
 
+  // Global delegation: перехватываем клики по любым <a href="#request"> и
+  // <a href="/#request"> на всём сайте — открываем модалку вместо скролла.
+  // Это избавляет от необходимости заменять каждую ссылку вручную (их 25+).
+  // Кнопка с modifier (cmd/ctrl/middle-click) и иные интенты — пропускаем.
+  useEffect(() => {
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      let el = e.target as HTMLElement | null;
+      while (el && el !== document.body) {
+        if (el.tagName === 'A') {
+          const href = (el as HTMLAnchorElement).getAttribute('href') || '';
+          // Совпадают: "#request", "/#request", "https://teeon.ru/#request" и т.п.
+          if (href === '#request' || href === '/#request' || href.endsWith('/#request')) {
+            e.preventDefault();
+            setOpen(true);
+          }
+          return;
+        }
+        el = el.parentElement;
+      }
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+
   // ESC закрывает + блокируем body-scroll пока открыто.
   useEffect(() => {
     if (!open) return;
