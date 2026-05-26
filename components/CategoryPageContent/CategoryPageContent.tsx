@@ -70,9 +70,12 @@ const ArrowIc = () => (
   </svg>
 );
 
-export default function CategoryPageContent({ category: cat }: Props) {
+export default async function CategoryPageContent({ category: cat }: Props) {
   const related = getRelatedCategories(cat.related);
-  const productImgs = collectCategoryImages(cat.slug, Math.max(cat.productExamples.length, 4));
+  const modelsData = await getMergedCatalogModels();
+  const cases = await getMergedPortfolioCases();
+  const productImgs = collectCategoryImages(cat.slug, Math.max(cat.productExamples.length, 4), modelsData);
+  const portfolioExamples = collectPortfolioForCategory(cat.slug, cases, 6);
 
   return (
     <main className="v6-page">
