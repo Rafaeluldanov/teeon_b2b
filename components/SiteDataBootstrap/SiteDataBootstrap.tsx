@@ -37,6 +37,10 @@ async function readDumpForBrowser(): Promise<Record<string, string> | null> {
 // Для админа (у которого localStorage уже заполнен) скрипт ничего не трогает —
 // у каждого ключа проверяется !localStorage.getItem(k), иначе пропуск.
 export default async function SiteDataBootstrap(): Promise<JSX.Element | null> {
+  // Файл-дамп монтируется через volume и появляется только в runtime контейнера.
+  // noStore() переводит страницы из SSG в dynamic SSR, чтобы на каждый запрос
+  // браузер получал актуальные данные сразу после нажатия "Сохранить на сервер".
+  noStore();
   const data = await readDumpForBrowser();
   if (!data) return null;
 
