@@ -2,14 +2,77 @@ import Link from 'next/link';
 import type { BrandingMethod } from '@/lib/branding';
 import { getRelatedBrandingMethods } from '@/lib/branding';
 import { catalogCategories } from '@/lib/catalog';
+import { getMergedPortfolioCases } from '@/lib/serverData';
 import JsonLd from '@/components/JsonLd/JsonLd';
 import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
 import BrandingSampleTabs from '@/components/BrandingSampleTabs/BrandingSampleTabs';
+import SafeImg from '@/components/SafeImg/SafeImg';
 import styles from './BrandingPageContent.module.css';
 
 interface Props {
   method: BrandingMethod;
+}
+
+interface BrandingPortfolioExample {
+  href: string;
+  title: string;
+  task?: string;
+  image?: string;
+}
+
+// Подбираем кейсы из портфолио, в которых использовалась эта технология нанесения.
+// Источник истины — relatedBranding на уровне кейса (поле админки). Дополнительно
+// пытаемся вытащить конкретный продукт из caseProducts, у которого branding[]
+// содержит совпадение по названию метода (нормализуем — в админ-дампе часто опечатки).
+function collectBrandingPortfolio(
+  methodSlug: string,
+  methodTitle: string,
+  cases: Awaited<ReturnType<typeof getMergedPortfolioCases>>,
+  max: number,
+): BrandingPortfolioExample[] {
+  const out: BrandingPortfolioExample[] = [];
+  const titleNorm = methodTitle.toLowerCase().replace(/[-\s]/g, '');
+
+  function productMatchesMethod(branding: string[] | undefined): boolean {
+    if (!branding?.length) return false;
+    return branding.some((b) => {
+      const bn = b.toLowerCase().replace(/[-\s]/g, '');
+      return bn.includes(titleNorm) || titleNorm.includes(bn);
+    });
+  }
+
+  // Шаг 1: точное совпадение по branding-полю отдельного продукта.
+  for (const c of cases) {
+    if (c.isActive === false) continue;
+    if (!Array.isArray(c.caseProducts) || !c.caseProducts.length) continue;
+    for (const p of c.caseProducts) {
+      if (p.isActive === false) continue;
+      if (!productMatchesMethod(p.branding)) continue;
+      out.push({
+        href: `/portfolio/${c.slug}/`,
+        title: p.title || c.shortTitle || c.title,
+        task: c.shortTitle && p.title !== c.shortTitle ? c.shortTitle : c.task,
+        image: p.images?.[0] || c.coverImage || c.galleryImages?.[0],
+      });
+      if (out.length >= max) return out;
+    }
+  }
+
+  // Шаг 2: добор кейсами с relatedBranding[]-slug, если точных совпадений мало.
+  for (const c of cases) {
+    if (out.length >= max) break;
+    if (c.isActive === false) continue;
+    if (!(c.relatedBranding ?? []).includes(methodSlug)) continue;
+    if (out.some((o) => o.href === `/portfolio/${c.slug}/`)) continue;
+    out.push({
+      href: `/portfolio/${c.slug}/`,
+      title: c.shortTitle || c.title,
+      task: c.task,
+      image: c.coverImage || c.galleryImages?.[0],
+    });
+  }
+  return out;
 }
 
 const ArrowIc = () => (
