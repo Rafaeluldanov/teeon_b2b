@@ -1,4 +1,5 @@
 import { promises as fs } from 'node:fs';
+import { unstable_noStore as noStore } from 'next/cache';
 
 const DUMP_PATH = '/app/.tmp/admin-dump-all.json';
 
