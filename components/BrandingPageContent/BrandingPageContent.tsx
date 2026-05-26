@@ -81,8 +81,10 @@ const ArrowIc = () => (
   </svg>
 );
 
-export default function BrandingPageContent({ method: m }: Props) {
+export default async function BrandingPageContent({ method: m }: Props) {
   const relatedMethods = getRelatedBrandingMethods(m.relatedMethods);
+  const cases = await getMergedPortfolioCases();
+  const portfolioExamples = collectBrandingPortfolio(m.slug, m.title, cases, 6);
   const relatedCatalog = m.relatedCatalog
     .map((slug) => catalogCategories.find((c) => c.slug === slug))
     .filter(Boolean);
