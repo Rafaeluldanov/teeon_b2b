@@ -32,35 +32,38 @@ function collectPortfolioForCategory(
 ): PortfolioExample[] {
   const out: PortfolioExample[] = [];
 
+  // Шаг 1: точные совпадения по конкретному продукту (categorySlug или tag).
   for (const c of cases) {
     if (c.isActive === false) continue;
-    const caseTagged =
-      (c.relatedCatalog ?? []).includes(slug) || (c.tags ?? []).includes(slug);
-
-    if (Array.isArray(c.caseProducts) && c.caseProducts.length) {
-      for (const p of c.caseProducts) {
-        if (p.isActive === false) continue;
-        const productTagged =
-          p.categorySlug === slug || (p.tags ?? []).includes(slug);
-        if (!productTagged && !caseTagged) continue;
-        out.push({
-          href: `/portfolio/${c.slug}/`,
-          title: p.title || c.shortTitle || c.title,
-          subtitle: c.shortTitle && p.title !== c.shortTitle ? c.shortTitle : undefined,
-          image: p.images?.[0] || c.coverImage || c.galleryImages?.[0],
-          fabric: p.material,
-          color: p.color,
-        });
-        if (out.length >= max) return out;
-      }
-    } else if (caseTagged) {
+    if (!Array.isArray(c.caseProducts) || !c.caseProducts.length) continue;
+    for (const p of c.caseProducts) {
+      if (p.isActive === false) continue;
+      const productTagged = p.categorySlug === slug || (p.tags ?? []).includes(slug);
+      if (!productTagged) continue;
       out.push({
         href: `/portfolio/${c.slug}/`,
-        title: c.shortTitle || c.title,
-        image: c.coverImage || c.galleryImages?.[0],
+        title: p.title || c.shortTitle || c.title,
+        subtitle: c.shortTitle && p.title !== c.shortTitle ? c.shortTitle : undefined,
+        image: p.images?.[0] || c.coverImage || c.galleryImages?.[0],
+        fabric: p.material,
+        color: p.color,
       });
       if (out.length >= max) return out;
     }
+  }
+  // Шаг 2: добор по уровню кейса (relatedCatalog/tags), если точных совпадений мало.
+  for (const c of cases) {
+    if (out.length >= max) break;
+    if (c.isActive === false) continue;
+    const caseTagged = (c.relatedCatalog ?? []).includes(slug) || (c.tags ?? []).includes(slug);
+    if (!caseTagged) continue;
+    // если каскадные продукты уже были в шаге 1 — пропускаем
+    if (out.some((o) => o.href === `/portfolio/${c.slug}/`)) continue;
+    out.push({
+      href: `/portfolio/${c.slug}/`,
+      title: c.shortTitle || c.title,
+      image: c.coverImage || c.galleryImages?.[0],
+    });
   }
   return out;
 }
