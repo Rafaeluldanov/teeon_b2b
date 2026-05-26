@@ -201,19 +201,19 @@ export default async function CategoryPageContent({ category: cat }: Props) {
           {portfolioExamples.length > 0 ? (
             portfolioExamples.map((p, idx) => (
               <li key={`${p.href}-${idx}`} className={styles.productCard}>
-                <Link href={p.href} className={styles.productImg} aria-label={`Кейс: ${p.title}`}>
-                  {p.image ? (
-                    <SafeImg
-                      src={p.image}
-                      alt={p.title}
-                      className={styles.productImgEl}
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  ) : (
+                {p.image ? (
+                  <ZoomableImage
+                    src={p.image}
+                    alt={p.title}
+                    wrapperClassName={styles.productImg}
+                    imgClassName={styles.productImgEl}
+                    ariaLabel={`Открыть фото: ${p.title}`}
+                  />
+                ) : (
+                  <div className={styles.productImg} role="img" aria-label={p.title}>
                     <span className={styles.productImgText}>{cat.name}</span>
-                  )}
-                </Link>
+                  </div>
+                )}
                 <div className={styles.productBody}>
                   <h3 className={styles.productName}>{p.title}</h3>
                   {(p.subtitle || p.fabric || p.color) && (
