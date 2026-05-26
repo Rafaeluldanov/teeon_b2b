@@ -63,10 +63,25 @@ export default function Hero() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem(LS_KEY);
-      if (raw) {
-        const parsed = JSON.parse(raw) as HomeBannerContent;
-        if (parsed.isActive !== false) setBanner(parsed);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as HomeBannerContent;
+
+      // Миграция: если в браузере хранится один из старых дефолтных заголовков,
+      // пользователь явно ничего не правил — обновляем на новый текст. Кастомные
+      // тексты не трогаем.
+      if (parsed && typeof parsed.title === 'string' && OLD_DEFAULT_TITLES.includes(parsed.title)) {
+        const migrated: HomeBannerContent = {
+          ...parsed,
+          title: defaultHomeBanner.title,
+          subtitle: defaultHomeBanner.subtitle,
+          badges: defaultHomeBanner.badges,
+        };
+        try { localStorage.setItem(LS_KEY, JSON.stringify(migrated)); } catch { /* ignore */ }
+        if (migrated.isActive !== false) setBanner(migrated);
+        return;
       }
+
+      if (parsed.isActive !== false) setBanner(parsed);
     } catch { /* ignore */ }
   }, []);
 
