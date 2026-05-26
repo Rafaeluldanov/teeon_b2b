@@ -181,58 +181,95 @@ export default async function CategoryPageContent({ category: cat }: Props) {
         </div>
       </div>
 
-      {/* ── Product examples ── */}
+      {/* ── Portfolio examples / Product examples fallback ── */}
       <div className={styles.productSection}>
         <div className={styles.sectionHead}>
           <div>
-            <div className={styles.kicker}>Примеры</div>
+            <div className={styles.kicker}>{portfolioExamples.length > 0 ? 'Из портфолио' : 'Примеры'}</div>
             <h2>Позиции —<br /><em>{cat.name}</em></h2>
           </div>
-          <p>Конкретные модели и характеристики уточняем при расчёте — подбираем под ваш тираж и задачу.</p>
+          <p>{portfolioExamples.length > 0
+            ? 'Реальные проекты, которые мы уже делали. Нажмите на карточку — откроется кейс целиком.'
+            : 'Конкретные модели и характеристики уточняем при расчёте — подбираем под ваш тираж и задачу.'}</p>
         </div>
         <ul className={styles.productGrid}>
-          {cat.productExamples.map((p, idx) => {
-            const img = productImgs[idx % Math.max(productImgs.length, 1)];
-            return (
-            <li key={p.name} className={styles.productCard}>
-              <div
-                className={styles.productImg}
-                role="img"
-                aria-label={`Фото: ${p.name}`}
-              >
-                {img ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={img}
-                    alt={p.name}
-                    className={styles.productImgEl}
-                    onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
-                  />
-                ) : (
-                  <span className={styles.productImgText}>{cat.name}</span>
-                )}
-              </div>
-              <div className={styles.productBody}>
-                <h3 className={styles.productName}>{p.name}</h3>
-                <dl className={styles.productMeta}>
-                  <div className={styles.metaRow}>
-                    <dt>Ткань</dt>
-                    <dd>{p.fabric}</dd>
+          {portfolioExamples.length > 0 ? (
+            portfolioExamples.map((p, idx) => (
+              <li key={`${p.href}-${idx}`} className={styles.productCard}>
+                <Link href={p.href} className={styles.productImg} aria-label={`Кейс: ${p.title}`}>
+                  {p.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className={styles.productImgEl}
+                      loading="lazy"
+                      decoding="async"
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                    />
+                  ) : (
+                    <span className={styles.productImgText}>{cat.name}</span>
+                  )}
+                </Link>
+                <div className={styles.productBody}>
+                  <h3 className={styles.productName}>{p.title}</h3>
+                  {(p.subtitle || p.fabric || p.color) && (
+                    <dl className={styles.productMeta}>
+                      {p.subtitle && (
+                        <div className={styles.metaRow}>
+                          <dt>Кейс</dt>
+                          <dd>{p.subtitle}</dd>
+                        </div>
+                      )}
+                      {p.fabric && (
+                        <div className={styles.metaRow}>
+                          <dt>Ткань</dt>
+                          <dd>{p.fabric}</dd>
+                        </div>
+                      )}
+                      {p.color && (
+                        <div className={styles.metaRow}>
+                          <dt>Цвет</dt>
+                          <dd>{p.color}</dd>
+                        </div>
+                      )}
+                    </dl>
+                  )}
+                  <Link href={p.href} className={styles.productCta}>Смотреть кейс →</Link>
+                </div>
+              </li>
+            ))
+          ) : (
+            cat.productExamples.map((p, idx) => {
+              const img = productImgs[idx % Math.max(productImgs.length, 1)];
+              return (
+                <li key={p.name} className={styles.productCard}>
+                  <div className={styles.productImg} role="img" aria-label={`Фото: ${p.name}`}>
+                    {img ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={img}
+                        alt={p.name}
+                        className={styles.productImgEl}
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      />
+                    ) : (
+                      <span className={styles.productImgText}>{cat.name}</span>
+                    )}
                   </div>
-                  <div className={styles.metaRow}>
-                    <dt>Цвет</dt>
-                    <dd>{p.color}</dd>
+                  <div className={styles.productBody}>
+                    <h3 className={styles.productName}>{p.name}</h3>
+                    <dl className={styles.productMeta}>
+                      <div className={styles.metaRow}><dt>Ткань</dt><dd>{p.fabric}</dd></div>
+                      <div className={styles.metaRow}><dt>Цвет</dt><dd>{p.color}</dd></div>
+                      <div className={styles.metaRow}><dt>Стоимость</dt><dd>Расчёт под тираж</dd></div>
+                    </dl>
+                    <a href="/#request" className={styles.productCta}>Запросить расчёт →</a>
                   </div>
-                  <div className={styles.metaRow}>
-                    <dt>Стоимость</dt>
-                    <dd>Расчёт под тираж</dd>
-                  </div>
-                </dl>
-                <a href="/#request" className={styles.productCta}>Запросить расчёт →</a>
-              </div>
-            </li>
-          );
-          })}
+                </li>
+              );
+            })
+          )}
         </ul>
       </div>
 
