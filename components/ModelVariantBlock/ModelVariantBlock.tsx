@@ -143,14 +143,6 @@ export default function ModelVariantBlock({ categorySlug }: ModelVariantBlockPro
                 className={`${styles.variantCard} ${idx === activeVariantIdx ? styles.variantCardActive : ''}`}
                 onClick={() => handleVariantChange(idx)}
               >
-                <div className={styles.variantCardImg}>
-                  {variant.image ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={variant.image} alt={variant.name} className={styles.variantCardImgEl} loading="lazy" decoding="async" />
-                  ) : (
-                    <span className={styles.variantCardImgPlaceholder}>{variant.name}</span>
-                  )}
-                </div>
                 <div className={styles.variantCardBody}>
                   <span className={styles.variantCardName}>{variant.name}</span>
                   {variant.subtitle && (
