@@ -8,6 +8,7 @@ import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
 import BrandingSampleTabs from '@/components/BrandingSampleTabs/BrandingSampleTabs';
 import SafeImg from '@/components/SafeImg/SafeImg';
+import ZoomableImage from '@/components/ZoomableImage/ZoomableImage';
 import styles from './BrandingPageContent.module.css';
 
 interface Props {
