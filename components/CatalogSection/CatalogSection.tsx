@@ -33,7 +33,10 @@ const BG_CLASS: Record<BgKey, string> = {
   ink:       styles['bg-ink'],
 };
 
-export default function CatalogSection() {
+export default async function CatalogSection() {
+  // SSR-side merge с админ-дампом — иначе collectCategoryImages не найдёт
+  // фотки, добавленные через админку, и сайт покажет фолбэк-иконки.
+  const modelsData = await getMergedCatalogModels();
   return (
     <section id="catalog" className="section-spacer" aria-labelledby="catalog-title">
       <div className="v6-section-head">
@@ -48,7 +51,7 @@ export default function CatalogSection() {
         {catalogCategories.map((cat) => {
           const meta = CAT_META[cat.slug] ?? { bg: 'paper-2' as BgKey, num: '—' };
           const bgClass = BG_CLASS[meta.bg] ?? '';
-          const imgs = collectCategoryImages(cat.slug, 4);
+          const imgs = collectCategoryImages(cat.slug, 4, modelsData);
           return (
             <li key={cat.slug} className={styles.card}>
               <div className={`${styles.media} ${imgs.length > 0 ? '' : bgClass}`}>
