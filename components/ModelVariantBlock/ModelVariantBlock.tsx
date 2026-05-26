@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { catalogModelsData } from '@/lib/catalogModels';
 import type { CatalogModelsMap, CatalogModel, CatalogVariant } from '@/lib/catalogModels';
 import Lightbox, { type LightboxState } from '@/components/Lightbox/Lightbox';
+import { openRequestModal } from '@/components/RequestModal/openRequestModal';
 import styles from './ModelVariantBlock.module.css';
 
 const ADMIN_MODELS_KEY = 'teeon_admin_catalog_models';
