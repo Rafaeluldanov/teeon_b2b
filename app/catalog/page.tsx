@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { catalogCategories } from '@/lib/catalog';
 import { collectCategoryImages } from '@/lib/catalogModels';
+import { getMergedCatalogModels } from '@/lib/serverData';
 import JsonLd from '@/components/JsonLd/JsonLd';
 import CatalogCategoryIcon from '@/components/CatalogCategoryIcon/CatalogCategoryIcon';
 import { siteConfig } from '@/lib/seo';
