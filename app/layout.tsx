@@ -62,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         {children}
         <Footer />
+        <RequestModal />
         <YandexMetrika />
       </body>
     </html>
