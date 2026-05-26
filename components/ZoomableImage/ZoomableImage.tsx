@@ -28,6 +28,9 @@ export default function ZoomableImage({
 }: Props) {
   const [state, setState] = useState<LightboxState | null>(null);
   const [broken, setBroken] = useState(false);
+  // Portal-target должен браться только в браузере. На SSR document не существует.
+  const [portalTarget, setPortalTarget] = useState<HTMLElement | null>(null);
+  useEffect(() => { setPortalTarget(document.body); }, []);
 
   if (broken) return null;
 
@@ -52,7 +55,13 @@ export default function ZoomableImage({
           onError={() => setBroken(true)}
         />
       </button>
-      <Lightbox state={state} onChange={setState} />
+      {/* Рендерим Lightbox в <body>, чтобы position:fixed не ломался transition-transform
+          и overflow:hidden у родительской карточки. Без портала лайтбокс открывался
+          в пределах карточки и подрагивал при hover из-за contenting block ancestor. */}
+      {portalTarget && state && createPortal(
+        <Lightbox state={state} onChange={setState} />,
+        portalTarget,
+      )}
     </>
   );
 }
