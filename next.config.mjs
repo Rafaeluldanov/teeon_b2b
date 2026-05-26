@@ -24,14 +24,26 @@ const nextConfig = {
         pathname: '/**',
       },
       {
-        // MinIO на прод-сервере по IP
+        // MinIO на прод-сервере по IP (legacy — оставлено для миграции)
         protocol: 'http',
         hostname: '185.225.34.60',
         port: '9000',
         pathname: '/**',
       },
+      {
+        // Прод: картинки отдаются Caddy через /s3/teeon-images/...
+        protocol: 'https',
+        hostname: 'teeon.ru',
+        pathname: '/s3/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.teeon.ru',
+        pathname: '/s3/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
   },
   async headers() {
     return [

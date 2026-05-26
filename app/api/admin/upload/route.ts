@@ -7,7 +7,8 @@ import path from 'path';
 
 export const runtime = 'nodejs';
 
-const WEBP_QUALITY = 80;
+const WEBP_QUALITY = 82;
+const WEBP_MAX_WIDTH = 2400; // покрывает retina-десктоп; больше — пустая трата трафика
 
 // Raster formats are transcoded to WebP server-side; SVG is preserved as-is.
 const ALLOWED_IMAGE: Record<string, string> = {
@@ -67,21 +68,24 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json({ success: false, message: `Файл слишком большой (${(file.size / 1024 / 1024).toFixed(1)} МБ). Максимум: ${isVideo ? '500' : '50'} МБ.` }, { status: 400 });
   }
 
-  const safeName = file.name
-    .toLowerCase()
-    .replace(/[^a-z0-9._-]/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 80);
-  let filename = `${Date.now()}-${safeName || 'file'}`;
+  // Обрезаем basename отдельно, чтобы расширение никогда не терялось.
+  const dot = file.name.lastIndexOf('.');
+  const rawBase = dot > 0 ? file.name.slice(0, dot) : file.name;
+  const rawExt = dot > 0 ? file.name.slice(dot + 1) : '';
+  const sanitize = (s: string) => s.toLowerCase().replace(/[^a-z0-9._-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  const safeBase = sanitize(rawBase).slice(0, 60) || 'file';
+  const safeExt = sanitize(rawExt).slice(0, 10);
+  const safeName = safeExt ? `${safeBase}.${safeExt}` : safeBase;
+  let filename = `${Date.now()}-${safeName}`;
   let buffer: Buffer = Buffer.from(await file.arrayBuffer());
   let contentType = file.type;
 
-  // Transcode raster images to WebP (quality 80) to keep MinIO/payload light.
+  // Transcode raster images to WebP, downsize to retina-desktop max.
   if (isImage && TRANSCODE_TO_WEBP.has(file.type)) {
     try {
       const webp = await sharp(buffer, { failOn: 'none' })
         .rotate()
+        .resize({ width: WEBP_MAX_WIDTH, withoutEnlargement: true })
         .webp({ quality: WEBP_QUALITY, effort: 4 })
         .toBuffer();
       buffer = Buffer.from(webp);

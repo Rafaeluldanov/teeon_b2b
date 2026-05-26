@@ -1,0 +1,31 @@
+{
+	# Email для уведомлений Let's Encrypt о скором истечении/проблемах
+	email teeon@upgifts.ru
+}
+
+# Редирект www → apex
+www.teeon.ru {
+	redir https://teeon.ru{uri} permanent
+}
+
+teeon.ru {
+	encode zstd gzip
+
+	# Картинки из MinIO под тем же доменом:
+	# https://teeon.ru/s3/teeon-images/foo.webp  →  http://localhost:9000/teeon-images/foo.webp
+	handle_path /s3/* {
+		reverse_proxy localhost:9000 {
+			header_up Host {upstream_hostport}
+		}
+	}
+
+	# Всё остальное — в Next.js
+	reverse_proxy localhost:3000
+
+	# Базовые security-заголовки
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "strict-origin-when-cross-origin"
+	}
+}

@@ -12,7 +12,17 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-ENV NEXT_TELEMETRY_DISABLED=1
+
+# NEXT_PUBLIC_* запекаются в бандл во время `npm run build`,
+# поэтому их нужно прокинуть как build-args (а не runtime env_file).
+ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_S3_PUBLIC_URL
+ARG NEXT_PUBLIC_YANDEX_METRIKA_ID
+ENV NEXT_TELEMETRY_DISABLED=1 \
+    NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL \
+    NEXT_PUBLIC_S3_PUBLIC_URL=$NEXT_PUBLIC_S3_PUBLIC_URL \
+    NEXT_PUBLIC_YANDEX_METRIKA_ID=$NEXT_PUBLIC_YANDEX_METRIKA_ID
+
 RUN npm run build
 
 # ---- runner: minimal runtime image ----
