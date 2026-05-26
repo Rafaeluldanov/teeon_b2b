@@ -83,4 +83,3 @@ for await (const key of listAll()) {
 
 console.log('\n=== done ===');
 console.log(JSON.stringify(stats, null, 2));
-// pipe-test marker
