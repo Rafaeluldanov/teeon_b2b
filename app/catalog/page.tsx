@@ -88,7 +88,8 @@ const catalogJsonLd = [
   }),
 ];
 
-export default function CatalogPage() {
+export default async function CatalogPage() {
+  const modelsData = await getMergedCatalogModels();
   return (
     <main className="v6-page">
       <JsonLd data={catalogJsonLd} />
