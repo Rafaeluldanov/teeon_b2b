@@ -6,6 +6,7 @@ import JsonLd from '@/components/JsonLd/JsonLd';
 import YandexMetrika from '@/components/YandexMetrika/YandexMetrika';
 import LocalStorageWebpMigration from '@/components/LocalStorageWebpMigration/LocalStorageWebpMigration';
 import SiteDataBootstrap from '@/components/SiteDataBootstrap/SiteDataBootstrap';
+import RequestModal from '@/components/RequestModal/RequestModal';
 import { siteConfig } from '@/lib/seo';
 import { getOrganizationSchema, getWebSiteSchema } from '@/lib/schema';
 
