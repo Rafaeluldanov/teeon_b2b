@@ -91,12 +91,7 @@ export default function ModelVariantBlock({ categorySlug }: ModelVariantBlockPro
       localStorage.setItem(SELECTED_VARIANT_KEY, JSON.stringify(selection));
     } catch { /* ignore */ }
     setSaved(true);
-    const el = document.getElementById('request');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      window.location.href = '/#request';
-    }
+    openRequestModal();
   };
 
   return (
