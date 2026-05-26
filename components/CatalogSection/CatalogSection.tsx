@@ -2,6 +2,7 @@ import Link from 'next/link';
 import styles from './CatalogSection.module.css';
 import { catalogCategories } from '@/lib/catalog';
 import { collectCategoryImages } from '@/lib/catalogModels';
+import { getMergedCatalogModels } from '@/lib/serverData';
 import CatalogCategoryIcon from '@/components/CatalogCategoryIcon/CatalogCategoryIcon';
 
 const ArrowIc = () => (
