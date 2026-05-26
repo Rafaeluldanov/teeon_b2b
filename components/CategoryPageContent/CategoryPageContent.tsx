@@ -245,12 +245,10 @@ export default async function CategoryPageContent({ category: cat }: Props) {
                 <li key={p.name} className={styles.productCard}>
                   <div className={styles.productImg} role="img" aria-label={`Фото: ${p.name}`}>
                     {img ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <SafeImg
                         src={img}
                         alt={p.name}
                         className={styles.productImgEl}
-                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                       />
                     ) : (
                       <span className={styles.productImgText}>{cat.name}</span>
