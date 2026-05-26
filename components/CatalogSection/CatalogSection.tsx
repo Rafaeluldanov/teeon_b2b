@@ -61,13 +61,11 @@ export default async function CatalogSection() {
                 {imgs.length > 0 ? (
                   <div className={styles.mediaCollage} data-count={Math.min(imgs.length, 4)}>
                     {imgs.slice(0, 4).map((src, i) => (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <SafeImg
                         key={i}
                         src={src}
                         alt=""
                         className={styles.mediaCollageImg}
-                        onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                       />
                     ))}
                   </div>
