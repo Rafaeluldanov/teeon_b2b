@@ -254,26 +254,51 @@ export default async function BrandingPageContent({ method: m }: Props) {
         </div>
       </section>
 
-      {/* ── Examples ── */}
+      {/* ── Examples / Portfolio cases ── */}
       <section aria-labelledby={`examples-${m.slug}`}>
         <div className={styles.sectionHead}>
           <div>
-            <div className={styles.kicker}>Примеры</div>
+            <div className={styles.kicker}>{portfolioExamples.length > 0 ? 'Из портфолио' : 'Примеры'}</div>
             <h2 id={`examples-${m.slug}`}>Примеры —<br /><em>{m.title}</em></h2>
           </div>
-          <p>Реальные задачи, которые мы решаем с помощью этой технологии.</p>
+          <p>{portfolioExamples.length > 0
+            ? 'Реальные кейсы, где мы применяли эту технологию. Нажмите на карточку — откроется кейс.'
+            : 'Реальные задачи, которые мы решаем с помощью этой технологии.'}</p>
         </div>
         <ul className={styles.examplesGrid}>
-          {m.examples.map((ex) => (
-            <li key={ex.name} className={styles.exampleCard}>
-              <div className={styles.exampleImg} role="img" aria-label={`Пример: ${ex.name}`} />
-              <div className={styles.exampleBody}>
-                <h3 className={styles.exampleTitle}>{ex.name}</h3>
-                <p className={styles.exampleTask}>{ex.task}</p>
-                <a href="/#request" className={styles.exampleCta}>Похожий заказ →</a>
-              </div>
-            </li>
-          ))}
+          {portfolioExamples.length > 0 ? (
+            portfolioExamples.map((ex, idx) => (
+              <li key={`${ex.href}-${idx}`} className={styles.exampleCard}>
+                <Link href={ex.href} className={styles.exampleImg} aria-label={`Кейс: ${ex.title}`}>
+                  {ex.image && (
+                    <SafeImg
+                      src={ex.image}
+                      alt={ex.title}
+                      className={styles.exampleImgEl}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
+                </Link>
+                <div className={styles.exampleBody}>
+                  <h3 className={styles.exampleTitle}>{ex.title}</h3>
+                  {ex.task && <p className={styles.exampleTask}>{ex.task}</p>}
+                  <Link href={ex.href} className={styles.exampleCta}>Смотреть кейс →</Link>
+                </div>
+              </li>
+            ))
+          ) : (
+            m.examples.map((ex) => (
+              <li key={ex.name} className={styles.exampleCard}>
+                <div className={styles.exampleImg} role="img" aria-label={`Пример: ${ex.name}`} />
+                <div className={styles.exampleBody}>
+                  <h3 className={styles.exampleTitle}>{ex.name}</h3>
+                  <p className={styles.exampleTask}>{ex.task}</p>
+                  <a href="/#request" className={styles.exampleCta}>Похожий заказ →</a>
+                </div>
+              </li>
+            ))
+          )}
         </ul>
       </section>
 
