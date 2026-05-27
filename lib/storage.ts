@@ -67,3 +67,32 @@ export async function listFiles(prefix?: string): Promise<StorageFile[]> {
 export async function deleteFile(key: string): Promise<void> {
   await makeClient().send(new DeleteObjectCommand({ Bucket: BUCKET, Key: key }));
 }
+
+export async function getFile(key: string): Promise<{ content: Buffer; contentType: string } | null> {
+  try {
+    const res = await makeClient().send(new GetObjectCommand({ Bucket: BUCKET, Key: key }));
+    if (!res.Body) return null;
+    const chunks: Buffer[] = [];
+    // SDK v3 streams the body — собираем в Buffer.
+    for await (const chunk of res.Body as AsyncIterable<Uint8Array>) {
+      chunks.push(Buffer.from(chunk));
+    }
+    return {
+      content: Buffer.concat(chunks),
+      contentType: res.ContentType ?? 'application/octet-stream',
+    };
+  } catch {
+    return null;
+  }
+}
+
+// Если URL — публичная ссылка на наш S3 (PUBLIC_URL/<key>), вернём ключ объекта,
+// чтобы качать его через S3-клиент напрямую (по внутреннему S3_ENDPOINT внутри
+// Docker-сети), а не через цикл teeon.ru → Caddy → MinIO.
+export function extractS3KeyFromPublicUrl(url: string): string | null {
+  if (!PUBLIC_URL) return null;
+  if (!url.startsWith(PUBLIC_URL + '/')) return null;
+  const key = url.slice(PUBLIC_URL.length + 1);
+  // Чистим query / fragment / лишние сегменты.
+  return key.split('?')[0]!.split('#')[0]!;
+}
