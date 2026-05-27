@@ -130,10 +130,12 @@ ul, ol {
   white-space: nowrap;
   line-height: 1.2;
 }
-.btn-primary:hover {
-  background: var(--color-cta-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(232, 87, 26, 0.35);
+@media (hover: hover) {
+  .btn-primary:hover {
+    background: var(--color-cta-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(232, 87, 26, 0.35);
+  }
 }
 
 .btn-secondary {
