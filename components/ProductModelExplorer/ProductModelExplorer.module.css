@@ -37,7 +37,9 @@
   cursor: pointer; text-align: left; transition: border-color 0.18s, box-shadow 0.18s;
   position: relative;
 }
-.optionCard:hover { border-color: #94a3b8; }
+@media (hover: hover) {
+  .optionCard:hover { border-color: #94a3b8; }
+}
 .optionCardActive { border-color: #f5c518; box-shadow: 0 4px 16px rgba(245,197,24,0.2); }
 
 .optionCardImg {
