@@ -82,7 +82,9 @@
   letter-spacing: 0.3px;
   transition: border-color 0.15s, color 0.15s;
 }
-.messengerBtn:hover { border-color: rgba(255,255,255,0.4); color: var(--paper); }
+@media (hover: hover) {
+  .messengerBtn:hover { border-color: rgba(255,255,255,0.4); color: var(--paper); }
+}
 
 .brandCta {
   display: inline-flex;
