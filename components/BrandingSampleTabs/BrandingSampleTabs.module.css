@@ -49,7 +49,9 @@
   transition: all .15s;
   letter-spacing: -.005em;
 }
-.tab:hover { color: var(--ink); background: var(--paper); border-color: var(--hair); }
+@media (hover: hover) {
+  .tab:hover { color: var(--ink); background: var(--paper); border-color: var(--hair); }
+}
 .tabActive {
   background: var(--ink);
   color: var(--paper);
