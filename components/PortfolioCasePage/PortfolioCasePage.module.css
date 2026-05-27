@@ -240,7 +240,9 @@
   background: var(--paper);
   transition: transform .15s, border-color .15s;
 }
-.relCatalogCard:hover { transform: translateY(-2px); border-color: var(--ink); }
+@media (hover: hover) {
+  .relCatalogCard:hover { transform: translateY(-2px); border-color: var(--ink); }
+}
 .relCatalogImg {
   aspect-ratio: 16/9;
   background: var(--paper-2);
