@@ -90,7 +90,12 @@ export default function AboutPortfolioPreview() {
         const productImgs = collectProductImages(c, 4);
         const hasMedia = c.coverImage || productImgs.length > 0;
         return (
-          <li key={c.slug} className={styles.pfCard}>
+          <li
+            key={c.slug}
+            className={styles.pfCard}
+            data-request-source={`Портфолио · ${c.title}`}
+            data-request-image={c.coverImage || productImgs[0] || undefined}
+          >
             <div className={`${styles.pfMedia} ${hasMedia ? '' : bgClass}`}>
               <span className={styles.pfChip}>{c.clientType}</span>
               {c.coverImage ? (
