@@ -202,7 +202,9 @@
   transition: background .15s, border-color .15s;
   width: 100%;
 }
-.brandingLink:hover { background: var(--blue); color: var(--paper); border-color: var(--blue); }
+@media (hover: hover) {
+  .brandingLink:hover { background: var(--blue); color: var(--paper); border-color: var(--blue); }
+}
 
 /* Custom list */
 .customList { display: flex; flex-direction: column; gap: 7px; }
