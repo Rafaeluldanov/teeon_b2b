@@ -73,6 +73,7 @@ export default function RequestModal() {
           // Совпадают: "#request", "/#request", "https://teeon.ru/#request" и т.п.
           if (href === '#request' || href === '/#request' || href.endsWith('/#request')) {
             e.preventDefault();
+            captureRequestSource(el);
             setOpen(true);
           }
           return;
