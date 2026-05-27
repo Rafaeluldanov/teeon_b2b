@@ -138,14 +138,28 @@ export async function sendLeadEmail(lead: LeadData): Promise<{ success: boolean;
     toEmail = process.env.LEAD_TO_EMAIL!;
   }
 
-  const attachments = lead.attachment
-    ? [{ filename: lead.attachment.filename, content: lead.attachment.content, contentType: lead.attachment.contentType }]
-    : [];
+  const attachments: { filename: string; content: Buffer; contentType: string }[] = [];
+  if (lead.sourceImage) {
+    attachments.push({
+      filename: lead.sourceImage.filename,
+      content: lead.sourceImage.content,
+      contentType: lead.sourceImage.contentType,
+    });
+  }
+  if (lead.attachment) {
+    attachments.push({
+      filename: lead.attachment.filename,
+      content: lead.attachment.content,
+      contentType: lead.attachment.contentType,
+    });
+  }
+
+  const subjectSuffix = lead.source ? ` (${lead.source})` : '';
 
   const info = await transporter.sendMail({
     from: process.env.LEAD_FROM_EMAIL ?? '"TEEON Сайт" <noreply@teeon.ru>',
     to: toEmail,
-    subject: `Заявка с сайта: ${lead.topic ?? lead.fullName}`,
+    subject: `Заявка с сайта: ${lead.topic ?? lead.fullName}${subjectSuffix}`,
     text: buildEmailText(lead),
     html: buildEmailHtml(lead),
     attachments,
