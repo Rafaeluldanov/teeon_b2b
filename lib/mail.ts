@@ -31,6 +31,7 @@ function buildEmailHtml(lead: LeadData): string {
     lead.email ? ['Email', lead.email] : null,
     lead.company ? ['Компания', lead.company] : null,
     lead.messenger ? ['Способ связи', lead.messenger] : null,
+    lead.source ? ['Источник заявки', lead.source] : null,
     lead.topic ? ['Тема', lead.topic] : null,
     lead.quantity ? ['Тираж', lead.quantity] : null,
     lead.deadline ? ['Срок', lead.deadline] : null,
