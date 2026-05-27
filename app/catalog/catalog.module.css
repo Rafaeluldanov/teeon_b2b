@@ -159,7 +159,9 @@
   flex-direction: column;
   transition: border-color .15s, transform .15s;
 }
-.card:hover { border-color: var(--ink); transform: translateY(-2px); }
+@media (hover: hover) {
+  .card:hover { border-color: var(--ink); transform: translateY(-2px); }
+}
 .cardMedia {
   aspect-ratio: 1 / 1;
   position: relative;
