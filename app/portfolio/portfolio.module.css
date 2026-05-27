@@ -267,7 +267,9 @@
   background: var(--paper);
   transition: transform .15s, box-shadow .15s;
 }
-.productCard:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(10,14,26,.10); }
+@media (hover: hover) {
+  .productCard:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(10,14,26,.10); }
+}
 .productImgs {
   display: flex; gap: 2px; height: 200px;
   background: var(--paper-2);
