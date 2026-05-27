@@ -125,7 +125,9 @@
   color: var(--ink);
   transition: border-color .15s, transform .15s;
 }
-.card:hover { border-color: var(--ink); transform: translateY(-2px); }
+@media (hover: hover) {
+  .card:hover { border-color: var(--ink); transform: translateY(-2px); }
+}
 .card.yellow { background: var(--yellow); border-color: transparent; }
 .card.blue   { background: var(--blue); color: var(--paper); border-color: transparent; }
 .card.ink    { background: var(--ink); color: var(--paper); border-color: transparent; }
