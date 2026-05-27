@@ -7,14 +7,6 @@ const ArrowIc = () => (
   </svg>
 );
 
-const PhotoSvg = () => (
-  <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-    <rect x="8" y="20" width="64" height="44" rx="6" stroke="currentColor" strokeWidth="2"/>
-    <circle cx="40" cy="42" r="12" stroke="currentColor" strokeWidth="2"/>
-    <path d="M28 20 L32 12 L48 12 L52 20" stroke="currentColor" strokeWidth="2"/>
-  </svg>
-);
-
 export default function About() {
   return (
     <section id="about" className="section-spacer" aria-labelledby="about-title">
