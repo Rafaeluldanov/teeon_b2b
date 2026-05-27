@@ -10,6 +10,32 @@ import styles from './RequestModal.module.css';
 // один файл.
 export const REQUEST_MODAL_OPEN_EVENT = 'teeon:open-request';
 
+// Ключи localStorage, через которые карточки товара/кейса передают форме
+// «откуда» пришла заявка. Карточка проставляет data-request-source и
+// data-request-image на любом ancestor-элементе ссылки/кнопки — глобальный
+// обработчик ниже считывает их при клике и сохраняет в storage, форма затем
+// их читает и шлёт в /api/request скрытыми полями.
+export const REQUEST_SOURCE_LABEL_KEY = 'teeon_request_source';
+export const REQUEST_SOURCE_IMAGE_KEY = 'teeon_request_image';
+
+function captureRequestSource(el: HTMLElement | null): void {
+  let src: string | null = null;
+  let img: string | null = null;
+  let cur: HTMLElement | null = el;
+  while (cur && cur !== document.body) {
+    if (!src) src = cur.getAttribute('data-request-source');
+    if (!img) img = cur.getAttribute('data-request-image');
+    if (src && img) break;
+    cur = cur.parentElement;
+  }
+  try {
+    if (src) localStorage.setItem(REQUEST_SOURCE_LABEL_KEY, src);
+    else localStorage.removeItem(REQUEST_SOURCE_LABEL_KEY);
+    if (img) localStorage.setItem(REQUEST_SOURCE_IMAGE_KEY, img);
+    else localStorage.removeItem(REQUEST_SOURCE_IMAGE_KEY);
+  } catch { /* ignore */ }
+}
+
 // Монтируется один раз глобально в app/layout.tsx. Лениво показывает форму
 // поверх страницы, не требует никаких изменений в RequestForm — он уже клиентский
 // и сам читает localStorage с предзаполнением.
