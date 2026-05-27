@@ -274,7 +274,10 @@ ul, ol {
   padding: 0 var(--v6-gutter);
   background: var(--paper);
   color: var(--ink);
+  width: 100%;
+  box-sizing: border-box;
 }
+.v6-page > * { min-width: 0; max-width: 100%; }
 .v6-page > * + * { margin-top: 14px; }
 
 /* Spacing */
