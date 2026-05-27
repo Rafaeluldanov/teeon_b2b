@@ -45,7 +45,15 @@ export default function RequestModal() {
   const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
-    const handler = () => setOpen(true);
+    const handler = (e: Event) => {
+      // openRequestModal(ctx) may dispatch CustomEvent with { source, image } detail.
+      const detail = (e as CustomEvent<{ source?: string; image?: string }>).detail;
+      try {
+        if (detail?.source) localStorage.setItem(REQUEST_SOURCE_LABEL_KEY, detail.source);
+        if (detail?.image) localStorage.setItem(REQUEST_SOURCE_IMAGE_KEY, detail.image);
+      } catch { /* ignore */ }
+      setOpen(true);
+    };
     window.addEventListener(REQUEST_MODAL_OPEN_EVENT, handler);
     return () => window.removeEventListener(REQUEST_MODAL_OPEN_EVENT, handler);
   }, []);
