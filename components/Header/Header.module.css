@@ -214,7 +214,9 @@
 }
 .messengerBtn svg,
 .messengerBtn img { width: 30px; height: 30px; display: block; border-radius: 7px; }
-.messengerBtn:hover { transform: scale(1.06); }
+@media (hover: hover) {
+  .messengerBtn:hover { transform: scale(1.06); }
+}
 
 .ctaBtn {
   display: inline-flex;
