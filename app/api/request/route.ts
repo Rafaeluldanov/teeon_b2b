@@ -25,53 +25,103 @@ const ALLOWED_MIME_TYPES = new Set([
 const ALLOWED_EXTENSIONS = /\.(pdf|png|jpe?g|webp|svg|txt|docx?|xlsx?|zip)$/i;
 
 // Подгружает картинку источника заявки (товар из каталога / кейс из портфолио),
-// чтобы приложить её к письму. Поддерживает локальные пути из /public и
-// абсолютные URL (CDN). При любой ошибке возвращает undefined — заявка должна
-// уйти даже если фото не удалось приложить.
+// чтобы приложить её к письму.
+// Поддерживает три варианта URL:
+//   1) /uploads/... или /images/... — читаем из public на диске.
+//   2) https://teeon.ru/s3/teeon-images/... (NEXT_PUBLIC_S3_PUBLIC_URL) —
+//      качаем через S3-клиент по внутреннему S3_ENDPOINT, минуя петлю
+//      Docker → внешний DNS → Caddy → MinIO (на ней раньше всё и отваливалось).
+//   3) Прочие https-URL — обычный fetch (с защитой от SSRF и таймаутом).
+// Любая ошибка → возвращаем undefined и логируем, чтобы заявка всё равно ушла.
+const EXT_TO_MIME: Record<string, string> = {
+  '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png',
+  '.webp': 'image/webp', '.gif': 'image/gif', '.svg': 'image/svg+xml',
+};
+
 async function loadSourceImage(rawUrl: string): Promise<{ filename: string; content: Buffer; contentType: string } | undefined> {
   if (!rawUrl) return undefined;
-  try {
-    const url = rawUrl.trim();
-    let buffer: Buffer;
-    let filename: string;
-    let contentType = 'application/octet-stream';
+  const url = rawUrl.trim();
+  if (!url) return undefined;
 
-    if (/^https?:\/\//i.test(url)) {
-      // Защита от SSRF: только публичные http(s), не localhost.
-      const u = new URL(url);
-      if (['localhost', '127.0.0.1', '0.0.0.0', '::1'].includes(u.hostname)) return undefined;
-      const res = await fetch(url, { signal: AbortSignal.timeout(7000) });
-      if (!res.ok) return undefined;
-      const ct = res.headers.get('content-type') ?? '';
-      if (!ct.startsWith('image/')) return undefined;
-      contentType = ct.split(';')[0]!.trim();
-      const ab = await res.arrayBuffer();
-      if (ab.byteLength > MAX_SOURCE_IMAGE_SIZE) return undefined;
-      buffer = Buffer.from(ab);
-      filename = path.basename(u.pathname) || 'source.jpg';
-    } else if (url.startsWith('/')) {
-      // Локальный путь относительно /public. Защита от path traversal.
-      const safePath = url.replace(/\?.*$/, '').split('/').filter((seg) => seg && seg !== '..').join('/');
-      const filePath = path.join(process.cwd(), 'public', safePath);
-      if (!filePath.startsWith(path.join(process.cwd(), 'public'))) return undefined;
-      if (!fs.existsSync(filePath)) return undefined;
-      const stat = fs.statSync(filePath);
-      if (!stat.isFile() || stat.size > MAX_SOURCE_IMAGE_SIZE) return undefined;
-      buffer = fs.readFileSync(filePath);
-      filename = path.basename(filePath);
-      const ext = path.extname(filename).toLowerCase();
-      const extMap: Record<string, string> = {
-        '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png',
-        '.webp': 'image/webp', '.gif': 'image/gif', '.svg': 'image/svg+xml',
+  try {
+    // 2) Наш S3 — берём напрямую из бакета.
+    const s3Key = url.startsWith('http') ? extractS3KeyFromPublicUrl(url) : null;
+    if (s3Key) {
+      const obj = await getFile(s3Key);
+      if (!obj) {
+        console.warn('[api/request] sourceImage: S3 object not found', { key: s3Key });
+        return undefined;
+      }
+      if (obj.content.byteLength > MAX_SOURCE_IMAGE_SIZE) {
+        console.warn('[api/request] sourceImage too large (S3)', { key: s3Key, size: obj.content.byteLength });
+        return undefined;
+      }
+      return {
+        filename: path.basename(s3Key) || 'source.jpg',
+        content: obj.content,
+        contentType: obj.contentType,
       };
-      contentType = extMap[ext] ?? 'image/jpeg';
-    } else {
-      return undefined;
     }
 
-    return { filename, content: buffer, contentType };
+    // 3) Прочие https — обычный fetch.
+    if (/^https?:\/\//i.test(url)) {
+      const u = new URL(url);
+      if (['localhost', '127.0.0.1', '0.0.0.0', '::1'].includes(u.hostname)) {
+        console.warn('[api/request] sourceImage blocked (loopback)', { host: u.hostname });
+        return undefined;
+      }
+      const res = await fetch(url, { signal: AbortSignal.timeout(7000) });
+      if (!res.ok) {
+        console.warn('[api/request] sourceImage fetch !ok', { url, status: res.status });
+        return undefined;
+      }
+      const ct = res.headers.get('content-type') ?? '';
+      if (!ct.startsWith('image/')) {
+        console.warn('[api/request] sourceImage wrong content-type', { url, ct });
+        return undefined;
+      }
+      const ab = await res.arrayBuffer();
+      if (ab.byteLength > MAX_SOURCE_IMAGE_SIZE) {
+        console.warn('[api/request] sourceImage too large (fetch)', { url, size: ab.byteLength });
+        return undefined;
+      }
+      return {
+        filename: path.basename(u.pathname) || 'source.jpg',
+        content: Buffer.from(ab),
+        contentType: ct.split(';')[0]!.trim(),
+      };
+    }
+
+    // 1) Локальный путь — /uploads/... или /images/...
+    if (url.startsWith('/')) {
+      const safePath = url.replace(/\?.*$/, '').split('/').filter((seg) => seg && seg !== '..').join('/');
+      const filePath = path.join(process.cwd(), 'public', safePath);
+      if (!filePath.startsWith(path.join(process.cwd(), 'public'))) {
+        console.warn('[api/request] sourceImage path traversal blocked', { url });
+        return undefined;
+      }
+      if (!fs.existsSync(filePath)) {
+        console.warn('[api/request] sourceImage local file not found', { filePath });
+        return undefined;
+      }
+      const stat = fs.statSync(filePath);
+      if (!stat.isFile() || stat.size > MAX_SOURCE_IMAGE_SIZE) {
+        console.warn('[api/request] sourceImage local: not a file or too large', { filePath, size: stat.size });
+        return undefined;
+      }
+      const filename = path.basename(filePath);
+      const ext = path.extname(filename).toLowerCase();
+      return {
+        filename,
+        content: fs.readFileSync(filePath),
+        contentType: EXT_TO_MIME[ext] ?? 'image/jpeg',
+      };
+    }
+
+    console.warn('[api/request] sourceImage unsupported URL', { url });
+    return undefined;
   } catch (err) {
-    console.warn('[api/request] loadSourceImage failed:', err);
+    console.warn('[api/request] loadSourceImage failed:', err, 'url:', url);
     return undefined;
   }
 }
