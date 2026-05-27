@@ -242,7 +242,9 @@
   font-size: 13px; font-weight: 700; color: var(--muted);
   text-decoration: none; transition: border-color .15s, color .15s;
 }
-.backBtn:hover { border-color: var(--ink); color: var(--ink); }
+@media (hover: hover) {
+  .backBtn:hover { border-color: var(--ink); color: var(--ink); }
+}
 
 /* Responsive */
 @media (max-width: 1024px) {
