@@ -14,7 +14,9 @@
   background: #fff; border: 1.5px solid #e2e8f0; border-radius: 999px;
   cursor: pointer; transition: all 0.18s; white-space: nowrap;
 }
-.modelTab:hover { border-color: #0f172a; color: #0f172a; }
+@media (hover: hover) {
+  .modelTab:hover { border-color: #0f172a; color: #0f172a; }
+}
 .modelTabActive { background: #0f172a; color: #fff; border-color: #0f172a; }
 
 .modelDesc { font-size: 14px; color: #64748b; margin: 0 0 24px; line-height: 1.65; }
