@@ -324,4 +324,10 @@ a.itemCard:hover { background: var(--blue); color: var(--paper); }
 @media (max-width: 480px) {
   .grid { grid-template-columns: 1fr; }
   .processGrid { grid-template-columns: 1fr 1fr; }
+  .hero { padding: 24px 18px; border-radius: var(--rad-md); }
+  .ctaSection { padding: 24px 20px; border-radius: var(--rad-md); gap: 20px; }
+  .seoSection { padding: 24px 20px; border-radius: var(--rad-md); }
+  .heroTitle { font-size: clamp(28px, 8vw, 40px); }
+  .ctaTitle { font-size: 22px; }
+  .sectionHead h2 { font-size: clamp(26px, 7vw, 36px); }
 }
