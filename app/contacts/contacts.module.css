@@ -709,4 +709,10 @@
 
 @media (max-width: 560px) {
   .howGrid { grid-template-columns: 1fr; }
+  .hero { padding: 24px 18px; border-radius: var(--rad-md); }
+  .requestWrap { padding: 24px 20px; border-radius: var(--rad-md); }
+  .mapInfo { padding: 24px 20px; border-radius: var(--rad-md); }
+  .legalCol { padding: 24px 20px; border-radius: var(--rad-md); }
+  .ctaBlock { padding: 24px 20px; border-radius: var(--rad-md); }
+  .heroH1 { font-size: clamp(28px, 8vw, 36px); }
 }
