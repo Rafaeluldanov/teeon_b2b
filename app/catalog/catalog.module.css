@@ -197,8 +197,10 @@
 .cardMedia.bgCoral .categoryIcon { color: rgba(255, 255, 255, 0.78); }
 .cardMedia.bgYellow .categoryIcon { color: rgba(10, 14, 26, 0.66); }
 .cardMedia.bgMint   .categoryIcon { color: rgba(10, 14, 26, 0.62); }
-.card:hover .categoryIcon {
-  transform: translateY(-2px) scale(1.03);
+@media (hover: hover) {
+  .card:hover .categoryIcon {
+    transform: translateY(-2px) scale(1.03);
+  }
 }
 .cardMediaCollage {
   position: absolute; inset: 0;
