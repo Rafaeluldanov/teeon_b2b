@@ -48,10 +48,14 @@ export default function RequestModal() {
     const handler = (e: Event) => {
       // openRequestModal(ctx) may dispatch CustomEvent with { source, image } detail.
       const detail = (e as CustomEvent<{ source?: string; image?: string }>).detail;
-      try {
-        if (detail?.source) localStorage.setItem(REQUEST_SOURCE_LABEL_KEY, detail.source);
-        if (detail?.image) localStorage.setItem(REQUEST_SOURCE_IMAGE_KEY, detail.image);
-      } catch { /* ignore */ }
+      if (detail && (detail.source || detail.image)) {
+        try {
+          if (detail.source) localStorage.setItem(REQUEST_SOURCE_LABEL_KEY, detail.source);
+          else localStorage.removeItem(REQUEST_SOURCE_LABEL_KEY);
+          if (detail.image) localStorage.setItem(REQUEST_SOURCE_IMAGE_KEY, detail.image);
+          else localStorage.removeItem(REQUEST_SOURCE_IMAGE_KEY);
+        } catch { /* ignore */ }
+      }
       setOpen(true);
     };
     window.addEventListener(REQUEST_MODAL_OPEN_EVENT, handler);
