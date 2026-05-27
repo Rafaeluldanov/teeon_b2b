@@ -135,7 +135,9 @@
   transition: background 0.15s;
   white-space: nowrap;
 }
-.btn:hover { background: #1a2040; }
+@media (hover: hover) {
+  .btn:hover { background: #1a2040; }
+}
 .quote {
   font-size: 12px;
   font-weight: 600;
