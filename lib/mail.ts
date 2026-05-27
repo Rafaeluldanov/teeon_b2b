@@ -19,6 +19,8 @@ export interface LeadData {
   quantity?: string;
   deadline?: string;
   comment?: string;
+  source?: string;
+  sourceImage?: MailAttachment;
   attachment?: MailAttachment;
 }
 
