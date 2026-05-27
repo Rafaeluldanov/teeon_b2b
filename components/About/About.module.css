@@ -9,7 +9,7 @@
 
 /* Row 1 */
 .tileYellow {
-  grid-column: span 5;
+  grid-column: span 7;
   background: var(--yellow);
   border-radius: var(--rad);
   padding: 28px;
@@ -17,19 +17,12 @@
   display: flex;
   flex-direction: column;
 }
-.tilePhoto1 {
-  grid-column: span 4;
-  border-radius: var(--rad);
-  min-height: 360px;
-  overflow: hidden;
-  background: var(--paper-2);
-  position: relative;
-}
 .tileCol3 {
-  grid-column: span 3;
+  grid-column: span 5;
   display: grid;
   grid-template-rows: 1fr 1fr;
   gap: 10px;
+  min-height: 360px;
 }
 .tileSmall {
   background: var(--paper-2);
@@ -49,7 +42,7 @@
 
 /* Row 2 */
 .tileStats {
-  grid-column: span 4;
+  grid-column: span 6;
   background: var(--paper-2);
   border-radius: var(--rad);
   padding: 24px;
@@ -57,16 +50,8 @@
   display: flex;
   flex-direction: column;
 }
-.tilePhoto2 {
-  grid-column: span 4;
-  border-radius: var(--rad);
-  min-height: 200px;
-  overflow: hidden;
-  background: var(--paper-2);
-  position: relative;
-}
 .tileBlue {
-  grid-column: span 4;
+  grid-column: span 6;
   background: var(--blue);
   color: var(--paper);
   border-radius: var(--rad);
@@ -74,28 +59,6 @@
   min-height: 200px;
   display: flex;
   flex-direction: column;
-}
-
-/* Photo tile content */
-.photoPlaceholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #e8e8e0 0%, #d5d5cc 100%);
-}
-.photoPlaceholder svg { opacity: 0.25; }
-.photoLabel {
-  position: absolute;
-  bottom: 14px;
-  left: 16px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  opacity: 0.5;
 }
 
 /* H2 stat number */
@@ -119,7 +82,6 @@
   font-size: 13px;
   line-height: 1.55;
   opacity: 0.6;
-  margin-top: 'auto';
 }
 
 .tileActions {
@@ -131,17 +93,26 @@
 }
 
 @media (max-width: 1024px) {
-  .bentogrid { grid-template-columns: 1fr 1fr 1fr; }
-  .tileYellow, .tilePhoto1, .tileCol3,
-  .tileStats, .tilePhoto2, .tileBlue { grid-column: span 1; min-height: 280px; }
-  .tileCol3 { grid-template-rows: auto auto; }
+  .bentogrid { grid-template-columns: 1fr 1fr; }
+  .tileYellow, .tileCol3,
+  .tileStats, .tileBlue {
+    grid-column: span 1;
+    min-height: 260px;
+  }
+  .tileCol3 { grid-template-rows: 1fr 1fr; }
 }
 @media (max-width: 640px) {
-  .bentogrid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .tileYellow { grid-column: span 2; }
-  .tilePhoto1 { grid-column: span 1; min-height: 220px; }
-  .tileCol3 { grid-column: span 1; }
-  .tileStats { grid-column: span 2; }
-  .tilePhoto2 { grid-column: span 1; }
-  .tileBlue { grid-column: span 1; }
+  .bentogrid { grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
+  .tileYellow, .tileCol3,
+  .tileStats, .tileBlue {
+    grid-column: 1 / -1;
+    min-height: 0;
+  }
+  .tileCol3 {
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr;
+  }
+  .tileYellow { padding: 24px 22px; }
+  .tileStats, .tileBlue { padding: 22px 20px; }
+  .bigNum { font-size: 48px; }
 }
