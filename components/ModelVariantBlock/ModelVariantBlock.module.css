@@ -100,9 +100,11 @@
   transition: border-color .15s, box-shadow .15s;
   position: relative;
 }
-.variantCard:hover {
-  border-color: rgba(10,14,26,.25);
-  box-shadow: 0 4px 12px rgba(10,14,26,.07);
+@media (hover: hover) {
+  .variantCard:hover {
+    border-color: rgba(10,14,26,.25);
+    box-shadow: 0 4px 12px rgba(10,14,26,.07);
+  }
 }
 .variantCardActive {
   border-color: var(--yellow);
