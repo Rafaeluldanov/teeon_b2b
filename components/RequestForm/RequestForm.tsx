@@ -174,6 +174,10 @@ function FormContent() {
         <input type="hidden" name="comment" value={prefillComment} />
       )}
 
+      {/* Hidden: источник заявки — карточка товара/кейса, с которой пришёл клиент. */}
+      {sourceLabel && <input type="hidden" name="source" value={sourceLabel} />}
+      {sourceImage && <input type="hidden" name="sourceImage" value={sourceImage} />}
+
       {errorMsg && (
         <div className={styles.errorBanner} role="alert" data-testid="form-error">
           {errorMsg}
