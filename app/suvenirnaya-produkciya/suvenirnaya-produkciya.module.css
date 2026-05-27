@@ -320,4 +320,7 @@
   .categoriesGrid { grid-template-columns: 1fr; }
   .scenariosGrid { grid-template-columns: 1fr; }
   .processGrid { grid-template-columns: 1fr; }
+  .hero { padding: 24px 18px; border-radius: var(--rad-md); }
+  .ctaSection { padding: 24px 20px; border-radius: var(--rad-md); gap: 20px; }
+  .heroTitle { font-size: clamp(28px, 8vw, 40px); }
 }
