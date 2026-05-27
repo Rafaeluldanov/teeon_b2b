@@ -23,9 +23,11 @@
   transition: background var(--transition), color var(--transition), border-color var(--transition);
   line-height: 1.4;
 }
-.tab:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
+@media (hover: hover) {
+  .tab:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
 }
 .tabActive {
   background: var(--color-primary);
