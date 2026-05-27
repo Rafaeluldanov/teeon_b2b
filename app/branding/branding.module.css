@@ -171,7 +171,9 @@
   letter-spacing: .06em; text-transform: uppercase;
   color: var(--blue); margin-top: 6px;
 }
-.card:hover .cardLink { color: var(--coral); }
+@media (hover: hover) {
+  .card:hover .cardLink { color: var(--coral); }
+}
 .card.yellow .cardLink,
 .card.blue .cardLink,
 .card.ink .cardLink,
