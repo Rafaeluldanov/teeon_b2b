@@ -54,7 +54,12 @@ export default async function CatalogSection() {
           const bgClass = BG_CLASS[meta.bg] ?? '';
           const imgs = collectCategoryImages(cat.slug, 4, modelsData);
           return (
-            <li key={cat.slug} className={styles.card}>
+            <li
+              key={cat.slug}
+              className={styles.card}
+              data-request-source={`Каталог · ${cat.name}`}
+              data-request-image={imgs[0] ?? undefined}
+            >
               <div className={`${styles.media} ${imgs.length > 0 ? '' : bgClass}`}>
                 <span className={styles.mediaNum}>{meta.num} /</span>
                 <span className={styles.mediaPill}>✦ Брендирование</span>
