@@ -69,6 +69,7 @@ function buildEmailText(lead: LeadData): string {
     lead.email ? `Email: ${lead.email}` : '',
     lead.company ? `Компания: ${lead.company}` : '',
     lead.messenger ? `Способ связи: ${lead.messenger}` : '',
+    lead.source ? `Источник заявки: ${lead.source}` : '',
     lead.topic ? `Тема: ${lead.topic}` : '',
     lead.quantity ? `Тираж: ${lead.quantity}` : '',
     lead.deadline ? `Срок: ${lead.deadline}` : '',
