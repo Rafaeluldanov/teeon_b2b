@@ -74,6 +74,7 @@ function buildEmailText(lead: LeadData): string {
     lead.quantity ? `Тираж: ${lead.quantity}` : '',
     lead.deadline ? `Срок: ${lead.deadline}` : '',
     lead.comment ? `\nКомментарий:\n${lead.comment}` : '',
+    lead.sourceImage ? `\nФото источника заявки: ${lead.sourceImage.filename}` : '',
     lead.attachment ? `\nПрикреплён файл: ${lead.attachment.filename}` : '',
   ].filter(Boolean);
   return lines.join('\n');
