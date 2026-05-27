@@ -111,6 +111,12 @@ function FormContent() {
         return;
       }
 
+      // Яндекс.Метрика — цель «Sent» на успешный сабмит формы.
+      try {
+        const ym = (window as unknown as { ym?: (...args: unknown[]) => void }).ym;
+        if (typeof ym === 'function') ym(108239136, 'reachGoal', 'Sent');
+      } catch { /* ignore */ }
+
       try {
         localStorage.removeItem('teeon_quote_items');
         localStorage.removeItem('teeon_quote_selection');
