@@ -271,7 +271,12 @@ export default function PortfolioCasesGrid({ activeTag }: Props) {
           const hasMedia = c.coverImage || productImgs.length > 0;
 
           return (
-            <li key={c.slug} className={styles.caseCard}>
+            <li
+              key={c.slug}
+              className={styles.caseCard}
+              data-request-source={`Портфолио · ${c.title}`}
+              data-request-image={c.coverImage || productImgs[0] || undefined}
+            >
               <div className={`${styles.caseMedia} ${hasMedia ? '' : bgClass}`}>
                 <span className={styles.caseChip}>{c.clientType}</span>
                 <span className={styles.caseYear}>{c.year}</span>
