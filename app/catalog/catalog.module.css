@@ -436,4 +436,16 @@
 @media (max-width: 480px) {
   .heroBadges { grid-template-columns: 1fr 1fr; gap: 6px; }
   .stepsGrid { grid-template-columns: 1fr 1fr; }
+  .hero { padding: 24px 18px; border-radius: var(--rad-md); }
+  .ctaSection { padding: 24px 20px; border-radius: var(--rad-md); gap: 20px; }
+  .seoSection { padding: 24px 20px; border-radius: var(--rad-md); }
+  .chooseCard { padding: 20px; }
+  .stepCard { padding: 18px 16px; }
+  .heroTitle { font-size: clamp(28px, 8vw, 40px); }
+  .ctaTitle { font-size: 22px; }
+  .heroBadge { padding: 10px 12px; gap: 8px; }
+  .heroBadgeIc { width: 30px; height: 30px; }
+  .heroBadgeTitle { font-size: 12px; }
+  .heroBadgeDesc { font-size: 10.5px; }
+  .sectionHead h2 { font-size: clamp(26px, 7vw, 36px); }
 }
