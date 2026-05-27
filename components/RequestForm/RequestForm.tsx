@@ -19,6 +19,8 @@ function FormContent() {
   const [previewUrl, setPreviewUrl] = useState('');
   const [honeypot, setHoneypot] = useState('');
   const [prefillComment, setPrefillComment] = useState('');
+  const [sourceLabel, setSourceLabel] = useState('');
+  const [sourceImage, setSourceImage] = useState('');
   const [ready, setReady] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
