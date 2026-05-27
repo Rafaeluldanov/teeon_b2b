@@ -33,7 +33,9 @@
   font-family: inherit;
   transition: opacity 0.15s;
 }
-.question:hover { opacity: 0.75; }
+@media (hover: hover) {
+  .question:hover { opacity: 0.75; }
+}
 .itemOpen .question { opacity: 1; }
 
 .num {
