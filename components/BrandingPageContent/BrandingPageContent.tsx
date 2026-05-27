@@ -290,7 +290,11 @@ export default async function BrandingPageContent({ method: m }: Props) {
             ))
           ) : (
             m.examples.map((ex) => (
-              <li key={ex.name} className={styles.exampleCard}>
+              <li
+                key={ex.name}
+                className={styles.exampleCard}
+                data-request-source={`Брендирование · ${m.title} · ${ex.name}`}
+              >
                 <div className={styles.exampleImg} role="img" aria-label={`Пример: ${ex.name}`} />
                 <div className={styles.exampleBody}>
                   <h3 className={styles.exampleTitle}>{ex.name}</h3>
