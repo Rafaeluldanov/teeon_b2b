@@ -298,7 +298,9 @@
   padding: 4px 10px; border: 1px solid var(--hair); border-radius: var(--rad-pill);
   transition: color .15s, border-color .15s;
 }
-.productCaseChip:hover { color: var(--ink); border-color: var(--ink); }
+@media (hover: hover) {
+  .productCaseChip:hover { color: var(--ink); border-color: var(--ink); }
+}
 .productTitle { font-size: 16px; font-weight: 800; color: var(--ink); margin: 0; }
 .productDesc { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin: 0; }
 .productMeta { display: flex; flex-direction: column; gap: 4px; margin: 0; }
