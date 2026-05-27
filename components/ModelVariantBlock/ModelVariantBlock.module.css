@@ -56,7 +56,9 @@
   transition: all .15s;
   letter-spacing: -.005em;
 }
-.modelTab:hover { color: var(--ink); background: var(--paper); border-color: var(--hair); }
+@media (hover: hover) {
+  .modelTab:hover { color: var(--ink); background: var(--paper); border-color: var(--hair); }
+}
 .modelTabActive {
   background: var(--ink);
   color: var(--paper);
