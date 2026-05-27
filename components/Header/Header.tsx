@@ -71,7 +71,7 @@ export default function Header() {
   };
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}>
       <div className={styles.inner}>
         {/* Logo */}
         <Link href="/" className={styles.logo} onClick={closeMobile}>
