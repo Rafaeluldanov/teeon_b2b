@@ -200,7 +200,12 @@ export default async function CategoryPageContent({ category: cat }: Props) {
         <ul className={styles.productGrid}>
           {portfolioExamples.length > 0 ? (
             portfolioExamples.map((p, idx) => (
-              <li key={`${p.href}-${idx}`} className={styles.productCard}>
+              <li
+                key={`${p.href}-${idx}`}
+                className={styles.productCard}
+                data-request-source={`Каталог · ${cat.name} · ${p.title}`}
+                data-request-image={p.image ?? undefined}
+              >
                 {p.image ? (
                   <ZoomableImage
                     src={p.image}
