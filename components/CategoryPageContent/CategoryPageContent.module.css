@@ -399,3 +399,7 @@
   .relatedGrid { grid-template-columns: 1fr; }
   .bottomNavInner { flex-direction: column; align-items: flex-start; }
 }
+@media (max-width: 480px) {
+  .hero { padding: 24px 18px; border-radius: var(--rad-md); }
+  .pricingSection { padding: 24px 20px; border-radius: var(--rad-md); gap: 20px; flex-direction: column; align-items: flex-start; }
+}
