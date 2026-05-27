@@ -154,7 +154,9 @@
   border: 1px solid var(--hair);
   transition: transform .18s, box-shadow .18s;
 }
-.caseCard:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(10,14,26,.10); }
+@media (hover: hover) {
+  .caseCard:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(10,14,26,.10); }
+}
 
 .caseMedia {
   aspect-ratio: 4 / 3;
