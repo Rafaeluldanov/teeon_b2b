@@ -171,7 +171,12 @@ export default function PortfolioCasesGrid({ activeTag }: Props) {
         </p>
         <ul className={styles.productsGrid}>
           {items.map(({ product: p, parent, key }) => (
-            <li key={key} className={styles.productCard}>
+            <li
+              key={key}
+              className={styles.productCard}
+              data-request-source={`Портфолио · ${p.title || parent.title}`}
+              data-request-image={p.images?.[0] || parent.coverImage || undefined}
+            >
               {p.images && p.images.length > 0 ? (
                 <div className={styles.productImgs} data-count={Math.min(p.images.length, 3)}>
                   {p.images.slice(0, 3).map((img, i) => (
