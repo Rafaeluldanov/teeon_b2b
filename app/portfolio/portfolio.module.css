@@ -450,4 +450,10 @@
 @media (max-width: 560px) {
   .casesGrid { grid-template-columns: 1fr; }
   .productsGrid { grid-template-columns: 1fr; }
+  .hero { padding: 24px 18px; border-radius: var(--rad-md); }
+  .ctaSection { padding: 24px 20px; border-radius: var(--rad-md); gap: 20px; }
+  .seoSection { padding: 24px 20px; border-radius: var(--rad-md); }
+  .showBlock { padding: 24px 20px; border-radius: var(--rad-md); }
+  .heroTitle { font-size: clamp(28px, 8vw, 40px); }
+  .ctaTitle { font-size: 22px; }
 }
