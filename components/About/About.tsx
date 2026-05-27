@@ -41,15 +41,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* Tile 2: photo placeholder */}
-        <div className={styles.tilePhoto1} role="img" aria-label="Фото швейного цеха">
-          <div className={styles.photoPlaceholder}>
-            <PhotoSvg />
-            <span className={styles.photoLabel}>Швейный цех · Москва</span>
-          </div>
-        </div>
-
-        {/* Tile 3: 2 small stat tiles */}
+        {/* Tile 2: 2 small stat tiles */}
         <div className={styles.tileCol3}>
           <div className={styles.tileSmall}>
             <div className="v6-kicker">Площадь</div>
