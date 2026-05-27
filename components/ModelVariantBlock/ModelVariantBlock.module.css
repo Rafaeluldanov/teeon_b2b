@@ -42,6 +42,20 @@
 }
 .modelTabsRow::-webkit-scrollbar { display: none; }
 
+@media (max-width: 768px) {
+  .modelTabsRow {
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(10, 14, 26, 0.35) rgba(10, 14, 26, 0.08);
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .modelTabsRow::-webkit-scrollbar { display: block; height: 4px; -webkit-appearance: none; }
+  .modelTabsRow::-webkit-scrollbar-track { background: rgba(10, 14, 26, 0.08); border-radius: 4px; }
+  .modelTabsRow::-webkit-scrollbar-thumb { background: rgba(10, 14, 26, 0.35); border-radius: 4px; }
+  .modelTabsRow::-webkit-scrollbar-thumb:hover { background: rgba(10, 14, 26, 0.55); }
+}
+
 .modelTab {
   padding: 8px 18px;
   font-size: 13.5px;
