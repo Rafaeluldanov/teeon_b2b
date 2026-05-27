@@ -1,6 +1,7 @@
 import {
   S3Client,
   PutObjectCommand,
+  GetObjectCommand,
   ListObjectsV2Command,
   DeleteObjectCommand,
 } from '@aws-sdk/client-s3';
