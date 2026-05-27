@@ -33,6 +33,7 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileCatalogOpen, setMobileCatalogOpen] = useState(false);
   const [mobileBrandingOpen, setMobileBrandingOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [overrideContacts, setOverrideContacts] = useState<EditableContacts | null>(null);
 
   useEffect(() => {
