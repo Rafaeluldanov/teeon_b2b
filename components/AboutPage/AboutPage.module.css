@@ -508,7 +508,7 @@
   .docsGrid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
-  .hero { padding: 32px 24px; }
+  .hero { padding: 24px 18px; border-radius: var(--rad-md); }
   .advGrid { grid-template-columns: 1fr; }
   .capGrid { grid-template-columns: 1fr; }
   .scenariosGrid { grid-template-columns: 1fr; }
@@ -518,4 +518,13 @@
   .statsGrid { grid-template-columns: 1fr 1fr; }
   .workflowRow { grid-template-columns: 56px 1fr; gap: 16px; }
   .workflowNum { font-size: 28px; }
+  .textBlock { padding: 24px 20px; border-radius: var(--rad-md); }
+  .qualityBlock { padding: 24px 20px; border-radius: var(--rad-md); }
+  .workflowBlock { padding: 24px 20px; border-radius: var(--rad-md); }
+  .docsCol { padding: 24px 20px; border-radius: var(--rad-md); }
+  .valuesBlock { padding: 24px 20px; border-radius: var(--rad-md); }
+  .ctaSection { padding: 24px 20px; border-radius: var(--rad-md); gap: 20px; }
+  .seoSection { padding: 24px 20px; border-radius: var(--rad-md); }
+  .heroTitle { font-size: clamp(28px, 8vw, 40px); }
+  .ctaTitle { font-size: 22px; }
 }
