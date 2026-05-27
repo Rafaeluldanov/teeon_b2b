@@ -155,7 +155,9 @@
   white-space: nowrap;
   transition: color 0.15s;
 }
-.quote:hover { color: var(--ink); }
+@media (hover: hover) {
+  .quote:hover { color: var(--ink); }
+}
 
 .footer {
   margin-top: 20px;
