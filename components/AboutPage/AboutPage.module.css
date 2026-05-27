@@ -146,7 +146,9 @@
   transition: border-color .15s, transform .15s;
   text-decoration: none; color: var(--ink);
 }
-.capCard:hover { border-color: var(--ink); transform: translateY(-2px); }
+@media (hover: hover) {
+  .capCard:hover { border-color: var(--ink); transform: translateY(-2px); }
+}
 .capCard.capYellow { background: var(--yellow); border-color: transparent; }
 .capCard.capBlue   { background: var(--blue); color: var(--paper); border-color: transparent; }
 .capCard.capInk    { background: var(--ink);  color: var(--paper); border-color: transparent; }
