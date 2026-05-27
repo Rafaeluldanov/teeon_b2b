@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
 import { sendLeadEmail } from '@/lib/mail';
+import { getFile, extractS3KeyFromPublicUrl } from '@/lib/storage';
 
 const MAX_FILE_SIZE = 25 * 1024 * 1024; // 25 MB
 const MAX_SOURCE_IMAGE_SIZE = 10 * 1024 * 1024; // 10 MB — для фото товара/кейса хватит
