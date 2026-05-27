@@ -85,13 +85,22 @@ async function saveToFile(lead: LeadData): Promise<void> {
   fs.mkdirSync(dir, { recursive: true });
 
   const ts = Date.now();
-  const record = { ...lead, attachment: lead.attachment ? { filename: lead.attachment.filename } : undefined, savedAt: new Date().toISOString() };
+  const record = {
+    ...lead,
+    attachment: lead.attachment ? { filename: lead.attachment.filename } : undefined,
+    sourceImage: lead.sourceImage ? { filename: lead.sourceImage.filename } : undefined,
+    savedAt: new Date().toISOString(),
+  };
   fs.writeFileSync(path.join(dir, `${ts}.json`), JSON.stringify(record, null, 2), 'utf-8');
 
+  const filesDir = path.join(dir, 'files');
   if (lead.attachment) {
-    const filesDir = path.join(dir, 'files');
     fs.mkdirSync(filesDir, { recursive: true });
     fs.writeFileSync(path.join(filesDir, `${ts}-${lead.attachment.filename}`), lead.attachment.content);
+  }
+  if (lead.sourceImage) {
+    fs.mkdirSync(filesDir, { recursive: true });
+    fs.writeFileSync(path.join(filesDir, `${ts}-source-${lead.sourceImage.filename}`), lead.sourceImage.content);
   }
 }
 
