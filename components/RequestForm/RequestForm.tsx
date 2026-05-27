@@ -27,6 +27,15 @@ function FormContent() {
   useEffect(() => {
     setReady(true);
     try {
+      // Источник заявки: из какой карточки (товар / кейс) клиент открыл форму.
+      // Кладёт сюда RequestModal через data-request-source / data-request-image.
+      const src = localStorage.getItem('teeon_request_source');
+      const img = localStorage.getItem('teeon_request_image');
+      if (src) setSourceLabel(src);
+      if (img) setSourceImage(img);
+    } catch { /* ignore */ }
+
+    try {
       // Priority 1: multi-item format
       const rawItems = localStorage.getItem('teeon_quote_items');
       if (rawItems) {
