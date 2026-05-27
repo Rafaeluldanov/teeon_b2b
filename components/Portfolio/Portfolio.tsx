@@ -99,7 +99,12 @@ export default function Portfolio() {
           const productImgs = collectProductImages(c, 4);
           const hasMedia = c.coverImage || productImgs.length > 0;
           return (
-            <li key={c.slug} className={styles.card}>
+            <li
+              key={c.slug}
+              className={styles.card}
+              data-request-source={`Портфолио · ${c.title}`}
+              data-request-image={c.coverImage || productImgs[0] || undefined}
+            >
               <div className={`${styles.media} ${hasMedia ? '' : bgClass}`}>
                 <span className={styles.chip}>{c.clientType}</span>
                 {c.coverImage ? (
