@@ -115,6 +115,8 @@ function FormContent() {
         localStorage.removeItem('teeon_quote_items');
         localStorage.removeItem('teeon_quote_selection');
         localStorage.removeItem('teeon_selected_variant');
+        localStorage.removeItem('teeon_request_source');
+        localStorage.removeItem('teeon_request_image');
       } catch { /* ignore */ }
 
       if (json.previewUrl) setPreviewUrl(json.previewUrl);
