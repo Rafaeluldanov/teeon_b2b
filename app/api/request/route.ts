@@ -154,6 +154,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       quantity,
       deadline,
       comment,
+      source,
+      sourceImage,
       attachment,
     });
 
