@@ -147,7 +147,9 @@
   margin-left: auto;
   transition: color 0.15s;
 }
-.quote:hover { color: var(--ink); }
+@media (hover: hover) {
+  .quote:hover { color: var(--ink); }
+}
 
 .footer {
   display: flex;
