@@ -160,7 +160,12 @@ export default async function CatalogPage() {
             const meta = CAT_META[cat.slug] ?? { bg: 'bgPaper2' as BgKey, num: '—' };
             const imgs = collectCategoryImages(cat.slug, 4, modelsData);
             return (
-              <li key={cat.slug} className={styles.card}>
+              <li
+                key={cat.slug}
+                className={styles.card}
+                data-request-source={`Каталог · ${cat.name}`}
+                data-request-image={imgs[0] ?? undefined}
+              >
                 <div className={`${styles.cardMedia} ${imgs.length > 0 ? '' : styles[meta.bg]}`}>
                   <span className={styles.cardNum}>{meta.num} /</span>
                   <span className={styles.cardPill}>✦ Брендирование</span>
