@@ -165,8 +165,14 @@
   .footer { padding: 40px 32px 0; }
 }
 @media (max-width: 640px) {
-  .top { grid-template-columns: 1fr; }
-  .footer { padding: 32px 20px 0; border-radius: var(--rad-md); }
+  .top { grid-template-columns: 1fr; gap: 24px; padding-bottom: 28px; }
+  .footer {
+    padding: 28px 18px 0;
+    border-radius: var(--rad-md);
+    width: calc(100% - 32px);
+    margin: 14px auto 16px;
+  }
   .bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
   .docs { gap: 12px; }
+  .brandDesc { max-width: none; }
 }
