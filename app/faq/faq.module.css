@@ -264,4 +264,7 @@
 }
 @media (max-width: 540px) {
   .heroStats { grid-template-columns: 1fr 1fr; }
+  .hero { padding: 24px 18px; border-radius: var(--rad-md); }
+  .askBlock { padding: 24px 20px; border-radius: var(--rad-md); }
+  .heroTitle { font-size: clamp(28px, 8vw, 40px); }
 }
