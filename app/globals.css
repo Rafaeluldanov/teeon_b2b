@@ -400,6 +400,14 @@ ul, ol {
   .v6-page { padding: 0 16px; }
 }
 
+@media (max-width: 480px) {
+  .v6-page { padding: 0 12px; }
+  .section-spacer { margin-top: 32px; }
+  .v6-section-head h2 { font-size: clamp(28px, 7.5vw, 44px); }
+  .v6-section-head { margin-bottom: 20px; gap: 12px; }
+  .v6-section-head p { padding-top: 8px; font-size: 14px; }
+}
+
 @media (max-width: 768px) {
   :root {
     --header-height: 64px;
