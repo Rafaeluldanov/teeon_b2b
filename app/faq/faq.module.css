@@ -221,7 +221,9 @@
   text-decoration: none; color: var(--paper);
   transition: background .15s, border-color .15s, color .15s;
 }
-.channel:hover { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+@media (hover: hover) {
+  .channel:hover { background: var(--yellow); border-color: var(--yellow); color: var(--ink); }
+}
 .channelIcon {
   width: 36px; height: 36px; border-radius: 10px;
   background: var(--yellow); color: var(--ink);
