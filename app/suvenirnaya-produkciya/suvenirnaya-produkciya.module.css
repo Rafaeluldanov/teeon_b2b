@@ -178,7 +178,9 @@
   display: flex; flex-direction: column; gap: 14px;
   transition: transform .15s;
 }
-.bundleCard:hover { transform: translateY(-2px); }
+@media (hover: hover) {
+  .bundleCard:hover { transform: translateY(-2px); }
+}
 .bundleTitle { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -.02em; }
 .bundleDesc { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
 .bundleProducts { display: flex; flex-direction: column; gap: 4px; }
