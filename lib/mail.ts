@@ -51,6 +51,7 @@ function buildEmailHtml(lead: LeadData): string {
     <table style="width:100%;border-collapse:collapse">
       ${tableRows}
     </table>
+    ${lead.sourceImage ? `<p style="margin-top:20px;color:#64748b;font-size:13px">🖼 К письму прикреплено фото товара/кейса, из которого пришла заявка: <strong>${lead.sourceImage.filename}</strong></p>` : ''}
     ${lead.attachment ? `<p style="margin-top:20px;color:#64748b;font-size:13px">📎 Прикреплён файл: <strong>${lead.attachment.filename}</strong></p>` : ''}
   </div>
   <div style="padding:16px 28px;background:#f8fafc;border-top:1px solid #e2e8f0">
