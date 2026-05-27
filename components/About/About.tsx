@@ -69,13 +69,6 @@ export default function About() {
           </p>
         </div>
 
-        <div className={styles.tilePhoto2} role="img" aria-label="Готовая партия">
-          <div className={styles.photoPlaceholder}>
-            <PhotoSvg />
-            <span className={styles.photoLabel}>Готовая партия</span>
-          </div>
-        </div>
-
         <div className={styles.tileBlue}>
           <div className="v6-kicker on-dark">Клиенты</div>
           <div className={styles.bigNum} style={{ marginTop: 12, fontSize: 36 }}>
