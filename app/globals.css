@@ -194,8 +194,10 @@ ul, ol {
   transition: background var(--transition);
   white-space: nowrap;
 }
-.btn-cta-sm:hover {
-  background: var(--color-cta-hover);
+@media (hover: hover) {
+  .btn-cta-sm:hover {
+    background: var(--color-cta-hover);
+  }
 }
 
 /* ─── Sections ───────────────────────────────────────────────── */
