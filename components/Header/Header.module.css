@@ -1,18 +1,12 @@
-/* ─── v6 Header: sticky capsule pill (follows scroll) ─────── */
+/* ─── v6 Header: in-flow capsule pill (scrolls with page) ─── */
 .header {
-  position: sticky;
-  top: 10px;
-  z-index: 1000;
+  position: relative;
+  z-index: 100;
   width: 100%;
   max-width: var(--v6-max);
   margin: 10px auto 0;
   padding: 0 var(--v6-gutter);
   pointer-events: none;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  will-change: transform;
 }
 
 .inner {
