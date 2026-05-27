@@ -109,6 +109,10 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const quantity = String(formData.get('qty') ?? '').trim() || undefined;
   const deadline = String(formData.get('deadline') ?? '').trim() || undefined;
   const comment = String(formData.get('comment') ?? '').trim() || undefined;
+  const source = String(formData.get('source') ?? '').trim().slice(0, 300) || undefined;
+  const sourceImageUrl = String(formData.get('sourceImage') ?? '').trim().slice(0, 1000) || undefined;
+
+  const sourceImage = sourceImageUrl ? await loadSourceImage(sourceImageUrl) : undefined;
 
   // File handling
   const fileEntry = formData.get('file');
