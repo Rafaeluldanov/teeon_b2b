@@ -174,9 +174,11 @@ ul, ol {
   transition: all var(--transition);
   white-space: nowrap;
 }
-.btn-outline:hover {
-  background: var(--color-accent);
-  color: var(--color-white);
+@media (hover: hover) {
+  .btn-outline:hover {
+    background: var(--color-accent);
+    color: var(--color-white);
+  }
 }
 
 .btn-cta-sm {
