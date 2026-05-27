@@ -251,7 +251,12 @@ export default async function CategoryPageContent({ category: cat }: Props) {
             cat.productExamples.map((p, idx) => {
               const img = productImgs[idx % Math.max(productImgs.length, 1)];
               return (
-                <li key={p.name} className={styles.productCard}>
+                <li
+                  key={p.name}
+                  className={styles.productCard}
+                  data-request-source={`Каталог · ${cat.name} · ${p.name}`}
+                  data-request-image={img ?? undefined}
+                >
                   <div className={styles.productImg} role="img" aria-label={`Фото: ${p.name}`}>
                     {img ? (
                       <SafeImg
