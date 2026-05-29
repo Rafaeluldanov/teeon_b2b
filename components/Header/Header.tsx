@@ -72,7 +72,7 @@ export default function Header() {
 
   return (
     <>
-    <header ref={headerRef} className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.inner}>
         {/* Logo */}
         <Link href="/" className={styles.logo} onClick={closeMobile}>
