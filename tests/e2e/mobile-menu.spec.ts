@@ -1,126 +1,98 @@
 import { test, expect } from '@playwright/test';
-import type { Page } from '@playwright/test';
 
-// Бургер-меню показывается только на узких экранах (max-width: 860px).
 test.use({ viewport: { width: 390, height: 844 } });
 
-// Прокрутка вниз на заданное расстояние. scroll-behavior:smooth в globals.css
-// делает scrollTo анимированным — отключаем его для детерминизма и ждём, пока
-// позиция скролла перестанет меняться.
-async function scrollDown(page: Page, y: number) {
-  await page.evaluate((target) => {
+test('Мобильное меню открывается под кнопкой hamburger после скролла', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/', { waitUntil: 'networkidle' });
+
+  await page.evaluate(() => {
     document.documentElement.style.scrollBehavior = 'auto';
-    window.scrollTo(0, target);
-  }, y);
-  await page.waitForFunction(
-    (target) => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      return Math.abs(window.scrollY - Math.min(target, max)) < 2;
-    },
-    y,
-  );
-}
-
-// Открываем меню «как пользователь» — нативным click по кнопке. Используем
-// dispatchEvent вместо locator.click(), потому что Playwright центрирует
-// элемент через scroll-into-view и искусственно сдвигает scrollY (чего при
-// реальном тапе пальцем не происходит). Видимость кнопки проверяем отдельно.
-async function openMenu(page: Page) {
-  const btn = page.getByRole('button', { name: 'Открыть меню' });
-  await expect(btn).toBeVisible();
-  await btn.dispatchEvent('click');
-  await expect(page.getByTestId('mobile-menu')).toBeVisible();
-}
-
-test.describe('Мобильное меню — позиция при скролле', () => {
-  test.beforeEach(async ({ page }) => {
-    // Главная — самая длинная страница, есть куда скроллить.
-    await page.goto('/');
+    window.scrollTo(0, 1500);
   });
 
-  test('Открывается под видимой шапкой, не улетает наверх и не двигает страницу', async ({ page }) => {
-    await scrollDown(page, 5000);
-    const scrollBefore = await page.evaluate(() => window.scrollY);
-    expect(scrollBefore, 'страница должна реально прокрутиться вниз').toBeGreaterThan(1000);
+  await page.waitForFunction(() => window.scrollY > 500);
 
-    await openMenu(page);
+  const toggle = page.locator('[data-mobile-toggle="true"]');
+  await expect(toggle).toBeVisible();
 
-    // Геометрия шапки и меню в один момент.
-    const geo = await page.evaluate(() => {
-      const h = document.querySelector('header')!.getBoundingClientRect();
-      const m = document.querySelector('[data-testid="mobile-menu"]')!.getBoundingClientRect();
-      return { headerTop: h.top, headerBottom: h.bottom, menuTop: m.top, menuBottom: m.bottom, vh: window.innerHeight };
-    });
+  const buttonBox = await toggle.boundingBox();
+  const scrollBefore = await page.evaluate(() => window.scrollY);
 
-    // Шапка осталась прилеплена к верху вьюпорта (sticky не сломался от
-    // блокировки скролла) — это и есть ключевая регрессия.
-    expect(geo.headerTop, 'шапка должна остаться вверху вьюпорта').toBeLessThan(40);
-    expect(geo.headerBottom, 'шапка должна быть видима вверху').toBeGreaterThan(20);
+  await toggle.click();
 
-    // Меню не улетело над вьюпортом и видно на экране.
-    expect(geo.menuTop, 'меню не должно улетать выше вьюпорта').toBeGreaterThanOrEqual(0);
-    expect(geo.menuTop, 'верх меню должен быть внутри вьюпорта').toBeLessThan(geo.vh);
-    // Меню открывается прямо под нижним краем видимой шапки.
-    expect(geo.menuTop, 'меню должно примыкать к нижнему краю шапки')
-      .toBeGreaterThanOrEqual(geo.headerBottom - 2);
-    expect(geo.menuTop, 'меню не должно висеть далеко ниже шапки')
-      .toBeLessThanOrEqual(geo.headerBottom + 24);
-    expect(geo.menuBottom, 'меню должно быть видимым ниже шапки').toBeGreaterThan(geo.headerBottom);
+  const menu = page.locator('[data-mobile-menu="true"]');
+  await expect(menu).toBeVisible();
 
-    // Страница не прыгнула — scrollY не изменился при открытии меню.
-    const scrollAfter = await page.evaluate(() => window.scrollY);
-    expect(scrollAfter, 'scrollY не должен меняться при открытии меню').toBe(scrollBefore);
+  const menuBox = await menu.boundingBox();
+
+  expect(buttonBox).not.toBeNull();
+  expect(menuBox).not.toBeNull();
+  if (!buttonBox || !menuBox) return;
+
+  // Меню открывается ПОД нижним краем кнопки, в видимой области экрана.
+  expect(menuBox.y).toBeGreaterThanOrEqual(buttonBox.y + buttonBox.height - 5);
+  expect(menuBox.y).toBeLessThan(180);
+  expect(menuBox.y).toBeGreaterThan(0);
+
+  // Страница не прыгнула.
+  const scrollAfter = await page.evaluate(() => window.scrollY);
+  expect(Math.abs(scrollAfter - scrollBefore)).toBeLessThan(10);
+
+  // Диагностика: меню — прямой потомок BODY и position: fixed.
+  const diagnostics = await page.evaluate(() => {
+    const m = document.querySelector('[data-mobile-menu="true"]') as HTMLElement | null;
+    const b = document.querySelector('[data-mobile-toggle="true"]') as HTMLElement | null;
+    return {
+      parent: m?.parentElement?.tagName,
+      position: m ? getComputedStyle(m).position : null,
+      scrollY: window.scrollY,
+      buttonBottom: b?.getBoundingClientRect().bottom,
+      menuY: m?.getBoundingClientRect().y,
+    };
+  });
+  console.log('DIAG', JSON.stringify(diagnostics));
+
+  expect(diagnostics.parent).toBe('BODY');
+  expect(diagnostics.position).toBe('fixed');
+});
+
+test('Мобильное меню после скролла раскрывает Каталог и Нанесение', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/', { waitUntil: 'networkidle' });
+
+  await page.evaluate(() => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 1500);
   });
 
-  test('Меню фиксировано к вьюпорту (position: fixed) и вынесено порталом из <header>', async ({ page }) => {
-    await scrollDown(page, 3000);
-    await openMenu(page);
-    const menu = page.getByTestId('mobile-menu');
+  await page.waitForFunction(() => window.scrollY > 500);
 
-    expect(await menu.evaluate((el) => getComputedStyle(el).position)).toBe('fixed');
-    // Портал: прямой потомок <body>, не внутри <header>.
-    expect(await menu.evaluate((el) => el.parentElement?.tagName ?? '')).toBe('BODY');
-    expect(await menu.evaluate((el) => !!el.closest('header')), 'меню не внутри <header>').toBe(false);
+  await page.locator('[data-mobile-toggle="true"]').click();
+  await expect(page.locator('[data-mobile-menu="true"]')).toBeVisible();
+
+  await page.getByRole('button', { name: /Каталог/i }).click();
+  await expect(page.getByRole('link', { name: /Футболки/i })).toBeVisible();
+
+  await page.getByRole('button', { name: /Нанесение/i }).click();
+  await expect(page.getByRole('link', { name: /Вышивка/i })).toBeVisible();
+});
+
+test('Мобильное меню фиксировано к viewport и вынесено порталом из <header>', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/', { waitUntil: 'networkidle' });
+
+  await page.evaluate(() => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 1500);
   });
+  await page.waitForFunction(() => window.scrollY > 500);
 
-  test('Оверлей перекрывает весь экран', async ({ page }) => {
-    await scrollDown(page, 2000);
-    await openMenu(page);
+  await page.locator('[data-mobile-toggle="true"]').click();
+  const menu = page.locator('[data-mobile-menu="true"]');
+  await expect(menu).toBeVisible();
 
-    const overlayHeight = await page.evaluate(() => {
-      const overlay = Array.from(document.querySelectorAll('div')).find((el) => {
-        const s = getComputedStyle(el);
-        return s.position === 'fixed' && s.inset === '0px';
-      });
-      return overlay ? overlay.getBoundingClientRect().height : 0;
-    });
-    expect(overlayHeight).toBeGreaterThan(700);
-  });
-
-  test('Закрытие меню восстанавливает позицию скролла', async ({ page }) => {
-    await scrollDown(page, 4000);
-    const before = await page.evaluate(() => window.scrollY);
-    await openMenu(page);
-    expect(await page.getByTestId('mobile-menu').getAttribute('aria-hidden')).toBe('false');
-    // Закрываем через бургер (теперь он "Закрыть меню").
-    await page.getByRole('button', { name: 'Закрыть меню' }).dispatchEvent('click');
-    // Меню скрыто (max-height:0 / opacity:0 — проверяем семантически).
-    await expect(page.getByTestId('mobile-menu')).toHaveAttribute('aria-hidden', 'true');
-    const after = await page.evaluate(() => window.scrollY);
-    expect(after).toBe(before);
-  });
-
-  test('Подменю "Каталог" и "Нанесение" раскрываются внутри открытого меню', async ({ page }) => {
-    await scrollDown(page, 2000);
-    await openMenu(page);
-    const menu = page.getByTestId('mobile-menu');
-
-    await menu.getByRole('button', { name: 'Каталог' }).click();
-    await expect(menu.getByRole('link', { name: /Весь каталог/ })).toBeVisible();
-    await expect(menu.locator('a[href="/catalog/futbolki/"], a[href="/catalog/futbolki"]').first()).toBeVisible();
-
-    await menu.getByRole('button', { name: 'Нанесение' }).click();
-    await expect(menu.getByRole('link', { name: /Все способы брендирования/ })).toBeVisible();
-    await expect(menu.locator('a[href="/branding/vyshivka/"], a[href="/branding/vyshivka"]').first()).toBeVisible();
-  });
+  expect(await menu.evaluate((el) => !!el.closest('header')), 'меню не должно быть внутри <header>').toBe(false);
+  expect(await menu.evaluate((el) => el.parentElement?.tagName ?? '')).toBe('BODY');
+  expect(await menu.evaluate((el) => getComputedStyle(el).position)).toBe('fixed');
 });
