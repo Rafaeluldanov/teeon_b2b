@@ -197,7 +197,14 @@ export default function Header() {
           <span />
         </button>
       </div>
+    </header>
 
+    {/* Оверлей и мобильное меню вынесены за пределы <header>: у хедера есть
+        transform (для плавного скролла на iOS), который делает его containing
+        block для fixed-потомков. Внутри хедера fixed-меню позиционировалось бы
+        относительно layout-бокса хедера (вверху документа) и «улетало» наверх
+        при скролле. Снаружи fixed снова считается от вьюпорта — меню открывается
+        прямо под прилипшим хедером, там где пользователь нажал на бургер. */}
       {mobileOpen && <div className={styles.overlay} onClick={closeMobile} aria-hidden="true" />}
 
       {/* Mobile menu */}
