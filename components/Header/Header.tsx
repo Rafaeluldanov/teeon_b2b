@@ -194,10 +194,21 @@ export default function Header() {
 
         {/* Hamburger */}
         <button
+          type="button"
+          data-mobile-toggle="true"
           className={`${styles.hamburger} ${mobileOpen ? styles.hamburgerOpen : ''}`}
-          onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? 'Закрыть меню' : 'Открыть меню'}
           aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
+          onClick={(event) => {
+            // Позицию меню берём от РЕАЛЬНОЙ кнопки в момент клика, во
+            // viewport-координатах (getBoundingClientRect). Это не зависит от
+            // scrollY, offsetTop, transform-предков и sticky — меню всегда
+            // открывается прямо под нажатой шапкой.
+            const rect = event.currentTarget.getBoundingClientRect();
+            setMobileMenuTop(Math.round(rect.bottom + 12));
+            setMobileOpen((prev) => !prev);
+          }}
         >
           <span />
           <span />
