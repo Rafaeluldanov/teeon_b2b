@@ -77,8 +77,13 @@ export default function Header() {
   const telegram = overrideContacts?.telegram ?? contacts.telegram;
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    // Блокируем фон через documentElement (html), а НЕ body. Установка
+    // overflow:hidden на body ломает position:sticky у шапки в WebKit/Blink:
+    // шапка теряет точку прилипания и «улетает» к началу документа, утаскивая
+    // за собой меню. На <html> overflow:hidden сохраняет и sticky, и позицию
+    // скролла — это и есть первопричина бага «меню улетает наверх».
+    document.documentElement.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.documentElement.style.overflow = ''; };
   }, [mobileOpen]);
 
   const closeMobile = () => {
