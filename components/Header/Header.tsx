@@ -208,7 +208,7 @@ export default function Header() {
       {mobileOpen && <div className={styles.overlay} onClick={closeMobile} aria-hidden="true" />}
 
       {/* Mobile menu */}
-      <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`} aria-hidden={!mobileOpen}>
+      <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`} aria-hidden={!mobileOpen} data-testid="mobile-menu">
         <nav className={styles.mobileNav}>
 
           {/* Catalog */}
