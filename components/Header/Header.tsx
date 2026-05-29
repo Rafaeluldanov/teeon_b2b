@@ -275,6 +275,6 @@ export default function Header() {
           <a href="/#request" className={styles.mobileCtaBtn} onClick={closeMobile}>Проконсультироваться</a>
         </nav>
       </div>
-    </header>
+    </>
   );
 }
