@@ -272,7 +272,9 @@
 .mobileOverlay {
   position: fixed;
   inset: 0;
-  z-index: 2000;
+  /* Ниже шапки (z-index:1000), чтобы видимая sticky-шапка с крестиком
+     оставалась поверх затемнения и закрывалась тапом по бургеру. */
+  z-index: 999;
   background: rgba(10, 14, 26, 0.32);
   border: none;
   padding: 0;
