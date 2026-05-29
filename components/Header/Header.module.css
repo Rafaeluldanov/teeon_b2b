@@ -299,7 +299,7 @@
   top: var(--mobile-menu-top, 88px);
   left: 16px;
   right: 16px;
-  z-index: 2010;
+  z-index: 1010;
 
   max-height: calc(100dvh - var(--mobile-menu-top, 88px) - 16px);
   overflow-y: auto;
