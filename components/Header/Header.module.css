@@ -269,35 +269,62 @@
 .hamburgerOpen span:nth-child(3) { transform: translateY(-6.3px) rotate(-45deg); }
 
 /* ─── Mobile overlay ────────────────────────────────────── */
-.overlay {
+.mobileOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 14, 26, 0.3);
-  z-index: 998;
+  z-index: 2000;
+  background: rgba(10, 14, 26, 0.32);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.18s ease, visibility 0.18s ease;
+}
+.mobileOverlayOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* ─── Mobile menu ───────────────────────────────────────── */
+/* position:fixed + портал в body + top из CSS-переменной, которую Header
+   проставляет от getBoundingClientRect() кнопки в момент клика. Меню всегда
+   открывается под видимой шапкой, во viewport-координатах. */
 .mobileMenu {
   position: fixed;
-  top: 82px;
+  top: var(--mobile-menu-top, 88px);
   left: 16px;
   right: 16px;
+  z-index: 2010;
+
+  max-height: calc(100dvh - var(--mobile-menu-top, 88px) - 16px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+
   background: var(--paper);
+  color: var(--ink);
   border: 1px solid var(--hair);
   border-radius: var(--rad);
-  box-shadow: 0 16px 48px rgba(10, 14, 26, 0.14);
-  z-index: 999;
-  max-height: 0;
-  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(10, 14, 26, 0.28);
+
   opacity: 0;
+  transform: translateY(-8px);
+  visibility: hidden;
   pointer-events: none;
-  transition: max-height 0.3s ease, opacity 0.2s ease;
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
 }
 .mobileMenuOpen {
-  max-height: calc(100dvh - 100px);
-  overflow-y: auto;
   opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
   pointer-events: auto;
+}
+
+@media (min-width: 861px) {
+  .mobileOverlay,
+  .mobileMenu { display: none; }
 }
 
 .mobileNav {
