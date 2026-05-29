@@ -228,16 +228,24 @@ export default function Header() {
       </div>
     </header>
 
-    {/* Оверлей и мобильное меню вынесены за пределы <header>: у хедера есть
-        transform (для плавного скролла на iOS), который делает его containing
-        block для fixed-потомков. Внутри хедера fixed-меню позиционировалось бы
-        относительно layout-бокса хедера (вверху документа) и «улетало» наверх
-        при скролле. Снаружи fixed снова считается от вьюпорта — меню открывается
-        прямо под прилипшим хедером, там где пользователь нажал на бургер. */}
+    {/* Оверлей и мобильное меню рендерятся через ПОРТАЛ прямо в document.body.
+        У хедера есть transform + will-change (для плавного скролла на iOS),
+        что делает его containing block для fixed-потомков. Портал выносит меню
+        из-под любого такого предка, поэтому position:fixed снова считается от
+        viewport. Координата top вычисляется по реальному getBoundingClientRect()
+        видимой шапки — меню всегда открывается ровно под ней, независимо от
+        scrollY, transform, sticky и положения страницы. */}
+    {mounted && createPortal(
+      <>
       {mobileOpen && <div className={styles.overlay} onClick={closeMobile} aria-hidden="true" />}
 
       {/* Mobile menu */}
-      <div className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`} aria-hidden={!mobileOpen} data-testid="mobile-menu">
+      <div
+        className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}
+        aria-hidden={!mobileOpen}
+        data-testid="mobile-menu"
+        style={{ top: menuTop }}
+      >
         <nav className={styles.mobileNav}>
 
           {/* Catalog */}
