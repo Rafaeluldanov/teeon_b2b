@@ -226,14 +226,24 @@ export default function Header() {
         scrollY, transform, sticky и положения страницы. */}
     {mounted && createPortal(
       <>
-      {mobileOpen && <div className={styles.overlay} onClick={closeMobile} aria-hidden="true" />}
+      {/* Затемнение фона — отдельная кнопка (закрывает по клику/Enter). */}
+      <button
+        type="button"
+        className={`${styles.mobileOverlay} ${mobileOpen ? styles.mobileOverlayOpen : ''}`}
+        aria-label="Закрыть меню"
+        onClick={closeMobile}
+        data-mobile-overlay="true"
+        tabIndex={mobileOpen ? 0 : -1}
+      />
 
       {/* Mobile menu */}
       <div
+        id="mobile-menu"
         className={`${styles.mobileMenu} ${mobileOpen ? styles.mobileMenuOpen : ''}`}
         aria-hidden={!mobileOpen}
+        data-mobile-menu="true"
         data-testid="mobile-menu"
-        style={{ top: menuTop }}
+        style={{ '--mobile-menu-top': `${mobileMenuTop}px` } as React.CSSProperties}
       >
         <nav className={styles.mobileNav}>
 
