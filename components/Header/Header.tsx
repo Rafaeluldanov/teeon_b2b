@@ -35,34 +35,11 @@ export default function Header() {
   const [mobileCatalogOpen, setMobileCatalogOpen] = useState(false);
   const [mobileBrandingOpen, setMobileBrandingOpen] = useState(false);
   const [overrideContacts, setOverrideContacts] = useState<EditableContacts | null>(null);
-  const headerRef = useRef<HTMLElement>(null);
-  const [menuTop, setMenuTop] = useState(82);
+  const [mobileMenuTop, setMobileMenuTop] = useState(88);
   const [mounted, setMounted] = useState(false);
 
-  // Меню рендерится через портал в document.body — этого нет на сервере.
+  // Меню рендерится через портал в document.body — на сервере document нет.
   useEffect(() => { setMounted(true); }, []);
-
-  // Позиционируем меню по РЕАЛЬНОМУ нижнему краю видимой шапки во
-  // viewport-координатах. getBoundingClientRect() возвращает фактическое
-  // положение на экране независимо от scrollY, transform, sticky и
-  // родительских контейнеров — поэтому меню всегда открывается прямо под
-  // шапкой, где бы пользователь ни находился на странице.
-  const updateMenuTop = useCallback(() => {
-    const el = headerRef.current;
-    if (!el) return;
-    setMenuTop(Math.max(0, Math.round(el.getBoundingClientRect().bottom + 8)));
-  }, []);
-
-  useEffect(() => {
-    if (!mobileOpen) return;
-    updateMenuTop();
-    window.addEventListener('resize', updateMenuTop);
-    window.addEventListener('scroll', updateMenuTop, { passive: true });
-    return () => {
-      window.removeEventListener('resize', updateMenuTop);
-      window.removeEventListener('scroll', updateMenuTop);
-    };
-  }, [mobileOpen, updateMenuTop]);
 
   useEffect(() => {
     try {
