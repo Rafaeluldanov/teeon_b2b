@@ -112,3 +112,5 @@
 @media (max-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 760px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 480px)  { .grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+/* on very small phones a 2-up card is narrower than its content — stack them */
+@media (max-width: 400px)  { .grid { grid-template-columns: 1fr; } }
