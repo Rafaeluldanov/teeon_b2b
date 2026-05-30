@@ -72,3 +72,6 @@
   .grid { grid-template-columns: 1fr 1fr; gap: 8px; }
   .card { min-height: 180px; padding: 20px 16px; }
 }
+@media (max-width: 400px) {
+  .grid { grid-template-columns: 1fr; }
+}
