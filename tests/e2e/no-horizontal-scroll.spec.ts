@@ -25,7 +25,7 @@ const PAGES = [
   '/branding/',
   '/branding/vyshivka/',
   '/portfolio/',
-  '/portfolio/hudi-futbolki-komanda/',
+  '/portfolio/yunarmiya-merch-tekstil/',
   '/about/',
   '/contacts/',
   '/faq/',
