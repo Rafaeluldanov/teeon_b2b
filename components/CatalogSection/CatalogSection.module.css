@@ -130,6 +130,9 @@
   gap: 12px;
   margin-top: auto;
   padding-top: 10px;
+  /* on the narrow 2-up cards the nowrap button + quote overflowed the card;
+     let them wrap to the next line instead of stretching the page */
+  flex-wrap: wrap;
 }
 .btn {
   display: inline-flex;
