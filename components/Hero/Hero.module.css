@@ -165,6 +165,9 @@
   padding: 22px 20px;
   display: flex;
   flex-direction: column;
+  /* allow the grid track to shrink instead of being forced wide by the big
+     stat number — prevents the row from overflowing on narrow screens */
+  min-width: 0;
 }
 .statCard.yellow { background: var(--yellow); }
 .statCard.blue { background: var(--blue); color: var(--paper); }
