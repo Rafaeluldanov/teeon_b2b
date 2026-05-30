@@ -100,10 +100,11 @@
 }
 .meta {
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   column-gap: 10px;
   row-gap: 4px;
 }
+.meta dd { min-width: 0; overflow-wrap: anywhere; }
 .meta dt {
   font-size: 11px;
   font-weight: 600;
