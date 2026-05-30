@@ -232,4 +232,5 @@
 @media (max-width: 400px) {
   /* below this even a shrunk number won't fit 2-up — stack the cards */
   .statsRow { grid-template-columns: 1fr; }
+  .badgesRow { grid-template-columns: 1fr; }
 }
