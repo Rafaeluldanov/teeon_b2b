@@ -308,6 +308,8 @@ a.itemCard:hover { background: var(--blue); color: var(--paper); }
 /* Responsive */
 @media (max-width: 1100px) { .grid { grid-template-columns: repeat(3, 1fr); } .chooseGrid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 900px) {
+  /* 3-up cards are too tight to fit at ~768px — drop to 2-up below 900 */
+  .grid { grid-template-columns: repeat(2, 1fr); }
   .sectionHead { grid-template-columns: 1fr; }
   .processGrid { grid-template-columns: 1fr 1fr; }
   .itemsGrid { grid-template-columns: repeat(3, 1fr); }
