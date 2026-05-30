@@ -124,6 +124,7 @@
   text-decoration: none;
   color: var(--ink);
   transition: border-color .15s, transform .15s;
+  min-width: 0;
 }
 @media (hover: hover) {
   .card:hover { border-color: var(--ink); transform: translateY(-2px); }
