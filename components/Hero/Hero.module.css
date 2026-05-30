@@ -221,3 +221,14 @@
   .badge { padding: 10px 10px; }
   .statsRow { grid-template-columns: 1fr 1fr; }
 }
+@media (max-width: 480px) {
+  /* the 44px stat number is too wide for a 2-up card on small phones and was
+     forcing the stats row past the viewport — scale it down to fit */
+  .statCard { padding: 16px 14px; }
+  .statVal { font-size: 34px; }
+  .statUnit { font-size: 14px; }
+}
+@media (max-width: 400px) {
+  /* below this even a shrunk number won't fit 2-up — stack the cards */
+  .statsRow { grid-template-columns: 1fr; }
+}
