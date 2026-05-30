@@ -12,15 +12,19 @@ const BRANDING_SLUGS = [
 
 // Actual slugs from lib/portfolio.ts
 const PORTFOLIO_SLUGS = [
-  'hudi-futbolki-komanda',
-  'merch-konferenciya',
-  'promo-odezhda-vistavka',
-  'sumki-shopery-meropriyatie',
-  'zhiletki-personal',
-  'dozhdeviki-promoakciya',
-  'svitshoty-sotrudniki',
-  'welcome-pack',
-  'kurtki-vyezdnaya-komanda',
+  'yunarmiya-merch-tekstil',
+  'rsv-rossiya-strana-vozmojnostey',
+  'sakura-sf-korporativnaya-odezhda',
+  'nibk-korporativnaya-odezhda',
+  'agrorus-i-ko-podarochnyy-nabor',
+  'vic-veterinary-merch',
+  'alean-tour-operator-merch',
+  'liftprom-corporate-vests',
+  'mistral-tretyakov-collab',
+  'rodnye-korma-vests',
+  'sibur-merch-tekstil',
+  'indrive-merch-capsule',
+  'itelma-corporate-jackets',
 ];
 
 const ALL_PAGES = [
