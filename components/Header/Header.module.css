@@ -324,7 +324,7 @@
   pointer-events: auto;
 }
 
-@media (min-width: 861px) {
+@media (min-width: 1081px) {
   .mobileOverlay,
   .mobileMenu { display: none; }
 }
