@@ -18,6 +18,13 @@ export interface ContactsData {
   phoneRaw: string;
   telegram: string;
   whatsapp: string;
+  /** Телефон менеджера для мессенджера MAX (отображаемый формат). */
+  maxPhone: string;
+  /** Тот же номер без форматирования, только цифры. */
+  maxPhoneRaw: string;
+  /** Подтверждённый URL профиля/бота/чата менеджера в MAX. Если пусто —
+   *  используется официальный share-deeplink (https://max.ru/:share?text=…). */
+  maxUrl: string;
   city: string;
   address: string;
   schedule: string;
