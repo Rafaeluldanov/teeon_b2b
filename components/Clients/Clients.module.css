@@ -1,7 +1,11 @@
 /* ─── v6 Clients grid ────────────────────────────────────── */
 .grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  /* minmax(0, 1fr) вместо 1fr: bare 1fr = minmax(auto, 1fr), и в Safari
+     min-content-вклад <img> равен его атрибутной ширине (160px), из-за чего
+     трек раздувается и грид вылезает за вьюпорт. minmax(0,…) разрешает треку
+     схлопнуться. */
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 14px;
   list-style: none;
   padding: 0;
@@ -12,6 +16,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* страховка к minmax(0,…): grid-айтем тоже не должен иметь min-width:auto */
+  min-width: 0;
   aspect-ratio: 16 / 9;
   padding: 20px;
   background: var(--paper);
