@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  // Allow overriding the build dir (defaults to .next) so dev/CI can use a
+  // separate, writable directory when .next is owned by another process.
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   images: {
     remotePatterns: [
       {
