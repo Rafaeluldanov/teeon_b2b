@@ -188,9 +188,10 @@ export default function Header() {
             <a href={`tel:+${phoneRaw}`} className={styles.contactPhone}>{phone}</a>
           </div>
           <a
-            href={`https://max.ru/${telegram.replace('@', '')}`}
+            href={maxHref}
             className={styles.messengerBtn}
-            aria-label="Написать в МАКС"
+            aria-label={`Написать менеджеру в MAX (${contacts.maxPhone})`}
+            title={`Написать менеджеру в MAX · ${contacts.maxPhone}`}
             target="_blank"
             rel="noopener noreferrer"
           >
