@@ -51,7 +51,14 @@ export default function Header() {
   const phone = overrideContacts?.phone ?? contacts.phone;
   const phoneRaw = overrideContacts?.phoneRaw ?? contacts.phoneRaw;
   const email = overrideContacts?.email ?? contacts.email;
-  const telegram = overrideContacts?.telegram ?? contacts.telegram;
+
+  // Мессенджер MAX → менеджер. Официального deeplink «написать по номеру» у MAX
+  // нет (подтверждено dev.max.ru/help/deeplinks), поэтому при отсутствии
+  // подтверждённого maxUrl формируем официальный share-deeplink с номером в тексте.
+  const maxShareText = `Здравствуйте! Хочу обсудить заказ TEEON. Удобно связаться с менеджером по номеру ${contacts.maxPhone}.`;
+  const maxHref = contacts.maxUrl
+    ? contacts.maxUrl
+    : `https://max.ru/:share?text=${encodeURIComponent(maxShareText)}`;
 
   // Скролл-лок намеренно НЕ используется: overflow:hidden на body ломает
   // position:sticky у шапки (она улетает к началу документа), а position:fixed
