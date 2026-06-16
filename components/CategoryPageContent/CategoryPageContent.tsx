@@ -214,6 +214,9 @@ export default async function CategoryPageContent({ category: cat }: Props) {
                     wrapperClassName={styles.productImg}
                     imgClassName={styles.productImgEl}
                     ariaLabel={`Открыть фото: ${p.title}`}
+                    width={800}
+                    height={600}
+                    sizes="(max-width: 640px) 92vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 380px"
                   />
                 ) : (
                   <div className={styles.productImg} role="img" aria-label={p.title}>

@@ -277,6 +277,9 @@ export default async function BrandingPageContent({ method: m }: Props) {
                     wrapperClassName={styles.exampleImg}
                     imgClassName={styles.exampleImgEl}
                     ariaLabel={`Открыть фото: ${ex.title}`}
+                    width={800}
+                    height={600}
+                    sizes="(max-width: 768px) 92vw, (max-width: 1024px) 50vw, 380px"
                   />
                 ) : (
                   <div className={styles.exampleImg} role="img" aria-label={ex.title} />
