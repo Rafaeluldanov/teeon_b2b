@@ -104,7 +104,7 @@ export const editablePages: EditablePageContent[] = [
     title: 'Контакты — TEEON',
     description: 'Свяжитесь с нами для расчёта заказа.',
     seoTitle: 'Контакты — TEEON | Пошив промо-одежды',
-    seoDescription: 'Контакты TEEON: телефон, email, Telegram, WhatsApp. Оставьте заявку на расчёт стоимости.',
+    seoDescription: 'Контакты TEEON: телефон, email, адрес производства в Москве. Оставьте заявку на расчёт стоимости.',
     blocks: [],
     faq: [],
     isActive: true,
