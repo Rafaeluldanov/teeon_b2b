@@ -239,7 +239,7 @@ export default function ContactsPage() {
                 {contacts.city}
               </div>
               <p className={styles.mapDesc}>
-                Производство в {contacts.city}е. Посещение — по согласованию, договоритесь по телефону или в Telegram.
+                Производство в {contacts.city}е. Посещение — по согласованию, договоритесь по телефону или на email.
               </p>
               <p className={styles.mapDesc} style={{ fontSize: '12.5px', opacity: 0.7 }}>
                 {contacts.address}
