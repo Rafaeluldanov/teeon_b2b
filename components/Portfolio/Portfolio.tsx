@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Portfolio.module.css';
 import { portfolioCases } from '@/lib/portfolio';
 import type { PortfolioCase } from '@/lib/portfolio';
