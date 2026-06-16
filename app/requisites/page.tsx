@@ -5,8 +5,8 @@ import { siteConfig } from '@/lib/seo';
 import styles from './requisites.module.css';
 
 export const metadata: Metadata = {
-  title: 'Реквизиты компании',
-  description: 'Реквизиты компании TEEON: ИНН, ОГРН, контактная информация для работы с юридическими лицами и ИП по договору.',
+  title: 'Реквизиты TEEON для договора и оплаты',
+  description: 'Реквизиты TEEON для B2B-заказов: ИП Ульданов Рафаэль Айратович, ИНН, ОГРНИП и фактический адрес производства в Москве.',
   robots: { index: true, follow: true },
   alternates: { canonical: `${siteConfig.url}/requisites/` },
 };
