@@ -622,7 +622,7 @@ export const portfolioCases: PortfolioCase[] = [
       },
       {
         id: '1779692565808-dkhh',
-        title: 'Футболка Оверсаз',
+        title: 'Футболка оверсайз',
         categorySlug: 'futbolki',
         description: 'Оверсайз-футболка с DTF-печатью логотипа — для корпоративных мероприятий и команды.',
         branding: ['DTF-печать'],
