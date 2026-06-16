@@ -21,14 +21,6 @@ export default function PrivacyPage() {
           <span aria-current="page">Политика обработки персональных данных</span>
         </nav>
 
-        <div className={styles.warning}>
-          <span className={styles.warningIcon} aria-hidden="true">⚠️</span>
-          <p>
-            <strong>Внимание:</strong> данный текст является шаблоном и требует юридической проверки и
-            адаптации перед публикацией. Не является официальным юридическим документом в текущем виде.
-          </p>
-        </div>
-
         <h1 className={styles.title}>Политика обработки персональных данных</h1>
 
         <div className={styles.body}>
