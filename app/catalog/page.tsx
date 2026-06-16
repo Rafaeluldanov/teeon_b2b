@@ -179,6 +179,8 @@ export default async function CatalogPage() {
                           src={src}
                           alt=""
                           className={styles.cardMediaCollageImg}
+                          loading="lazy"
+                          decoding="async"
                         />
                       ))}
                     </div>
