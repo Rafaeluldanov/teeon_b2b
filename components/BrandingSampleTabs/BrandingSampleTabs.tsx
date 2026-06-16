@@ -101,7 +101,10 @@ export default function BrandingSampleTabs({ methodSlug }: Props) {
           <div className={styles.panelGrid}>
             {/* Image */}
             <div className={styles.imageWrapper} aria-label={s.imageLabel}>
-              {s.imageSrc ? (
+              {/* Рендерим <img> только для активной вкладки: скрытые табы иначе
+                  eager-загружают тяжёлые sample-картинки. При переключении таба
+                  картинка нового активного таба монтируется и грузится по требованию. */}
+              {s.imageSrc && idx === activeIdx ? (
                 <button
                   type="button"
                   className={styles.imageBtn}
@@ -116,6 +119,8 @@ export default function BrandingSampleTabs({ methodSlug }: Props) {
                     src={s.imageSrc}
                     alt={s.imageLabel}
                     className={styles.image}
+                    loading="lazy"
+                    decoding="async"
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).style.display = 'none';
                       const fb = (e.currentTarget.parentElement?.parentElement?.querySelector(`.${styles.imagePlaceholder}`)) as HTMLElement | null;
