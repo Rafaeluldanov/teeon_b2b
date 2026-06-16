@@ -47,7 +47,7 @@ export const contacts: ContactsData = {
   maxPhoneRaw: '79030179820',
   maxUrl: '',
   city: 'Москва',
-  address: 'Адрес производства и офиса будет добавлен после уточнения',
+  address: 'Москва, 2-й Грайвороновский проезд, 48',
   schedule: 'Пн–Пт, 10:00–19:00',
   companyName: 'TEEON',
   descriptor: 'Пошив промо-одежды и корпоративного мерча под ключ',
