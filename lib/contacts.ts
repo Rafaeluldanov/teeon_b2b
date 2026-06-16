@@ -16,8 +16,6 @@ export interface ContactsData {
   email: string;
   phone: string;
   phoneRaw: string;
-  telegram: string;
-  whatsapp: string;
   /** Телефон менеджера для мессенджера MAX (отображаемый формат). */
   maxPhone: string;
   /** Тот же номер без форматирования, только цифры. */
