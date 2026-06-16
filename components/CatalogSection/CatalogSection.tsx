@@ -4,7 +4,7 @@ import { catalogCategories } from '@/lib/catalog';
 import { collectCategoryImages } from '@/lib/catalogModels';
 import { getMergedCatalogModels } from '@/lib/serverData';
 import CatalogCategoryIcon from '@/components/CatalogCategoryIcon/CatalogCategoryIcon';
-import SafeImg from '@/components/SafeImg/SafeImg';
+import Image from 'next/image';
 
 const ArrowIc = () => (
   <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
