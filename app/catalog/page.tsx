@@ -67,6 +67,7 @@ const CAT_META: Record<string, { bg: BgKey; num: string }> = {
   zhiletki:   { bg: 'bgPaper2', num: '06' },
   kurtki:     { bg: 'bgInk',    num: '07' },
   dozhdeviki: { bg: 'bgCoral',  num: '08' },
+  kepki:      { bg: 'bgYellow', num: '09' },
 };
 
 const ArrowIc = () => (
