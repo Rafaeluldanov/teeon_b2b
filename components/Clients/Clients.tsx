@@ -49,6 +49,7 @@ export default function Clients() {
               alt={c.name}
               className={styles.logo}
               loading="lazy"
+              decoding="async"
               width={160}
               height={90}
             />
