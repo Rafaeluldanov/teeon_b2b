@@ -35,7 +35,7 @@ export default function Clients() {
       <div className="v6-section-head">
         <div>
           <div className="v6-kicker">(07) — Нам доверяют</div>
-          <h2 id="clients-title">Более 300 <em>постоянных</em> заказчиков</h2>
+          <h2 id="clients-title">Нам доверяют компании<br /><em>по всей России</em></h2>
         </div>
         <p>Промышленность, госструктуры, агросектор, образование и крупный бизнес. Ниже — компании, для которых мы реализовали проекты с брендированием.</p>
       </div>
