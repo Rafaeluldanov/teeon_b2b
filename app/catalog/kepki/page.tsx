@@ -339,7 +339,7 @@ export default async function KepkiPage() {
       <section className="container" aria-labelledby="kepki-cta">
         <div className={styles.ctaBlock}>
           <div className={styles.ctaText}>
-            <div className={styles.ctaTitle} id="kepki-cta">Рассчитать тираж <em>кепок</em></div>
+            <h2 className={styles.ctaTitle} id="kepki-cta">Рассчитать тираж <em>кепок</em></h2>
             <p className={styles.ctaDesc}>
               Опишите задачу, модель и желаемый тираж — подберём кепки и способ брендирования и пришлём расчёт.
             </p>
