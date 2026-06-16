@@ -144,6 +144,8 @@ export default function PortfolioCasePage({ caseItem }: Props) {
         <span aria-current="page">{c.shortTitle}</span>
       </nav>
 
+      <h1 className={styles.caseTitle}>{c.title}</h1>
+
       {/* ── Gallery ── */}
       {galleryImages.length > 0 && (
         <ul
