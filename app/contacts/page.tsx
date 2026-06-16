@@ -42,8 +42,6 @@ const attachItems = [
 const contactCards = [
   { ic: '📞', t: 'Телефон',  main: contacts.phone,     href: `tel:${contacts.phoneRaw}`,           d: 'Пн–Пт · 9:00–19:00 — звонки и SMS', mod: '' },
   { ic: '✉️', t: 'Email',    main: contacts.email,     href: `mailto:${contacts.email}`,           d: 'Любые файлы, ТЗ, договоры — ответ в течение часа', mod: 'yellow' },
-  { ic: '💬', t: 'Telegram', main: contacts.telegram,  href: `https://t.me/teeon_merch`,           d: 'Быстрые вопросы, образцы, файлы до 100 МБ', mod: '' },
-  { ic: '🟢', t: 'WhatsApp', main: contacts.whatsapp,  href: `https://wa.me/${contacts.phoneRaw}`, d: 'Голосовые и быстрая переписка', mod: 'blue' },
   { ic: '🕐', t: 'График',   main: contacts.schedule,  href: null,                                 d: 'Заявки принимаем круглосуточно — ответим в начале следующего рабочего дня', mod: '' },
   { ic: '📍', t: 'Адрес',    main: contacts.city,      href: null,                                 d: contacts.address, mod: 'ink' },
 ];
