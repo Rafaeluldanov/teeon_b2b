@@ -27,6 +27,10 @@ interface PortfolioExample {
 
 // Из портфолио вытаскиваем конкретные продукты, помеченные текущей категорией.
 // Если внутри кейсов нет caseProducts (старый формат) — берём сам кейс с тегом.
+// Admin-кейсы получают slug вида `case-<timestamp>-<rand>`: они noindex и не в
+// sitemap, поэтому не линкуем их из related-блоков (иначе ссылка ведёт в noindex-тупик).
+const isNoindexAdminCaseSlug = (slug: string): boolean => /^case-\d+-[a-z0-9]+$/.test(slug);
+
 function collectPortfolioForCategory(
   slug: string,
   cases: Awaited<ReturnType<typeof getMergedPortfolioCases>>,
@@ -37,6 +41,7 @@ function collectPortfolioForCategory(
   // Шаг 1: точные совпадения по конкретному продукту (categorySlug или tag).
   for (const c of cases) {
     if (c.isActive === false) continue;
+    if (isNoindexAdminCaseSlug(c.slug)) continue;
     if (!Array.isArray(c.caseProducts) || !c.caseProducts.length) continue;
     for (const p of c.caseProducts) {
       if (p.isActive === false) continue;
@@ -57,6 +62,7 @@ function collectPortfolioForCategory(
   for (const c of cases) {
     if (out.length >= max) break;
     if (c.isActive === false) continue;
+    if (isNoindexAdminCaseSlug(c.slug)) continue;
     const caseTagged = (c.relatedCatalog ?? []).includes(slug) || (c.tags ?? []).includes(slug);
     if (!caseTagged) continue;
     // если каскадные продукты уже были в шаге 1 — пропускаем

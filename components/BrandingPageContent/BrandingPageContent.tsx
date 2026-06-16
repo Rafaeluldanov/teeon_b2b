@@ -26,6 +26,10 @@ interface BrandingPortfolioExample {
 // Источник истины — relatedBranding на уровне кейса (поле админки). Дополнительно
 // пытаемся вытащить конкретный продукт из caseProducts, у которого branding[]
 // содержит совпадение по названию метода (нормализуем — в админ-дампе часто опечатки).
+// Admin-кейсы получают slug вида `case-<timestamp>-<rand>`: они noindex и не в
+// sitemap, поэтому не линкуем их из related-блоков (иначе ссылка ведёт в noindex-тупик).
+const isNoindexAdminCaseSlug = (slug: string): boolean => /^case-\d+-[a-z0-9]+$/.test(slug);
+
 function collectBrandingPortfolio(
   methodSlug: string,
   methodTitle: string,
@@ -46,6 +50,7 @@ function collectBrandingPortfolio(
   // Шаг 1: точное совпадение по branding-полю отдельного продукта.
   for (const c of cases) {
     if (c.isActive === false) continue;
+    if (isNoindexAdminCaseSlug(c.slug)) continue;
     if (!Array.isArray(c.caseProducts) || !c.caseProducts.length) continue;
     for (const p of c.caseProducts) {
       if (p.isActive === false) continue;
@@ -64,6 +69,7 @@ function collectBrandingPortfolio(
   for (const c of cases) {
     if (out.length >= max) break;
     if (c.isActive === false) continue;
+    if (isNoindexAdminCaseSlug(c.slug)) continue;
     if (!(c.relatedBranding ?? []).includes(methodSlug)) continue;
     if (out.some((o) => o.href === `/portfolio/${c.slug}/`)) continue;
     out.push({
