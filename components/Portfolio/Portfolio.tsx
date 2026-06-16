@@ -109,8 +109,15 @@ export default function Portfolio() {
               <div className={`${styles.media} ${hasMedia ? '' : bgClass}`}>
                 <span className={styles.chip}>{c.clientType}</span>
                 {c.coverImage ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={c.coverImage} alt={c.title} className={styles.mediaImg} loading="lazy" decoding="async" />
+                  <Image
+                    src={c.coverImage}
+                    alt={c.title}
+                    className={styles.mediaImg}
+                    width={600}
+                    height={600}
+                    sizes="(max-width: 400px) 92vw, (max-width: 1024px) 46vw, 33vw"
+                    loading="lazy"
+                  />
                 ) : productImgs.length > 0 ? (
                   <div className={styles.mediaCollage} data-count={Math.min(productImgs.length, 4)}>
                     {productImgs.slice(0, 4).map((img, i) => (
