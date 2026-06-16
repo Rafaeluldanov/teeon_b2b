@@ -67,13 +67,15 @@ export default async function CatalogSection() {
                 {imgs.length > 0 ? (
                   <div className={styles.mediaCollage} data-count={Math.min(imgs.length, 4)}>
                     {imgs.slice(0, 4).map((src, i) => (
-                      <SafeImg
+                      <Image
                         key={i}
                         src={src}
                         alt=""
+                        width={300}
+                        height={300}
+                        sizes="(max-width: 760px) 23vw, (max-width: 1100px) 16vw, 130px"
                         className={styles.mediaCollageImg}
                         loading="lazy"
-                        decoding="async"
                       />
                     ))}
                   </div>
