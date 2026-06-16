@@ -245,7 +245,7 @@ export const portfolioCases: PortfolioCase[] = [
     seoTitle: 'Кейс: Sakura S/F — корпоративная одежда автозапчастей | TEEON',
     seoDescription: 'Линейка корпоративной одежды и аксессуаров Sakura S/F: бейсболки, рюкзаки, поло, жилетки, худи. Флекстран и вышивка в фирменных красно-белых акцентах.',
     tags: ['polo', 'hudi', 'zhiletki', 'kepki', 'sumki', 'vyshivka', 'forma', 'merch'],
-    relatedCatalog: ['hudi', 'zhiletki', 'sumki'],
+    relatedCatalog: ['hudi', 'zhiletki', 'sumki', 'kepki'],
     relatedBranding: ['vyshivka', 'shelkografiya', 'birki'],
     isActive: true,
     galleryImages: [
