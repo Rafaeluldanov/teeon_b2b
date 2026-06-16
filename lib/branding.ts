@@ -90,7 +90,7 @@ export const brandingMethods: BrandingMethod[] = [
       { name: 'Куртки для выездной команды', task: 'Вышивка на спине и груди, 80 шт.' },
     ],
     relatedMethods: ['shevrony', 'birki', 'dtf-pechat'],
-    relatedCatalog: ['hudi', 'kurtki', 'zhiletki'],
+    relatedCatalog: ['hudi', 'kurtki', 'zhiletki', 'kepki'],
   },
   {
     slug: 'shevrony',
@@ -154,7 +154,7 @@ export const brandingMethods: BrandingMethod[] = [
       { name: 'Форма для security', task: 'ПВХ-шеврон с номером и логотипом, 100 шт.' },
     ],
     relatedMethods: ['vyshivka', 'birki', 'dtf-pechat'],
-    relatedCatalog: ['kurtki', 'zhiletki', 'hudi'],
+    relatedCatalog: ['kurtki', 'zhiletki', 'hudi', 'kepki'],
   },
   {
     slug: 'shelkografiya',

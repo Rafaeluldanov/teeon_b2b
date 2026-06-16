@@ -8,7 +8,8 @@ export type CatalogIconSlug =
   | 'sumki'
   | 'zhiletki'
   | 'kurtki'
-  | 'dozhdeviki';
+  | 'dozhdeviki'
+  | 'kepki';
 
 interface CatalogCategoryIconProps {
   slug: CatalogIconSlug | string;
@@ -66,6 +67,12 @@ const RAIN_SEAM = 'M 80 64 L 80 140';
 const RAIN_DROP_1 = 'M 22 22 Q 28 30 22 32 Q 16 30 22 22 Z';
 const RAIN_DROP_2 = 'M 138 22 Q 144 30 138 32 Q 132 30 138 22 Z';
 const RAIN_DROP_3 = 'M 138 50 Q 144 58 138 60 Q 132 58 138 50 Z';
+
+const CAP_CROWN = 'M 38 108 Q 38 52 84 52 Q 128 52 128 108 Z';
+const CAP_BRIM = 'M 122 108 Q 152 110 152 122 Q 152 126 144 126 L 120 120 Z';
+const CAP_BAND = 'M 38 108 L 128 108';
+const CAP_BUTTON = 'M 80 52 A 4 4 0 1 1 88 52 A 4 4 0 1 1 80 52 Z';
+const CAP_SEAM = 'M 84 52 L 84 108';
 
 function renderIcon(slug: string) {
   switch (slug) {
@@ -150,6 +157,18 @@ function renderIcon(slug: string) {
           <path className={styles.iconDrop} d={RAIN_DROP_1} />
           <path className={styles.iconDrop} d={RAIN_DROP_2} />
           <path className={styles.iconDrop} d={RAIN_DROP_3} />
+        </>
+      );
+    case 'kepki':
+      return (
+        <>
+          <path className={styles.iconFill} d={CAP_CROWN} />
+          <path className={styles.iconFill} d={CAP_BRIM} />
+          <path className={styles.iconStroke} d={CAP_CROWN} />
+          <path className={styles.iconStroke} d={CAP_BRIM} />
+          <path className={styles.iconStroke} d={CAP_BAND} />
+          <path className={styles.iconStrokeThin} d={CAP_SEAM} />
+          <path className={styles.iconStrokeThin} d={CAP_BUTTON} />
         </>
       );
     default:

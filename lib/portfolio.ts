@@ -245,7 +245,7 @@ export const portfolioCases: PortfolioCase[] = [
     seoTitle: 'Кейс: Sakura S/F — корпоративная одежда автозапчастей | TEEON',
     seoDescription: 'Линейка корпоративной одежды и аксессуаров Sakura S/F: бейсболки, рюкзаки, поло, жилетки, худи. Флекстран и вышивка в фирменных красно-белых акцентах.',
     tags: ['polo', 'hudi', 'zhiletki', 'kepki', 'sumki', 'vyshivka', 'forma', 'merch'],
-    relatedCatalog: ['hudi', 'zhiletki', 'sumki'],
+    relatedCatalog: ['hudi', 'zhiletki', 'sumki', 'kepki'],
     relatedBranding: ['vyshivka', 'shelkografiya', 'birki'],
     isActive: true,
     galleryImages: [
@@ -266,7 +266,7 @@ export const portfolioCases: PortfolioCase[] = [
         ],
         sortOrder: 1,
         isActive: true,
-        tags: ['vyshivka'],
+        tags: ['kepki', 'vyshivka'],
       },
       {
         id: '1779683768843-1u0h',
@@ -358,7 +358,7 @@ export const portfolioCases: PortfolioCase[] = [
     seoTitle: 'Кейс: NIBK — корпоративная одежда автокомпонентов | TEEON',
     seoDescription: 'Фирменная форма NIBK в чёрно-фиолетовой палитре: 500 худи, 700 жилеток, 500 поло, рюкзаки и бейсболки. Вышивка, флекстран, ПВХ-бирки. Партиями под сезон.',
     tags: ['polo', 'hudi', 'zhiletki', 'kepki', 'sumki', 'vyshivka', 'forma', 'merch'],
-    relatedCatalog: ['hudi', 'zhiletki', 'sumki'],
+    relatedCatalog: ['hudi', 'zhiletki', 'sumki', 'kepki'],
     relatedBranding: ['vyshivka', 'shelkografiya', 'birki'],
     isActive: true,
     caseProducts: [
@@ -409,7 +409,7 @@ export const portfolioCases: PortfolioCase[] = [
         ],
         sortOrder: 3,
         isActive: true,
-        tags: ['vyshivka'],
+        tags: ['kepki', 'vyshivka'],
       },
       {
         id: '1779684438682-j0kw',

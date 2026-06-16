@@ -86,7 +86,7 @@ export default function Portfolio() {
       <div className="v6-section-head">
         <div>
           <div className="v6-kicker">(06) — Кейсы</div>
-          <h2 id="portfolio-title">240<em>+</em> проектов<br />в деле</h2>
+          <h2 id="portfolio-title">Кейсы <em>корпоративного мерча</em><br />и&nbsp;промо-одежды</h2>
         </div>
         <p>Примеры нашей работы: от welcome-наборов для IT до тиражей в 1 200 шопперов для ритейл-сети. Каждый — с задачей, цифрами и сроками.</p>
       </div>

@@ -61,7 +61,7 @@ export default function BrandingSection() {
       <div className="v6-section-head">
         <div>
           <div className="v6-kicker">(04) — Нанесение</div>
-          <h2 id="branding-title">9 способов<br /><em>персонализации</em></h2>
+          <h2 id="branding-title">Способы <em>брендирования</em><br />одежды и&nbsp;мерча</h2>
         </div>
         <p>Подбираем технологию под ткань, тираж и бюджет. От вышивки на корпоративных поло до полноцветной DTF на промо-футболках.</p>
       </div>

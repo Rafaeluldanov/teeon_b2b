@@ -10,15 +10,15 @@ import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
 import styles from './catalog.module.css';
 
 export const metadata: Metadata = {
-  title: 'Каталог промо-одежды и корпоративного мерча на заказ',
+  title: 'Каталог промо-одежды и мерча с логотипом',
   description:
-    'Футболки, худи, свитшоты, лонгсливы, сумки, жилетки, куртки и дождевики для бизнеса. Пошив, брендирование, расчёт тиража и производство под ключ.',
+    'Футболки, худи, свитшоты, лонгсливы, сумки, жилетки, куртки, дождевики и кепки для корпоративного мерча. Пошив, брендирование и поставка тиражей для бизнеса.',
   alternates: { canonical: `${siteConfig.url}/catalog/` },
   openGraph: {
     url: `${siteConfig.url}/catalog/`,
-    title: 'Каталог промо-одежды и корпоративного мерча на заказ',
+    title: 'Каталог промо-одежды и мерча с логотипом',
     description:
-      'Футболки, худи, свитшоты, лонгсливы, сумки, жилетки, куртки и дождевики для бизнеса. Пошив, брендирование, расчёт тиража и производство под ключ.',
+      'Футболки, худи, свитшоты, лонгсливы, сумки, жилетки, куртки, дождевики и кепки для корпоративного мерча. Пошив, брендирование и поставка тиражей для бизнеса.',
   },
 };
 
@@ -67,6 +67,7 @@ const CAT_META: Record<string, { bg: BgKey; num: string }> = {
   zhiletki:   { bg: 'bgPaper2', num: '06' },
   kurtki:     { bg: 'bgInk',    num: '07' },
   dozhdeviki: { bg: 'bgCoral',  num: '08' },
+  kepki:      { bg: 'bgYellow', num: '09' },
 };
 
 const ArrowIc = () => (
@@ -111,7 +112,7 @@ export default async function CatalogPage() {
             Каталог <em>промо-одежды</em><br />и мерча
           </h1>
           <p className={styles.heroDesc}>
-            8 базовых категорий — пошив под тираж, 9 методов нанесения, образец до партии. Всё в одном цехе.
+            9 базовых категорий — пошив под тираж, 9 методов нанесения, образец до партии. Всё в одном цехе.
           </p>
           <div className={styles.heroActions}>
             <a href="/#request" className="v6-btn v6-btn--yellow">
@@ -151,7 +152,7 @@ export default async function CatalogPage() {
         <div className={styles.sectionHead}>
           <div>
             <div className={styles.kicker}>(03) — Каталог</div>
-            <h2 id="cat-grid-title">8 категорий<br /><em>промо-одежды</em></h2>
+            <h2 id="cat-grid-title">9 категорий<br /><em>промо-одежды</em></h2>
           </div>
           <p>Выберите категорию — рассчитаем тираж, подберём ткань и способ нанесения под ваш проект и бюджет.</p>
         </div>
