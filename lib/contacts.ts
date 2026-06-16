@@ -105,7 +105,5 @@ export const contacts: ContactsData = {
   preferredContactOptions: [
     'Телефон',
     'Email',
-    'Telegram',
-    'WhatsApp',
   ],
 };
