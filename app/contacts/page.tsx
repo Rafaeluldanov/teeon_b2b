@@ -195,7 +195,7 @@ export default function ContactsPage() {
               <div className="v6-kicker">(04) — Контакты</div>
               <h2 className={styles.secH2} id="contacts-title">Все <em>способы связи</em></h2>
             </div>
-            <p>Выбирайте удобный канал — ответ в течение часа в рабочее время. Срочные вопросы — в Telegram или WhatsApp.</p>
+            <p>Выбирайте удобный канал — ответ в течение часа в рабочее время. Срочные вопросы — по телефону или на email.</p>
           </div>
 
           <ul className={styles.cnContacts}>
