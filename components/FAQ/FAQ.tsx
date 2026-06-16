@@ -25,7 +25,7 @@ export default function FAQ() {
       <div className="v6-section-head">
         <div>
           <div className="v6-kicker">(08) — FAQ</div>
-          <h2 id="faq-title">Часто <em>спрашивают</em></h2>
+          <h2 id="faq-title">Частые вопросы<br /><em>о пошиве мерча</em></h2>
         </div>
         <p>Шесть вопросов, которые задают перед первым заказом. На остальные — в чате или по телефону.</p>
       </div>
