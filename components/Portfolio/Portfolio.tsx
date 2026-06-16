@@ -121,14 +121,15 @@ export default function Portfolio() {
                 ) : productImgs.length > 0 ? (
                   <div className={styles.mediaCollage} data-count={Math.min(productImgs.length, 4)}>
                     {productImgs.slice(0, 4).map((img, i) => (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         key={i}
                         src={img}
                         alt=""
                         className={styles.mediaCollageImg}
+                        width={300}
+                        height={300}
+                        sizes="(max-width: 400px) 46vw, (max-width: 1024px) 23vw, 16vw"
                         loading="lazy"
-                        decoding="async"
                         onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                       />
                     ))}
