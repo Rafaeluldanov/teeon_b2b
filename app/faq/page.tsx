@@ -175,7 +175,7 @@ export default function FAQPage() {
             Не&nbsp;нашли <em>ответ</em>?
           </h2>
           <p className={styles.askDesc}>
-            Напишите менеджеру — ответим в течение часа в рабочее время. Срочные вопросы можно отправить в Telegram с файлами до 100 МБ.
+            Напишите менеджеру — ответим в течение часа в рабочее время. Файлы и ТЗ можно прислать через форму заявки или на email.
           </p>
           <div className={styles.askActions}>
             <a href="/#request" className="v6-btn v6-btn--yellow">
