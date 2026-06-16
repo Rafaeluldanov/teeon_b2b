@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import type { PortfolioCase } from '@/lib/portfolio';
 import { getRelatedPortfolioCases } from '@/lib/portfolio';
 import { catalogCategories } from '@/lib/catalog';
@@ -198,13 +199,14 @@ export default function PortfolioCasePage({ caseItem }: Props) {
                         onClick={() => setLightbox({ images: p.images, index: i })}
                         aria-label={`Открыть фото: ${p.title} ${i + 1}`}
                       >
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                        <Image
                           src={img}
                           alt={`${p.title} фото ${i + 1}`}
                           className={styles.caseProductImgEl}
+                          width={420}
+                          height={420}
+                          sizes="(max-width: 760px) 44vw, (max-width: 1100px) 28vw, 260px"
                           loading="lazy"
-                          decoding="async"
                           onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                         />
                       </button>
@@ -347,26 +349,28 @@ export default function PortfolioCasePage({ caseItem }: Props) {
                   <div className={`${styles.relCaseMedia} ${rHasMedia ? '' : (rBg ? styles[rBg as keyof typeof styles] : '')}`}>
                     <span className={styles.relCaseChip}>{r.clientType}</span>
                     {rAdmin.coverImage ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         src={rAdmin.coverImage}
                         alt={r.title}
                         className={styles.relCaseMediaImg}
+                        width={600}
+                        height={450}
+                        sizes="(max-width: 760px) 92vw, (max-width: 1100px) 44vw, 360px"
                         loading="lazy"
-                        decoding="async"
                         onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                       />
                     ) : rImgs.length > 0 ? (
                       <div className={styles.relCaseMediaCollage} data-count={Math.min(rImgs.length, 4)}>
                         {rImgs.slice(0, 4).map((img, i) => (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
+                          <Image
                             key={i}
                             src={img}
                             alt=""
                             className={styles.relCaseMediaCollageImg}
+                            width={300}
+                            height={300}
+                            sizes="(max-width: 760px) 44vw, (max-width: 1100px) 22vw, 180px"
                             loading="lazy"
-                            decoding="async"
                             onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                           />
                         ))}
