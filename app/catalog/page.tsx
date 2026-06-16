@@ -152,7 +152,7 @@ export default async function CatalogPage() {
         <div className={styles.sectionHead}>
           <div>
             <div className={styles.kicker}>(03) — Каталог</div>
-            <h2 id="cat-grid-title">8 категорий<br /><em>промо-одежды</em></h2>
+            <h2 id="cat-grid-title">9 категорий<br /><em>промо-одежды</em></h2>
           </div>
           <p>Выберите категорию — рассчитаем тираж, подберём ткань и способ нанесения под ваш проект и бюджет.</p>
         </div>
