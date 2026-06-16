@@ -62,15 +62,11 @@ function ContactsEditor() {
 
         <div className={styles.divider}>Контакты</div>
         <div className={styles.row2}>
-          <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Телефон (отображаемый)</label><input className={styles.input} value={d.phone} placeholder="+7 (999) 000-00-00" onChange={e => set('phone', e.target.value)} /></div>
-          <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Телефон (цифры для tel:)</label><input className={styles.input} value={d.phoneRaw} placeholder="79990000000" onChange={e => set('phoneRaw', e.target.value)} /></div>
+          <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Телефон (отображаемый)</label><input className={styles.input} value={d.phone} placeholder="+7 (495) 152-37-45" onChange={e => set('phone', e.target.value)} /></div>
+          <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Телефон (цифры для tel:)</label><input className={styles.input} value={d.phoneRaw} placeholder="74951523745" onChange={e => set('phoneRaw', e.target.value)} /></div>
         </div>
         <div className={styles.row2}>
           <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Email</label><input className={styles.input} type="email" value={d.email} onChange={e => set('email', e.target.value)} /></div>
-          <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Telegram (@username)</label><input className={styles.input} value={d.telegram} placeholder="@teeon_merch" onChange={e => set('telegram', e.target.value)} /></div>
-        </div>
-        <div className={styles.row2}>
-          <div className={styles.fieldGroup}><label className={styles.fieldLabel}>WhatsApp (номер)</label><input className={styles.input} value={d.whatsapp} onChange={e => set('whatsapp', e.target.value)} /></div>
           <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Город</label><input className={styles.input} value={d.city} onChange={e => set('city', e.target.value)} /></div>
         </div>
         <div className={styles.fieldGroup}><label className={styles.fieldLabel}>Адрес</label><input className={styles.input} value={d.address} onChange={e => set('address', e.target.value)} /></div>
