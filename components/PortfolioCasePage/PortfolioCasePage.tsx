@@ -163,14 +163,14 @@ export default function PortfolioCasePage({ caseItem }: Props) {
                 aria-label={`Открыть: ${c.galleryLabels[i] ?? `Фото ${i + 1}`}`}
                 style={{ display: 'block', width: '100%', height: '100%', padding: 0, border: 0, background: 'transparent', cursor: 'zoom-in' }}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={url}
                   alt={c.galleryLabels[i] ?? `Фото ${i + 1}`}
+                  width={400}
+                  height={300}
+                  sizes="(max-width: 480px) 92vw, 280px"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  decoding="async"
-                  {...(i === 0 ? { fetchPriority: 'high' as const } : {})}
+                  {...(i === 0 ? { priority: true } : { loading: 'lazy' as const })}
                   onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                 />
               </button>
