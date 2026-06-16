@@ -4,7 +4,7 @@ import { catalogCategories } from '@/lib/catalog';
 import { collectCategoryImages } from '@/lib/catalogModels';
 import { getMergedCatalogModels } from '@/lib/serverData';
 import CatalogCategoryIcon from '@/components/CatalogCategoryIcon/CatalogCategoryIcon';
-import SafeImg from '@/components/SafeImg/SafeImg';
+import Image from 'next/image';
 
 const ArrowIc = () => (
   <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
@@ -67,13 +67,15 @@ export default async function CatalogSection() {
                 {imgs.length > 0 ? (
                   <div className={styles.mediaCollage} data-count={Math.min(imgs.length, 4)}>
                     {imgs.slice(0, 4).map((src, i) => (
-                      <SafeImg
+                      <Image
                         key={i}
                         src={src}
                         alt=""
+                        width={300}
+                        height={300}
+                        sizes="(max-width: 760px) 23vw, (max-width: 1100px) 16vw, 130px"
                         className={styles.mediaCollageImg}
                         loading="lazy"
-                        decoding="async"
                       />
                     ))}
                   </div>
