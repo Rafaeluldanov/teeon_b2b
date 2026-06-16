@@ -21,7 +21,6 @@ export default function FooterContactsClient() {
   const email = c?.email ?? defaultC.email;
   const city = c?.city ?? defaultC.city;
   const schedule = c?.schedule ?? defaultC.schedule;
-  const telegram = c?.telegram ?? defaultC.telegram;
 
   return (
     <>
