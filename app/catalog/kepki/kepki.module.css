@@ -261,7 +261,7 @@
   flex-wrap: wrap;
 }
 .ctaText { min-width: 0; }
-.ctaTitle { font-size: 22px; font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 6px; }
+.ctaTitle { font-size: 22px; font-weight: 800; color: #fff; line-height: 1.2; margin: 0 0 6px; }
 .ctaTitle em { color: var(--yellow, #f5b301); font-style: normal; }
 .ctaDesc { font-size: 14.5px; line-height: 1.6; color: rgba(255, 255, 255, 0.8); max-width: 520px; }
 
