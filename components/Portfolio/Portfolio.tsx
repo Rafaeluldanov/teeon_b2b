@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import styles from './Portfolio.module.css';
 import { portfolioCases } from '@/lib/portfolio';
 import type { PortfolioCase } from '@/lib/portfolio';
@@ -108,19 +109,27 @@ export default function Portfolio() {
               <div className={`${styles.media} ${hasMedia ? '' : bgClass}`}>
                 <span className={styles.chip}>{c.clientType}</span>
                 {c.coverImage ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={c.coverImage} alt={c.title} className={styles.mediaImg} loading="lazy" decoding="async" />
+                  <Image
+                    src={c.coverImage}
+                    alt={c.title}
+                    className={styles.mediaImg}
+                    width={600}
+                    height={600}
+                    sizes="(max-width: 400px) 92vw, (max-width: 1024px) 46vw, 33vw"
+                    loading="lazy"
+                  />
                 ) : productImgs.length > 0 ? (
                   <div className={styles.mediaCollage} data-count={Math.min(productImgs.length, 4)}>
                     {productImgs.slice(0, 4).map((img, i) => (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         key={i}
                         src={img}
                         alt=""
                         className={styles.mediaCollageImg}
+                        width={300}
+                        height={300}
+                        sizes="(max-width: 400px) 46vw, (max-width: 1024px) 23vw, 16vw"
                         loading="lazy"
-                        decoding="async"
                         onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                       />
                     ))}
