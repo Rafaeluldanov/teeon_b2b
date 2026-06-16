@@ -53,9 +53,9 @@ export const contacts: ContactsData = {
   descriptor: 'Пошив промо-одежды и корпоративного мерча под ключ',
 
   legalInfo: {
-    legalName: 'Реквизиты будут добавлены после уточнения',
-    inn: '—',
-    ogrn: '—',
+    legalName: 'ИП Ульданов Рафаэль Айратович',
+    inn: '026507818527',
+    ogrn: '321028000162059',
   },
 
   contactMethods: [
