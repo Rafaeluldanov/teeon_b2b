@@ -51,12 +51,6 @@ const channels = [
     desc: 'Ответ в течение часа',
     href: `mailto:${contacts.email}`,
   },
-  {
-    icon: '💬',
-    title: `Telegram ${contacts.telegram}`,
-    desc: 'Срочные вопросы и файлы',
-    href: `https://t.me/${contacts.telegram.replace('@', '')}`,
-  },
 ];
 
 export default function FAQPage() {
