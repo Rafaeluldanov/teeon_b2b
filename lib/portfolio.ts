@@ -266,7 +266,7 @@ export const portfolioCases: PortfolioCase[] = [
         ],
         sortOrder: 1,
         isActive: true,
-        tags: ['vyshivka'],
+        tags: ['kepki', 'vyshivka'],
       },
       {
         id: '1779683768843-1u0h',
