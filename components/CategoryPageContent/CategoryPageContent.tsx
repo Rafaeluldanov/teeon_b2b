@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { CatalogCategory } from '@/lib/catalog';
 import { getRelatedCategories } from '@/lib/catalog';
 import { collectCategoryImages } from '@/lib/catalogModels';
@@ -309,8 +310,16 @@ export default async function CategoryPageContent({ category: cat }: Props) {
                   {rImgs.length > 0 ? (
                     <div className={styles.relatedImgCollage} data-count={Math.min(rImgs.length, 4)}>
                       {rImgs.slice(0, 4).map((src, i) => (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img key={i} src={src} alt="" className={styles.relatedImgCollageImg} loading="lazy" decoding="async" />
+                        <Image
+                          key={i}
+                          src={src}
+                          alt=""
+                          className={styles.relatedImgCollageImg}
+                          width={300}
+                          height={200}
+                          sizes="(max-width: 768px) 25vw, 160px"
+                          loading="lazy"
+                        />
                       ))}
                     </div>
                   ) : (
