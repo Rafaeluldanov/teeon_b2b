@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { portfolioCases } from '@/lib/portfolio';
 import type { PortfolioCase } from '@/lib/portfolio';
 import { DEFAULT_TAG_ALIASES } from '@/lib/portfolioFilters';
@@ -187,11 +188,14 @@ export default function PortfolioCasesGrid({ activeTag }: Props) {
                       onClick={() => setLightbox({ images: p.images, index: i })}
                       aria-label={`Открыть фото: ${p.title ?? parent.title} ${i + 1}`}
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={img}
                         alt={`${p.title ?? parent.title} фото ${i + 1}`}
                         className={styles.productImgEl}
+                        width={600}
+                        height={450}
+                        sizes="(max-width: 560px) 92vw, (max-width: 1100px) 46vw, 33vw"
+                        loading="lazy"
                         onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                       />
                     </button>
@@ -281,22 +285,28 @@ export default function PortfolioCasesGrid({ activeTag }: Props) {
                 <span className={styles.caseChip}>{c.clientType}</span>
                 <span className={styles.caseYear}>{c.year}</span>
                 {c.coverImage ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={c.coverImage}
                     alt={c.title}
                     className={styles.caseMediaImg}
+                    width={800}
+                    height={600}
+                    sizes="(max-width: 560px) 92vw, (max-width: 1100px) 46vw, 33vw"
+                    loading="lazy"
                     onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                   />
                 ) : productImgs.length > 0 ? (
                   <div className={styles.caseMediaCollage} data-count={Math.min(productImgs.length, 4)}>
                     {productImgs.slice(0, 4).map((img, i) => (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <Image
                         key={i}
                         src={img}
                         alt=""
                         className={styles.caseMediaCollageImg}
+                        width={400}
+                        height={300}
+                        sizes="(max-width: 560px) 46vw, (max-width: 1100px) 23vw, 16vw"
+                        loading="lazy"
                         onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
                       />
                     ))}
