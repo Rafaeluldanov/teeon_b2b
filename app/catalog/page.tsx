@@ -112,7 +112,7 @@ export default async function CatalogPage() {
             Каталог <em>промо-одежды</em><br />и мерча
           </h1>
           <p className={styles.heroDesc}>
-            8 базовых категорий — пошив под тираж, 9 методов нанесения, образец до партии. Всё в одном цехе.
+            9 базовых категорий — пошив под тираж, 9 методов нанесения, образец до партии. Всё в одном цехе.
           </p>
           <div className={styles.heroActions}>
             <a href="/#request" className="v6-btn v6-btn--yellow">
