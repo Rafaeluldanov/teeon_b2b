@@ -154,7 +154,7 @@ export const brandingMethods: BrandingMethod[] = [
       { name: 'Форма для security', task: 'ПВХ-шеврон с номером и логотипом, 100 шт.' },
     ],
     relatedMethods: ['vyshivka', 'birki', 'dtf-pechat'],
-    relatedCatalog: ['kurtki', 'zhiletki', 'hudi'],
+    relatedCatalog: ['kurtki', 'zhiletki', 'hudi', 'kepki'],
   },
   {
     slug: 'shelkografiya',
