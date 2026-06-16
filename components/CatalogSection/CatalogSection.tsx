@@ -72,6 +72,8 @@ export default async function CatalogSection() {
                         src={src}
                         alt=""
                         className={styles.mediaCollageImg}
+                        loading="lazy"
+                        decoding="async"
                       />
                     ))}
                   </div>
