@@ -20,8 +20,6 @@ export const defaultContacts: EditableContacts = {
   phone: contacts.phone,
   phoneRaw: contacts.phoneRaw,
   email: contacts.email,
-  telegram: contacts.telegram,
-  whatsapp: contacts.whatsapp,
   city: contacts.city,
   address: contacts.address,
   schedule: contacts.schedule,
