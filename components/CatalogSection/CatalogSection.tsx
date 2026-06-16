@@ -49,7 +49,8 @@ export default async function CatalogSection() {
       </div>
 
       <ul className={styles.grid}>
-        {catalogCategories.map((cat) => {
+        {/* Главная остаётся на 8 базовых категориях; кепки доступны в /catalog и меню. */}
+        {catalogCategories.slice(0, 8).map((cat) => {
           const meta = CAT_META[cat.slug] ?? { bg: 'paper-2' as BgKey, num: '—' };
           const bgClass = BG_CLASS[meta.bg] ?? '';
           const imgs = collectCategoryImages(cat.slug, 4, modelsData);
