@@ -11,6 +11,17 @@
 .breadLink:hover { color: var(--ink); }
 .breadSep { opacity: .4; }
 
+/* Case page H1 (visible page title above the gallery) */
+.caseTitle {
+  font-size: clamp(26px, 4.5vw, 42px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin: 0 0 18px;
+  max-width: 900px;
+}
+
 /* Hero card */
 .hero {
   background: var(--paper);
