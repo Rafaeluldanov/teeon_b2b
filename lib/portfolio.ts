@@ -431,12 +431,12 @@ export const portfolioCases: PortfolioCase[] = [
       },
       {
         id: '1779684542256-es00',
-        title: 'Футбока Поло',
+        title: 'Футболка Поло',
         categorySlug: 'futbolki',
         description: 'Поло 220 г/м² в чёрном цвете с нанесением флекстраном — для офиса и презентаций.',
         quantity: '500 шт',
         material: 'Хлопок',
-        color: 'черынй',
+        color: 'чёрный',
         branding: ['Флекстран'],
         characteristics: ['Пике 220 г/м²', 'Усиленный воротник', 'Флекстран-логотип'],
         images: [
@@ -491,7 +491,7 @@ export const portfolioCases: PortfolioCase[] = [
       },
       {
         id: '1779694135345-fj0x',
-        title: 'Кутка ветровка',
+        title: 'Куртка-ветровка',
         categorySlug: 'kurtki',
         description: 'Куртка-ветровка в фирменных цветах с вышитым логотипом — практичная защита от ветра для полевых выездов.',
         branding: ['Вышивка'],
@@ -507,7 +507,7 @@ export const portfolioCases: PortfolioCase[] = [
       },
       {
         id: '1779694240221-e7fx',
-        title: 'Футболка базова',
+        title: 'Футболка базовая',
         description: 'Базовая футболка цвета хаки с DTF-печатью логотипа — повседневный элемент мерч-комплекта.',
         material: 'Хлопок',
         color: 'Хаки',
@@ -523,7 +523,7 @@ export const portfolioCases: PortfolioCase[] = [
       },
       {
         id: '1779699096437-cze3',
-        title: 'Футболка базова',
+        title: 'Футболка базовая',
         description: 'Базовая футболка цвета хаки — дополнительная партия с тем же нанесением для расширения комплекта.',
         material: 'Хлопок',
         color: 'Хаки',
@@ -622,7 +622,7 @@ export const portfolioCases: PortfolioCase[] = [
       },
       {
         id: '1779692565808-dkhh',
-        title: 'Футболка Оверсаз',
+        title: 'Футболка оверсайз',
         categorySlug: 'futbolki',
         description: 'Оверсайз-футболка с DTF-печатью логотипа — для корпоративных мероприятий и команды.',
         branding: ['DTF-печать'],

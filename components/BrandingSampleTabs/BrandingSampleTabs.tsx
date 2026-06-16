@@ -19,7 +19,6 @@ const ImagePlaceholderSvg = () => (
       <circle cx="22" cy="28" r="6"/>
       <path d="M4 44 L20 28 L36 44 M44 36 L56 44"/>
     </svg>
-    <span>Фото не добавлено</span>
   </>
 );
 

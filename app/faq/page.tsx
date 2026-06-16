@@ -51,12 +51,6 @@ const channels = [
     desc: 'Ответ в течение часа',
     href: `mailto:${contacts.email}`,
   },
-  {
-    icon: '💬',
-    title: `Telegram ${contacts.telegram}`,
-    desc: 'Срочные вопросы и файлы',
-    href: `https://t.me/${contacts.telegram.replace('@', '')}`,
-  },
 ];
 
 export default function FAQPage() {
@@ -181,7 +175,7 @@ export default function FAQPage() {
             Не&nbsp;нашли <em>ответ</em>?
           </h2>
           <p className={styles.askDesc}>
-            Напишите менеджеру — ответим в течение часа в рабочее время. Срочные вопросы можно отправить в Telegram с файлами до 100 МБ.
+            Напишите менеджеру — ответим в течение часа в рабочее время. Файлы и ТЗ можно прислать через форму заявки или на email.
           </p>
           <div className={styles.askActions}>
             <a href="/#request" className="v6-btn v6-btn--yellow">

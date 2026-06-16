@@ -42,8 +42,6 @@ const attachItems = [
 const contactCards = [
   { ic: '📞', t: 'Телефон',  main: contacts.phone,     href: `tel:${contacts.phoneRaw}`,           d: 'Пн–Пт · 9:00–19:00 — звонки и SMS', mod: '' },
   { ic: '✉️', t: 'Email',    main: contacts.email,     href: `mailto:${contacts.email}`,           d: 'Любые файлы, ТЗ, договоры — ответ в течение часа', mod: 'yellow' },
-  { ic: '💬', t: 'Telegram', main: contacts.telegram,  href: `https://t.me/teeon_merch`,           d: 'Быстрые вопросы, образцы, файлы до 100 МБ', mod: '' },
-  { ic: '🟢', t: 'WhatsApp', main: contacts.whatsapp,  href: `https://wa.me/${contacts.phoneRaw}`, d: 'Голосовые и быстрая переписка', mod: 'blue' },
   { ic: '🕐', t: 'График',   main: contacts.schedule,  href: null,                                 d: 'Заявки принимаем круглосуточно — ответим в начале следующего рабочего дня', mod: '' },
   { ic: '📍', t: 'Адрес',    main: contacts.city,      href: null,                                 d: contacts.address, mod: 'ink' },
 ];
@@ -197,7 +195,7 @@ export default function ContactsPage() {
               <div className="v6-kicker">(04) — Контакты</div>
               <h2 className={styles.secH2} id="contacts-title">Все <em>способы связи</em></h2>
             </div>
-            <p>Выбирайте удобный канал — ответ в течение часа в рабочее время. Срочные вопросы — в Telegram или WhatsApp.</p>
+            <p>Выбирайте удобный канал — ответ в течение часа в рабочее время. Срочные вопросы — по телефону или на email.</p>
           </div>
 
           <ul className={styles.cnContacts}>
@@ -241,7 +239,7 @@ export default function ContactsPage() {
                 {contacts.city}
               </div>
               <p className={styles.mapDesc}>
-                Производство в {contacts.city}е. Посещение — по согласованию, договоритесь по телефону или в Telegram.
+                Производство в {contacts.city}е. Посещение — по согласованию, договоритесь по телефону или на email.
               </p>
               <p className={styles.mapDesc} style={{ fontSize: '12.5px', opacity: 0.7 }}>
                 {contacts.address}

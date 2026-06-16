@@ -5,8 +5,8 @@ import { siteConfig } from '@/lib/seo';
 import styles from './requisites.module.css';
 
 export const metadata: Metadata = {
-  title: 'Реквизиты компании',
-  description: 'Реквизиты компании TEEON: ИНН, ОГРН, контактная информация для работы с юридическими лицами и ИП по договору.',
+  title: 'Реквизиты TEEON для договора и оплаты',
+  description: 'Реквизиты TEEON для B2B-заказов: ИП Ульданов Рафаэль Айратович, ИНН, ОГРНИП и фактический адрес производства в Москве.',
   robots: { index: true, follow: true },
   alternates: { canonical: `${siteConfig.url}/requisites/` },
 };
@@ -26,10 +26,9 @@ export default function RequisitesPage() {
         <h1 className={styles.title}>Реквизиты {contacts.companyName}</h1>
 
         <div className={styles.notice}>
-          <span aria-hidden="true">ℹ️</span>
           <p>
-            Реквизиты компании будут добавлены после уточнения юридической информации.
-            Для уточнения реквизитов, пожалуйста, свяжитесь с нами.
+            TEEON работает с юридическими лицами, ИП и корпоративными заказчиками.
+            Для подготовки договора и счёта используйте подтверждённые данные компании.
           </p>
         </div>
 
@@ -72,12 +71,16 @@ export default function RequisitesPage() {
                 <dd>{contacts.legalInfo.inn}</dd>
               </div>
               <div className={styles.dlRow}>
-                <dt>ОГРН</dt>
+                <dt>ОГРНИП</dt>
                 <dd>{contacts.legalInfo.ogrn}</dd>
+              </div>
+              <div className={styles.dlRow}>
+                <dt>Адрес производства</dt>
+                <dd>Москва, 2-й Грайвороновский проезд, 48</dd>
               </div>
             </dl>
             <p className={styles.placeholder}>
-              Полные реквизиты (расчётный счёт, банк, БИК) будут добавлены после уточнения.
+              Банковские реквизиты предоставляются менеджером при подготовке договора и счёта.
             </p>
           </div>
         </div>

@@ -21,7 +21,6 @@ export default function FooterContactsClient() {
   const email = c?.email ?? defaultC.email;
   const city = c?.city ?? defaultC.city;
   const schedule = c?.schedule ?? defaultC.schedule;
-  const telegram = c?.telegram ?? defaultC.telegram;
 
   return (
     <>
@@ -32,18 +31,6 @@ export default function FooterContactsClient() {
       <div className={styles.address}>
         <span>{city}</span>
         <span>{schedule}</span>
-      </div>
-      <div className={styles.messengers}>
-        <a
-          href={`https://t.me/${telegram.replace('@', '')}`}
-          className={styles.messengerBtn}
-          aria-label="Написать в Telegram"
-        >TG</a>
-        <a
-          href={`https://wa.me/${phoneRaw}`}
-          className={styles.messengerBtn}
-          aria-label="Написать в WhatsApp"
-        >WA</a>
       </div>
     </>
   );

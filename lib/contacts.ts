@@ -16,8 +16,6 @@ export interface ContactsData {
   email: string;
   phone: string;
   phoneRaw: string;
-  telegram: string;
-  whatsapp: string;
   /** Телефон менеджера для мессенджера MAX (отображаемый формат). */
   maxPhone: string;
   /** Тот же номер без форматирования, только цифры. */
@@ -42,8 +40,6 @@ export const contacts: ContactsData = {
   email: 'teeon@upgifts.ru',
   phone: '+7 (495) 152-37-45',
   phoneRaw: '74951523745',
-  telegram: '@teeon_merch',
-  whatsapp: '+7 (999) 000-00-00',
   // Менеджер в MAX. Официального deeplink «написать по номеру» у MAX нет,
   // поэтому maxUrl оставляем пустым → используется share-deeplink с этим номером
   // в тексте. Если появится подтверждённая ссылка на профиль/бота — вписать в maxUrl.
@@ -51,15 +47,15 @@ export const contacts: ContactsData = {
   maxPhoneRaw: '79030179820',
   maxUrl: '',
   city: 'Москва',
-  address: 'Адрес производства и офиса будет добавлен после уточнения',
+  address: 'Москва, 2-й Грайвороновский проезд, 48',
   schedule: 'Пн–Пт, 10:00–19:00',
   companyName: 'TEEON',
   descriptor: 'Пошив промо-одежды и корпоративного мерча под ключ',
 
   legalInfo: {
-    legalName: 'Реквизиты будут добавлены после уточнения',
-    inn: '—',
-    ogrn: '—',
+    legalName: 'ИП Ульданов Рафаэль Айратович',
+    inn: '026507818527',
+    ogrn: '321028000162059',
   },
 
   contactMethods: [
@@ -76,20 +72,6 @@ export const contacts: ContactsData = {
       value: 'teeon@upgifts.ru',
       href: 'mailto:teeon@upgifts.ru',
       description: 'Можно прислать ТЗ и логотип',
-    },
-    {
-      icon: '💬',
-      title: 'Telegram',
-      value: '@teeon_merch',
-      href: 'https://t.me/teeon_merch',
-      description: 'Ответим в рабочее время',
-    },
-    {
-      icon: '📱',
-      title: 'WhatsApp',
-      value: '+7 (999) 000-00-00',
-      href: 'https://wa.me/79990000000',
-      description: 'Напишите удобным способом',
     },
   ],
 
@@ -123,7 +105,5 @@ export const contacts: ContactsData = {
   preferredContactOptions: [
     'Телефон',
     'Email',
-    'Telegram',
-    'WhatsApp',
   ],
 };
