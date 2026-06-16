@@ -71,12 +71,16 @@ export default function RequisitesPage() {
                 <dd>{contacts.legalInfo.inn}</dd>
               </div>
               <div className={styles.dlRow}>
-                <dt>ОГРН</dt>
+                <dt>ОГРНИП</dt>
                 <dd>{contacts.legalInfo.ogrn}</dd>
+              </div>
+              <div className={styles.dlRow}>
+                <dt>Адрес производства</dt>
+                <dd>Москва, 2-й Грайвороновский проезд, 48</dd>
               </div>
             </dl>
             <p className={styles.placeholder}>
-              Полные реквизиты (расчётный счёт, банк, БИК) будут добавлены после уточнения.
+              Банковские реквизиты предоставляются менеджером при подготовке договора и счёта.
             </p>
           </div>
         </div>
