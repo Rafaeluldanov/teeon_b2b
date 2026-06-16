@@ -491,7 +491,7 @@ export const portfolioCases: PortfolioCase[] = [
       },
       {
         id: '1779694135345-fj0x',
-        title: 'Кутка ветровка',
+        title: 'Куртка-ветровка',
         categorySlug: 'kurtki',
         description: 'Куртка-ветровка в фирменных цветах с вышитым логотипом — практичная защита от ветра для полевых выездов.',
         branding: ['Вышивка'],
