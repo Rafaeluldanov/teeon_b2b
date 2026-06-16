@@ -6,7 +6,7 @@ import styles from './privacy.module.css';
 export const metadata: Metadata = {
   title: 'Политика обработки персональных данных',
   description:
-    'Информация о порядке сбора, хранения и обработки персональных данных пользователей на сайте TEEON.',
+    'Политика обработки персональных данных пользователей сайта TEEON.',
   robots: { index: true, follow: true },
   alternates: { canonical: `${siteConfig.url}/privacy/` },
 };
