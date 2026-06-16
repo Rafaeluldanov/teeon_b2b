@@ -5,7 +5,7 @@ import { getMergedPortfolioCases } from '@/lib/serverData';
 import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getServiceSchema, getFAQSchema } from '@/lib/schema';
 import JsonLd from '@/components/JsonLd/JsonLd';
-import SafeImg from '@/components/SafeImg/SafeImg';
+import OptimizedImageWithFallback from '@/components/OptimizedImageWithFallback/OptimizedImageWithFallback';
 import styles from './kepki.module.css';
 
 const cat = getCategoryBySlug('kepki')!;
@@ -297,7 +297,15 @@ export default async function KepkiPage() {
             {examples.map((ex, idx) => (
               <article key={`${ex.caseSlug}-${idx}`} className={styles.exampleCard}>
                 <div className={styles.exampleImg}>
-                  <SafeImg src={ex.image} alt={`${ex.title} — ${ex.caseTitle}`} className={styles.exampleImgEl} loading="lazy" decoding="async" />
+                  <OptimizedImageWithFallback
+                    src={ex.image}
+                    alt={`${ex.title} — ${ex.caseTitle}`}
+                    className={styles.exampleImgEl}
+                    width={800}
+                    height={600}
+                    sizes="(max-width: 640px) 92vw, (max-width: 768px) 48vw, (max-width: 1024px) 32vw, 280px"
+                    loading="lazy"
+                  />
                 </div>
                 <div className={styles.exampleBody}>
                   <h3 className={styles.exampleTitle}>{ex.title}</h3>

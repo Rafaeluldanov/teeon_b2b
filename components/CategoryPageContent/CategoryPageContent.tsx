@@ -8,7 +8,7 @@ import JsonLd from '@/components/JsonLd/JsonLd';
 import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
 import ModelVariantBlock from '@/components/ModelVariantBlock/ModelVariantBlock';
-import SafeImg from '@/components/SafeImg/SafeImg';
+import OptimizedImageWithFallback from '@/components/OptimizedImageWithFallback/OptimizedImageWithFallback';
 import ZoomableImage from '@/components/ZoomableImage/ZoomableImage';
 import styles from './CategoryPageContent.module.css';
 
@@ -260,10 +260,14 @@ export default async function CategoryPageContent({ category: cat }: Props) {
                 >
                   <div className={styles.productImg} role="img" aria-label={`Фото: ${p.name}`}>
                     {img ? (
-                      <SafeImg
+                      <OptimizedImageWithFallback
                         src={img}
                         alt={p.name}
                         className={styles.productImgEl}
+                        width={800}
+                        height={600}
+                        sizes="(max-width: 640px) 92vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 380px"
+                        loading="lazy"
                       />
                     ) : (
                       <span className={styles.productImgText}>{cat.name}</span>
