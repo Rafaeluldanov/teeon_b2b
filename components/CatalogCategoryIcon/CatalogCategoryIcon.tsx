@@ -159,6 +159,18 @@ function renderIcon(slug: string) {
           <path className={styles.iconDrop} d={RAIN_DROP_3} />
         </>
       );
+    case 'kepki':
+      return (
+        <>
+          <path className={styles.iconFill} d={CAP_CROWN} />
+          <path className={styles.iconFill} d={CAP_BRIM} />
+          <path className={styles.iconStroke} d={CAP_CROWN} />
+          <path className={styles.iconStroke} d={CAP_BRIM} />
+          <path className={styles.iconStroke} d={CAP_BAND} />
+          <path className={styles.iconStrokeThin} d={CAP_SEAM} />
+          <path className={styles.iconStrokeThin} d={CAP_BUTTON} />
+        </>
+      );
     default:
       return (
         <>
