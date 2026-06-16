@@ -5,6 +5,7 @@ import { brandingSamples } from '@/lib/brandingSamples';
 import type { BrandingSample } from '@/lib/brandingSamples';
 import { BRANDING_SAMPLES_LS_KEY } from '@/lib/editableBrandingSamples';
 import type { EditableBrandingSamplesMap } from '@/lib/editableBrandingSamples';
+import Image from 'next/image';
 import Lightbox, { type LightboxState } from '@/components/Lightbox/Lightbox';
 import styles from './BrandingSampleTabs.module.css';
 
@@ -114,13 +115,14 @@ export default function BrandingSampleTabs({ methodSlug }: Props) {
                   }}
                   aria-label={`Открыть фото: ${s.imageLabel}`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={s.imageSrc}
                     alt={s.imageLabel}
                     className={styles.image}
+                    width={800}
+                    height={600}
+                    sizes="(max-width: 480px) 92vw, 480px"
                     loading="lazy"
-                    decoding="async"
                     onError={(e) => {
                       (e.currentTarget as HTMLImageElement).style.display = 'none';
                       const fb = (e.currentTarget.parentElement?.parentElement?.querySelector(`.${styles.imagePlaceholder}`)) as HTMLElement | null;
