@@ -73,20 +73,6 @@ export const contacts: ContactsData = {
       href: 'mailto:teeon@upgifts.ru',
       description: 'Можно прислать ТЗ и логотип',
     },
-    {
-      icon: '💬',
-      title: 'Telegram',
-      value: '@teeon_merch',
-      href: 'https://t.me/teeon_merch',
-      description: 'Ответим в рабочее время',
-    },
-    {
-      icon: '📱',
-      title: 'WhatsApp',
-      value: '+7 (999) 000-00-00',
-      href: 'https://wa.me/79990000000',
-      description: 'Напишите удобным способом',
-    },
   ],
 
   requestTopics: [
