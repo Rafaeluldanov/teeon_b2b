@@ -6,7 +6,7 @@ import { collectCategoryImages } from '@/lib/catalogModels';
 import { getMergedCatalogModels, getMergedPortfolioCases } from '@/lib/serverData';
 import JsonLd from '@/components/JsonLd/JsonLd';
 import { siteConfig } from '@/lib/seo';
-import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
+import { getBreadcrumbSchema, getServiceSchema, getFAQSchema } from '@/lib/schema';
 import ModelVariantBlock from '@/components/ModelVariantBlock/ModelVariantBlock';
 import OptimizedImageWithFallback from '@/components/OptimizedImageWithFallback/OptimizedImageWithFallback';
 import ZoomableImage from '@/components/ZoomableImage/ZoomableImage';
@@ -298,6 +298,27 @@ export default async function CategoryPageContent({ category: cat }: Props) {
         </ul>
       </div>
 
+      {/* ── FAQ ── */}
+      {cat.faq && cat.faq.length > 0 && (
+        <section className={styles.faqSection} aria-labelledby={`faq-${cat.slug}`}>
+          <div className={styles.sectionHead}>
+            <div>
+              <div className={styles.kicker}>FAQ</div>
+              <h2 id={`faq-${cat.slug}`}>Частые вопросы<br /><em>{cat.name.toLowerCase()} с логотипом</em></h2>
+            </div>
+            <p>Отвечаем на основные вопросы по заказу. Точные параметры согласуем перед запуском тиража.</p>
+          </div>
+          <div className={styles.faqList}>
+            {cat.faq.map((item) => (
+              <article key={item.q} className={styles.faqItem}>
+                <h3 className={styles.faqQ}>{item.q}</h3>
+                <p className={styles.faqA}>{item.a}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ── Pricing ── */}
       <div className={styles.pricingSection}>
         <div>
@@ -377,6 +398,7 @@ export default async function CategoryPageContent({ category: cat }: Props) {
           description: cat.pageDesc,
           url: `${siteConfig.url}/catalog/${cat.slug}/`,
         }),
+        ...(cat.faq && cat.faq.length > 0 ? [getFAQSchema(cat.faq)] : []),
       ]} />
     </main>
   );
