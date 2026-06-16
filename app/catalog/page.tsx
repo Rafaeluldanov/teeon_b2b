@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { catalogCategories } from '@/lib/catalog';
 import { collectCategoryImages } from '@/lib/catalogModels';
 import { getMergedCatalogModels } from '@/lib/serverData';
