@@ -436,7 +436,7 @@ export const portfolioCases: PortfolioCase[] = [
         description: 'Поло 220 г/м² в чёрном цвете с нанесением флекстраном — для офиса и презентаций.',
         quantity: '500 шт',
         material: 'Хлопок',
-        color: 'черынй',
+        color: 'чёрный',
         branding: ['Флекстран'],
         characteristics: ['Пике 220 г/м²', 'Усиленный воротник', 'Флекстран-логотип'],
         images: [
