@@ -43,7 +43,7 @@ export default async function CatalogSection() {
       <div className="v6-section-head">
         <div>
           <div className="v6-kicker">(03) — Каталог</div>
-          <h2 id="catalog-title">Каталог <span className="hl" style={{ background: 'var(--yellow)', color: 'var(--ink)', borderRadius: 8, padding: '0 10px' }}>промо-одежды</span></h2>
+          <h2 id="catalog-title">Каталог <span className="hl" style={{ background: 'var(--yellow)', color: 'var(--ink)', borderRadius: 8, padding: '0 10px' }}>промо-одежды</span> с&nbsp;логотипом</h2>
         </div>
         <p>8 базовых категорий — основа, на которую ложится любое брендирование. Любую позицию подгоняем под задачу: ткань, посадка, упаковка, фурнитура.</p>
       </div>
