@@ -15,7 +15,7 @@ export default function WorkSteps() {
       <div className="v6-section-head">
         <div>
           <div className="v6-kicker">(05) — Процесс</div>
-          <h2 id="steps-title">Как мы<br /><em>работаем</em></h2>
+          <h2 id="steps-title">Как мы<br /><em>производим тираж</em></h2>
         </div>
         <p>От первого звонка до отгрузки — шесть прозрачных шагов. Образец до тиража, статус заказа в реальном времени, контроль ОТК на трёх этапах.</p>
       </div>
