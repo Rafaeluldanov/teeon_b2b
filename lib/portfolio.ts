@@ -358,7 +358,7 @@ export const portfolioCases: PortfolioCase[] = [
     seoTitle: 'Кейс: NIBK — корпоративная одежда автокомпонентов | TEEON',
     seoDescription: 'Фирменная форма NIBK в чёрно-фиолетовой палитре: 500 худи, 700 жилеток, 500 поло, рюкзаки и бейсболки. Вышивка, флекстран, ПВХ-бирки. Партиями под сезон.',
     tags: ['polo', 'hudi', 'zhiletki', 'kepki', 'sumki', 'vyshivka', 'forma', 'merch'],
-    relatedCatalog: ['hudi', 'zhiletki', 'sumki'],
+    relatedCatalog: ['hudi', 'zhiletki', 'sumki', 'kepki'],
     relatedBranding: ['vyshivka', 'shelkografiya', 'birki'],
     isActive: true,
     caseProducts: [
