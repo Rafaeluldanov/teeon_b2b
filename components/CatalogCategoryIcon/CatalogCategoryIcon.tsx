@@ -8,7 +8,8 @@ export type CatalogIconSlug =
   | 'sumki'
   | 'zhiletki'
   | 'kurtki'
-  | 'dozhdeviki';
+  | 'dozhdeviki'
+  | 'kepki';
 
 interface CatalogCategoryIconProps {
   slug: CatalogIconSlug | string;
