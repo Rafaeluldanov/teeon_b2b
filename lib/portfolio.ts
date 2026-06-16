@@ -431,7 +431,7 @@ export const portfolioCases: PortfolioCase[] = [
       },
       {
         id: '1779684542256-es00',
-        title: 'Футбока Поло',
+        title: 'Футболка Поло',
         categorySlug: 'futbolki',
         description: 'Поло 220 г/м² в чёрном цвете с нанесением флекстраном — для офиса и презентаций.',
         quantity: '500 шт',
