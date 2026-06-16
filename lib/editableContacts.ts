@@ -6,8 +6,6 @@ export interface EditableContacts {
   phone: string;
   phoneRaw: string;
   email: string;
-  telegram: string;
-  whatsapp: string;
   city: string;
   address: string;
   schedule: string;
