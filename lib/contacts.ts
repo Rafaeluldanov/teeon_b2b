@@ -40,8 +40,6 @@ export const contacts: ContactsData = {
   email: 'teeon@upgifts.ru',
   phone: '+7 (495) 152-37-45',
   phoneRaw: '74951523745',
-  telegram: '@teeon_merch',
-  whatsapp: '+7 (999) 000-00-00',
   // Менеджер в MAX. Официального deeplink «написать по номеру» у MAX нет,
   // поэтому maxUrl оставляем пустым → используется share-deeplink с этим номером
   // в тексте. Если появится подтверждённая ссылка на профиль/бота — вписать в maxUrl.
