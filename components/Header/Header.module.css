@@ -439,8 +439,8 @@
   height: 24px;
   flex-shrink: 0;
 }
-.mobileMessengerIcon :global(img),
-.mobileMessengerIcon svg {
+.mobileMessengerIcon svg,
+.mobileMessengerIcon img {
   width: 24px;
   height: 24px;
   display: block;
