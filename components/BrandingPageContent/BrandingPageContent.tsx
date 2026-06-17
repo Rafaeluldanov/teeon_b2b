@@ -5,7 +5,7 @@ import { catalogCategories } from '@/lib/catalog';
 import { getMergedPortfolioCases } from '@/lib/serverData';
 import JsonLd from '@/components/JsonLd/JsonLd';
 import { siteConfig } from '@/lib/seo';
-import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
+import { getBreadcrumbSchema, getServiceSchema, getFAQSchema } from '@/lib/schema';
 import BrandingSampleTabs from '@/components/BrandingSampleTabs/BrandingSampleTabs';
 import SafeImg from '@/components/SafeImg/SafeImg';
 import ZoomableImage from '@/components/ZoomableImage/ZoomableImage';
@@ -261,6 +261,27 @@ export default async function BrandingPageContent({ method: m }: Props) {
         </div>
       </section>
 
+      {/* ── FAQ ── */}
+      {m.faq && m.faq.length > 0 && (
+        <section aria-labelledby={`faq-${m.slug}`}>
+          <div className={styles.sectionHead}>
+            <div>
+              <div className={styles.kicker}>FAQ</div>
+              <h2 id={`faq-${m.slug}`}>Частые вопросы<br /><em>{m.title.toLowerCase()}</em></h2>
+            </div>
+            <p>Собрали короткие ответы по выбору технологии, подготовке макета и факторам стоимости.</p>
+          </div>
+          <div className={styles.faqList}>
+            {m.faq.map((item) => (
+              <article key={item.q} className={styles.faqItem}>
+                <h3 className={styles.faqQ}>{item.q}</h3>
+                <p className={styles.faqA}>{item.a}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ── Examples / Portfolio cases ── */}
       <section aria-labelledby={`examples-${m.slug}`}>
         <div className={styles.sectionHead}>
@@ -396,6 +417,7 @@ export default async function BrandingPageContent({ method: m }: Props) {
           description: m.shortDescription,
           url: `${siteConfig.url}/branding/${m.slug}/`,
         }),
+        ...(m.faq && m.faq.length > 0 ? [getFAQSchema(m.faq)] : []),
       ]} />
     </main>
   );
