@@ -345,6 +345,28 @@ export default function Header() {
           <div className={styles.mobileDivider} />
           <a href={`tel:+${phoneRaw}`} className={styles.mobilePhone}>{phone}</a>
           <a href={`mailto:${email}`} className={styles.mobileEmail}>{email}</a>
+          <div className={styles.mobileMessengers}>
+            <a
+              href={maxHref}
+              className={styles.mobileMessengerLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMobile}
+            >
+              <span className={styles.mobileMessengerIcon} aria-hidden="true"><MaxIcon /></span>
+              Написать в MAX
+            </a>
+            <a
+              href={telegramHref}
+              className={styles.mobileMessengerLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={closeMobile}
+            >
+              <span className={styles.mobileMessengerIcon} aria-hidden="true"><TelegramIcon /></span>
+              Написать в Telegram
+            </a>
+          </div>
           <a href="/#request" className={styles.mobileCtaBtn} onClick={closeMobile}>Проконсультироваться</a>
         </nav>
       </div>
