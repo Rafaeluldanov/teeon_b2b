@@ -23,6 +23,13 @@ export interface ContactsData {
   /** Подтверждённый URL профиля/бота/чата менеджера в MAX. Если пусто —
    *  используется официальный share-deeplink (https://max.ru/:share?text=…). */
   maxUrl: string;
+  /** Телефон менеджера для Telegram (отображаемый формат). */
+  telegramPhone: string;
+  /** Тот же номер без форматирования, только цифры. */
+  telegramPhoneRaw: string;
+  /** Подтверждённый @username/ссылка на чат менеджера в Telegram (имеет приоритет).
+   *  Если пусто — формируется официальная ссылка по номеру (https://t.me/+<phone>). */
+  telegramUrl: string;
   city: string;
   address: string;
   schedule: string;
