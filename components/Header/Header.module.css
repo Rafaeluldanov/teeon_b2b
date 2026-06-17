@@ -202,24 +202,43 @@
 }
 .contactPhone:hover { color: var(--blue); }
 
+.messengerGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
 .messengerBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--ink);
-  flex-shrink: 0;
-  transition: transform 0.15s ease;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
   text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+  flex: 0 0 auto;
 }
-.messengerBtn svg,
-.messengerBtn img { width: 30px; height: 30px; display: block; border-radius: 7px; }
-@media (hover: hover) {
-  .messengerBtn:hover { transform: scale(1.06); }
+.messengerBtn:hover {
+  transform: translateY(-1px) scale(1.04);
 }
+
+.maxBtn {
+  background: #ffffff;
+  color: #0a0e1a;
+  box-shadow: 0 8px 24px rgba(109, 93, 252, 0.26);
+}
+
+.telegramBtn {
+  background: linear-gradient(135deg, #2aabee, #229ed9);
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(34, 158, 217, 0.28);
+}
+
+/* MAX-иконка (webp) внутри круглой кнопки */
+.messengerBtn img { width: 30px; height: 30px; display: block; border-radius: 8px; }
+.telegramSvg { width: 24px; height: 24px; display: block; }
 
 .ctaBtn {
   display: inline-flex;
