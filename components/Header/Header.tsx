@@ -30,12 +30,17 @@ const MaxIcon = ({ priority = false }: { priority?: boolean }) => (
 );
 
 // Официальный логотип Telegram (inline SVG — без внешних библиотек и ассетов).
+// Цвет берётся из currentColor (задаётся на .telegramBtn).
 const TelegramIcon = () => (
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <circle cx="12" cy="12" r="12" fill="#29A9EB" />
+  <svg
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+    focusable="false"
+    className={styles.telegramSvg}
+  >
     <path
-      d="M5.491 11.74l11.57-4.461c.537-.194 1.006.131.832.943l-1.97 9.281c-.146.658-.537.818-1.084.508l-3-2.211-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953z"
-      fill="#fff"
+      fill="currentColor"
+      d="M21.9 4.3 18.7 19.4c-.24 1.06-.88 1.32-1.78.82l-4.92-3.63-2.37 2.28c-.26.26-.48.48-.98.48l.35-5.01 9.12-8.24c.4-.35-.09-.55-.61-.2L6.24 12.98 1.4 11.47c-1.05-.33-1.07-1.05.22-1.56L20.56 2.6c.88-.33 1.65.2 1.34 1.7Z"
     />
   </svg>
 );
