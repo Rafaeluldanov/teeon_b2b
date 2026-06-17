@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import Image from 'next/image';
 import { contacts } from '@/lib/contacts';
 import { CONTACTS_LS_KEY } from '@/lib/editableContacts';
 import type { EditableContacts } from '@/lib/editableContacts';
