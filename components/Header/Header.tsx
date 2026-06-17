@@ -360,9 +360,9 @@ export default function Header() {
               className={styles.mobileMessengerLink}
               target="_blank"
               rel="noopener noreferrer"
+              data-max-link-mobile="true"
               onClick={closeMobile}
             >
-              <span className={styles.mobileMessengerIcon} aria-hidden="true"><MaxIcon /></span>
               Написать в MAX
             </a>
             <a
@@ -370,9 +370,9 @@ export default function Header() {
               className={styles.mobileMessengerLink}
               target="_blank"
               rel="noopener noreferrer"
+              data-telegram-link-mobile="true"
               onClick={closeMobile}
             >
-              <span className={styles.mobileMessengerIcon} aria-hidden="true"><TelegramIcon /></span>
               Написать в Telegram
             </a>
           </div>
