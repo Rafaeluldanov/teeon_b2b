@@ -80,8 +80,8 @@ export default function Header() {
   // открывает чат с этим номером. Если в contacts задан telegramUrl (@username) —
   // используем его; текст приветствия добавляем параметром ?text=.
   const telegramShareText = `Здравствуйте! Пишу с сайта TEEON — хочу обсудить заказ с менеджером (${contacts.telegramPhone}).`;
-  const telegramHref = contacts.telegramUrl
-    ? `${contacts.telegramUrl}?text=${encodeURIComponent(telegramShareText)}`
+  const telegramHref = contacts.telegramUrl && contacts.telegramUrl.trim()
+    ? `${contacts.telegramUrl.trim()}?text=${encodeURIComponent(telegramShareText)}`
     : `https://t.me/+${contacts.telegramPhoneRaw}?text=${encodeURIComponent(telegramShareText)}`;
 
   // Скролл-лок намеренно НЕ используется: overflow:hidden на body ломает
