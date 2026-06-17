@@ -339,16 +339,6 @@ export default function Header() {
           <a href={`mailto:${email}`} className={styles.mobileEmail}>{email}</a>
           <div className={styles.mobileMessengers}>
             <a
-              href={maxHref}
-              className={styles.mobileMessengerLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-max-link-mobile="true"
-              onClick={closeMobile}
-            >
-              Написать в MAX
-            </a>
-            <a
               href={telegramHref}
               className={styles.mobileMessengerLink}
               target="_blank"
