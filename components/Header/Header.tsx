@@ -56,20 +56,12 @@ export default function Header() {
   const phoneRaw = overrideContacts?.phoneRaw ?? contacts.phoneRaw;
   const email = overrideContacts?.email ?? contacts.email;
 
-  // Мессенджер MAX → менеджер. Официального deeplink «написать по номеру» у MAX
-  // нет (подтверждено dev.max.ru/help/deeplinks), поэтому при отсутствии
-  // подтверждённого maxUrl формируем официальный share-deeplink с номером в тексте.
-  const maxShareText = `Здравствуйте! Хочу обсудить заказ TEEON. Удобно связаться с менеджером по номеру ${contacts.maxPhone}.`;
-  const maxHref = contacts.maxUrl && contacts.maxUrl.trim()
-    ? contacts.maxUrl.trim()
-    : `https://max.ru/:share?text=${encodeURIComponent(maxShareText)}`;
-
   // Мессенджер Telegram → менеджер. Прямая ссылка по номеру t.me/+<phone>
   // открывает чат с этим номером. Если в contacts задан telegramUrl (@username) —
-  // используем его; текст приветствия добавляем параметром ?text=.
+  // используем его; иначе формируем номерную ссылку с текстом приветствия.
   const telegramShareText = `Здравствуйте! Пишу с сайта TEEON — хочу обсудить заказ с менеджером (${contacts.telegramPhone}).`;
   const telegramHref = contacts.telegramUrl && contacts.telegramUrl.trim()
-    ? `${contacts.telegramUrl.trim()}?text=${encodeURIComponent(telegramShareText)}`
+    ? contacts.telegramUrl.trim()
     : `https://t.me/+${contacts.telegramPhoneRaw}?text=${encodeURIComponent(telegramShareText)}`;
 
   // Скролл-лок намеренно НЕ используется: overflow:hidden на body ломает
