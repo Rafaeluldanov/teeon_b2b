@@ -72,8 +72,8 @@ export default function Header() {
   // нет (подтверждено dev.max.ru/help/deeplinks), поэтому при отсутствии
   // подтверждённого maxUrl формируем официальный share-deeplink с номером в тексте.
   const maxShareText = `Здравствуйте! Хочу обсудить заказ TEEON. Удобно связаться с менеджером по номеру ${contacts.maxPhone}.`;
-  const maxHref = contacts.maxUrl
-    ? contacts.maxUrl
+  const maxHref = contacts.maxUrl && contacts.maxUrl.trim()
+    ? contacts.maxUrl.trim()
     : `https://max.ru/:share?text=${encodeURIComponent(maxShareText)}`;
 
   // Мессенджер Telegram → менеджер. Прямая ссылка по номеру t.me/+<phone>
