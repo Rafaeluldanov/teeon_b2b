@@ -17,17 +17,6 @@ const ChevronIcon = () => (
   </svg>
 );
 
-const MaxIcon = ({ priority = false }: { priority?: boolean }) => (
-  <Image
-    src="/max-icon.webp"
-    alt=""
-    width={30}
-    height={30}
-    className="max-icon-img"
-    priority={priority}
-  />
-);
-
 // Официальный логотип Telegram (inline SVG — без внешних библиотек и ассетов).
 // Цвет берётся из currentColor (задаётся на .telegramBtn).
 const TelegramIcon = () => (
