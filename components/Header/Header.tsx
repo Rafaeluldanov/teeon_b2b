@@ -71,6 +71,14 @@ export default function Header() {
     ? contacts.maxUrl
     : `https://max.ru/:share?text=${encodeURIComponent(maxShareText)}`;
 
+  // Мессенджер Telegram → менеджер. Прямая ссылка по номеру t.me/+<phone>
+  // открывает чат с этим номером. Если в contacts задан telegramUrl (@username) —
+  // используем его; текст приветствия добавляем параметром ?text=.
+  const telegramShareText = `Здравствуйте! Пишу с сайта TEEON — хочу обсудить заказ с менеджером (${contacts.telegramPhone}).`;
+  const telegramHref = contacts.telegramUrl
+    ? `${contacts.telegramUrl}?text=${encodeURIComponent(telegramShareText)}`
+    : `https://t.me/+${contacts.telegramPhoneRaw}?text=${encodeURIComponent(telegramShareText)}`;
+
   // Скролл-лок намеренно НЕ используется: overflow:hidden на body ломает
   // position:sticky у шапки (она улетает к началу документа), а position:fixed
   // на body вызывает прыжок страницы наверх. Позиция меню вычисляется от кнопки
