@@ -207,6 +207,20 @@ export default function Header() {
           <a href="/#request" className={styles.ctaBtn}>Проконсультироваться</a>
         </div>
 
+        {/* Telegram в видимой мобильной шапке (рядом с гамбургером).
+            На десктопе скрыт (там Telegram в .messengerGroup). */}
+        <a
+          href={telegramHref}
+          className={styles.mobileTelegramHeaderLink}
+          aria-label={`Написать менеджеру в Telegram: ${contacts.telegramPhone}`}
+          title={`Написать менеджеру в Telegram: ${contacts.telegramPhone}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-telegram-link-mobile-header="true"
+        >
+          <TelegramIcon />
+        </a>
+
         {/* Hamburger */}
         <button
           type="button"
