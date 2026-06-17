@@ -412,6 +412,41 @@
   color: var(--muted);
   text-decoration: none;
 }
+.mobileMessengers {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 6px 0 2px;
+}
+.mobileMessengerLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 4px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  border-radius: var(--rad-sm);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.mobileMessengerLink:hover { background: var(--paper-2); }
+.mobileMessengerIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.mobileMessengerIcon :global(img),
+.mobileMessengerIcon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+  border-radius: 6px;
+}
+
 .mobileCtaBtn {
   display: flex;
   justify-content: center;
