@@ -53,6 +53,11 @@ export const contacts: ContactsData = {
   maxPhone: '+7 903 017-98-20',
   maxPhoneRaw: '79030179820',
   maxUrl: '',
+  // Менеджер в Telegram. Прямая ссылка по номеру (https://t.me/+<phone>) открывает
+  // чат с этим номером. Если появится @username — вписать сюда (имеет приоритет).
+  telegramPhone: '+7 903 017-98-20',
+  telegramPhoneRaw: '79030179820',
+  telegramUrl: '',
   city: 'Москва',
   address: 'Москва, 2-й Грайвороновский проезд, 48',
   schedule: 'Пн–Пт, 10:00–19:00',
