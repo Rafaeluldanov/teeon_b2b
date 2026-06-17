@@ -224,21 +224,35 @@
   transform: translateY(-1px) scale(1.04);
 }
 
-.maxBtn {
-  background: #ffffff;
-  color: #0a0e1a;
-  box-shadow: 0 8px 24px rgba(109, 93, 252, 0.26);
-}
-
 .telegramBtn {
   background: linear-gradient(135deg, #2aabee, #229ed9);
   color: #ffffff;
   box-shadow: 0 8px 24px rgba(34, 158, 217, 0.28);
 }
 
-/* MAX-иконка (webp) внутри круглой кнопки */
-.messengerBtn img { width: 30px; height: 30px; display: block; border-radius: 8px; }
 .telegramSvg { width: 24px; height: 24px; display: block; }
+
+/* Telegram в видимой мобильной шапке (рядом с гамбургером).
+   По умолчанию скрыт; показывается в свёрнутой шапке (≤1080px), где .contacts
+   уже скрыт и появляется гамбургер. margin-left:auto прижимает его вправо,
+   к гамбургеру. */
+.mobileTelegramHeaderLink {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: auto;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2aabee, #229ed9);
+  color: #ffffff;
+  text-decoration: none;
+  flex: 0 0 auto;
+  box-shadow: 0 8px 24px rgba(34, 158, 217, 0.24);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.mobileTelegramHeaderLink:hover { transform: translateY(-1px) scale(1.04); }
+.mobileTelegramHeaderLink svg { width: 22px; height: 22px; }
 
 .ctaBtn {
   display: inline-flex;
