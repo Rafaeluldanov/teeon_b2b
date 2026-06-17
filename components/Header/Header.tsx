@@ -214,7 +214,17 @@ export default function Header() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <MaxIcon />
+            <MaxIcon priority />
+          </a>
+          <a
+            href={telegramHref}
+            className={styles.messengerBtn}
+            aria-label={`Написать менеджеру в Telegram (${contacts.telegramPhone})`}
+            title={`Написать менеджеру в Telegram · ${contacts.telegramPhone}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <TelegramIcon />
           </a>
           <a href="/#request" className={styles.ctaBtn}>Проконсультироваться</a>
         </div>
