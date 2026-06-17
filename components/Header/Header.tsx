@@ -191,18 +191,7 @@ export default function Header() {
             <a href={`mailto:${email}`} className={styles.contactEmail}>{email}</a>
             <a href={`tel:+${phoneRaw}`} className={styles.contactPhone}>{phone}</a>
           </div>
-          <div className={styles.messengerGroup} aria-label="Мессенджеры">
-            <a
-              href={maxHref}
-              className={`${styles.messengerBtn} ${styles.maxBtn}`}
-              aria-label={`Написать менеджеру в MAX: ${contacts.maxPhone}`}
-              title={`Написать менеджеру в MAX: ${contacts.maxPhone}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-max-link="true"
-            >
-              <MaxIcon priority />
-            </a>
+          <div className={styles.messengerGroup} aria-label="Мессенджер">
             <a
               href={telegramHref}
               className={`${styles.messengerBtn} ${styles.telegramBtn}`}
