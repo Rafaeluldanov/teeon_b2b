@@ -497,6 +497,9 @@
   .nav { display: none; }
   .contacts { display: none; }
   .hamburger { display: flex; }
+  /* В свёрнутой шапке десктопный Telegram (в .contacts) скрыт — показываем
+     отдельную видимую Telegram-иконку рядом с гамбургером. */
+  .mobileTelegramHeaderLink { display: inline-flex; }
 }
 @media (max-width: 860px) {
   .inner { height: 54px; padding: 0 6px 0 16px; }
