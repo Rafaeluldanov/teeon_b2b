@@ -8,13 +8,13 @@ import { getBreadcrumbSchema, getServiceSchema, getFAQSchema } from '@/lib/schem
 import styles from './branding.module.css';
 
 export const metadata: Metadata = {
-  title: 'Нанесение и брендирование одежды | Вышивка, шелкография, DTF',
+  title: 'Нанесение и брендирование | Вышивка, шелкография, DTF',
   description:
     'Наносим логотипы на промо-одежду и мерч: вышивка, шевроны, шелкография, DTF, DTG, сублимация, тиснение, гравировка и бирки. Расчёт под тираж.',
   alternates: { canonical: `${siteConfig.url}/branding/` },
   openGraph: {
     url: `${siteConfig.url}/branding/`,
-    title: 'Нанесение и брендирование одежды | Вышивка, шелкография, DTF',
+    title: 'Нанесение и брендирование | Вышивка, шелкография, DTF',
     description:
       'Наносим логотипы на промо-одежду и мерч: вышивка, шевроны, шелкография, DTF, DTG, сублимация, тиснение, гравировка и бирки. Расчёт под тираж.',
   },
