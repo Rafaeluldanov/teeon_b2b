@@ -14,9 +14,9 @@ export const metadata: Metadata = {
   title: 'Каталог промо-одежды и мерча с логотипом',
   description:
     'Футболки, худи, свитшоты, лонгсливы, сумки, жилетки, куртки, дождевики и кепки для корпоративного мерча. Пошив, брендирование и поставка тиражей для бизнеса.',
-  alternates: { canonical: `${siteConfig.url}/catalog/` },
+  alternates: { canonical: `${siteConfig.url}/catalog` },
   openGraph: {
-    url: `${siteConfig.url}/catalog/`,
+    url: `${siteConfig.url}/catalog`,
     title: 'Каталог промо-одежды и мерча с логотипом',
     description:
       'Футболки, худи, свитшоты, лонгсливы, сумки, жилетки, куртки, дождевики и кепки для корпоративного мерча. Пошив, брендирование и поставка тиражей для бизнеса.',
@@ -80,13 +80,13 @@ const ArrowIc = () => (
 const catalogJsonLd = [
   getBreadcrumbSchema([
     { name: 'Главная', url: siteConfig.url },
-    { name: 'Каталог', url: `${siteConfig.url}/catalog/` },
+    { name: 'Каталог', url: `${siteConfig.url}/catalog` },
   ]),
   getServiceSchema({
     name: 'Пошив промо-одежды и корпоративного мерча',
     description:
       'Производим промо-одежду и корпоративный мерч для бизнеса: футболки, худи, свитшоты, лонгсливы, сумки, жилетки, куртки и дождевики.',
-    url: `${siteConfig.url}/catalog/`,
+    url: `${siteConfig.url}/catalog`,
   }),
 ];
 

@@ -8,9 +8,9 @@ const cat = getCategoryBySlug('hudi')!;
 export const metadata: Metadata = {
   title: cat.seo.title,
   description: cat.seo.description,
-  alternates: { canonical: `${siteConfig.url}/catalog/${cat.slug}/` },
+  alternates: { canonical: `${siteConfig.url}/catalog/${cat.slug}` },
   openGraph: {
-    url: `${siteConfig.url}/catalog/${cat.slug}/`,
+    url: `${siteConfig.url}/catalog/${cat.slug}`,
     title: cat.seo.title,
     description: cat.seo.description,
   },

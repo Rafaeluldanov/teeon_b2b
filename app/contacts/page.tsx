@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   title: 'Контакты TEEON | Заявка на пошив промо-одежды и мерча',
   description:
     'Контакты TEEON для расчёта пошива промо-одежды, корпоративного мерча и брендирования. Оставьте заявку, прикрепите логотип или ТЗ, укажите тираж и сроки.',
-  alternates: { canonical: `${siteConfig.url}/contacts/` },
+  alternates: { canonical: `${siteConfig.url}/contacts` },
   openGraph: {
-    url: `${siteConfig.url}/contacts/`,
+    url: `${siteConfig.url}/contacts`,
     title: 'Контакты TEEON | Заявка на пошив промо-одежды и мерча',
     description:
       'Контакты TEEON для расчёта пошива промо-одежды, корпоративного мерча и брендирования. Оставьте заявку, прикрепите логотип или ТЗ, укажите тираж и сроки.',
@@ -51,7 +51,7 @@ const faqItems = faqGroups[2].items;
 const jsonLd = [
   getBreadcrumbSchema([
     { name: 'Главная', url: siteConfig.url },
-    { name: 'Контакты', url: `${siteConfig.url}/contacts/` },
+    { name: 'Контакты', url: `${siteConfig.url}/contacts` },
   ]),
   getOrganizationSchema(),
   getFAQSchema(faqItems.map(f => ({ q: f.question, a: f.answer }))),

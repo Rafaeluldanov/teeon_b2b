@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       robots: { index: false, follow: false },
     };
   }
-  const url = `${siteConfig.url}/portfolio/${c.slug}/`;
+  const url = `${siteConfig.url}/portfolio/${c.slug}`;
   return {
     title: c.seoTitle,
     description: c.seoDescription,

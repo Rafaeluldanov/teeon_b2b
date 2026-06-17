@@ -8,9 +8,9 @@ const method = getBrandingMethod('gravirovka')!;
 export const metadata: Metadata = {
   title: method.seoTitle,
   description: method.seoDescription,
-  alternates: { canonical: `${siteConfig.url}/branding/${method.slug}/` },
+  alternates: { canonical: `${siteConfig.url}/branding/${method.slug}` },
   openGraph: {
-    url: `${siteConfig.url}/branding/${method.slug}/`,
+    url: `${siteConfig.url}/branding/${method.slug}`,
     title: method.seoTitle,
     description: method.seoDescription,
   },

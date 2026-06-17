@@ -419,8 +419,8 @@ export default function PortfolioCasePage({ caseItem }: Props) {
       <JsonLd data={[
         getBreadcrumbSchema([
           { name: 'Главная', url: siteConfig.url },
-          { name: 'Портфолио', url: `${siteConfig.url}/portfolio/` },
-          { name: caseItem.shortTitle, url: `${siteConfig.url}/portfolio/${caseItem.slug}/` },
+          { name: 'Портфолио', url: `${siteConfig.url}/portfolio` },
+          { name: caseItem.shortTitle, url: `${siteConfig.url}/portfolio/${caseItem.slug}` },
         ]),
         getPortfolioCaseSchema(caseItem),
       ]} />

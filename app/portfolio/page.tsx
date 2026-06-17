@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   title: 'Портфолио промо-одежды и мерча | Кейсы производства',
   description:
     'Примеры работ по пошиву промо-одежды, корпоративного мерча и брендированных изделий: футболки, худи, свитшоты, сумки, жилетки, куртки и нанесение логотипов.',
-  alternates: { canonical: `${siteConfig.url}/portfolio/` },
+  alternates: { canonical: `${siteConfig.url}/portfolio` },
   openGraph: {
-    url: `${siteConfig.url}/portfolio/`,
+    url: `${siteConfig.url}/portfolio`,
     title: 'Портфолио промо-одежды и мерча | Кейсы производства',
     description:
       'Примеры работ по пошиву промо-одежды, корпоративного мерча и брендированных изделий: футболки, худи, свитшоты, сумки, жилетки, куртки и нанесение логотипов.',
@@ -228,7 +228,7 @@ export default function PortfolioPage({ searchParams }: Props) {
 
       <JsonLd data={getBreadcrumbSchema([
         { name: 'Главная', url: siteConfig.url },
-        { name: 'Портфолио', url: `${siteConfig.url}/portfolio/` },
+        { name: 'Портфолио', url: `${siteConfig.url}/portfolio` },
       ])} />
     </main>
   );

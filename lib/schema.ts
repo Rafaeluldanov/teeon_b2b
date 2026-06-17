@@ -117,7 +117,7 @@ export function getPortfolioCaseSchema(caseItem: {
     '@type': 'CreativeWork',
     name: caseItem.title,
     description: caseItem.description,
-    url: `${siteConfig.url}/portfolio/${caseItem.slug}/`,
+    url: `${siteConfig.url}/portfolio/${caseItem.slug}`,
     dateCreated: String(caseItem.year),
     creator: {
       '@type': 'Organization',

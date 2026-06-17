@@ -15,3 +15,14 @@ export const siteConfig = {
 } as const;
 
 export type SiteConfig = typeof siteConfig;
+
+/**
+ * Canonical absolute URL for a route path.
+ * Root ('/' or '') → origin without trailing slash (https://teeon.ru);
+ * every other path is returned WITHOUT a trailing slash, matching the
+ * non-trailing-slash URLs production serves with 200 (trailing-slash URLs 308-redirect).
+ */
+export function canonicalUrl(path: string = '/'): string {
+  const clean = String(path).replace(/^\/+/, '').replace(/\/+$/, '');
+  return clean ? `${siteConfig.url}/${clean}` : siteConfig.url;
+}

@@ -7,7 +7,7 @@ import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getFAQSchema } from '@/lib/schema';
 import styles from './faq.module.css';
 
-const pageUrl = `${siteConfig.url}/faq/`;
+const pageUrl = `${siteConfig.url}/faq`;
 
 export const metadata: Metadata = {
   title: faqPageSeo.title,

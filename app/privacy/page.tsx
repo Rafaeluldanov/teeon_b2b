@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description:
     'Политика обработки персональных данных пользователей сайта TEEON.',
   robots: { index: true, follow: true },
-  alternates: { canonical: `${siteConfig.url}/privacy/` },
+  alternates: { canonical: `${siteConfig.url}/privacy` },
 };
 
 export default function PrivacyPage() {

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: 'Реквизиты TEEON для договора и оплаты',
   description: 'Реквизиты TEEON для B2B-заказов: ИП Ульданов Рафаэль Айратович, ИНН, ОГРНИП и фактический адрес производства в Москве.',
   robots: { index: true, follow: true },
-  alternates: { canonical: `${siteConfig.url}/requisites/` },
+  alternates: { canonical: `${siteConfig.url}/requisites` },
 };
 
 export default function RequisitesPage() {

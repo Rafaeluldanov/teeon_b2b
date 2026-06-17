@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   title: 'Нанесение и брендирование | Вышивка, шелкография, DTF',
   description:
     'Наносим логотипы на промо-одежду и мерч: вышивка, шевроны, шелкография, DTF, DTG, сублимация, тиснение, гравировка и бирки. Расчёт под тираж.',
-  alternates: { canonical: `${siteConfig.url}/branding/` },
+  alternates: { canonical: `${siteConfig.url}/branding` },
   openGraph: {
-    url: `${siteConfig.url}/branding/`,
+    url: `${siteConfig.url}/branding`,
     title: 'Нанесение и брендирование | Вышивка, шелкография, DTF',
     description:
       'Наносим логотипы на промо-одежду и мерч: вышивка, шевроны, шелкография, DTF, DTG, сублимация, тиснение, гравировка и бирки. Расчёт под тираж.',
@@ -78,12 +78,12 @@ const ArrowIc = () => (
 const brandingJsonLd = [
   getBreadcrumbSchema([
     { name: 'Главная', url: siteConfig.url },
-    { name: 'Брендирование', url: `${siteConfig.url}/branding/` },
+    { name: 'Брендирование', url: `${siteConfig.url}/branding` },
   ]),
   getServiceSchema({
     name: 'Брендирование одежды и мерча',
     description: 'Наносим логотипы на промо-одежду и мерч: вышивка, шевроны, шелкография, DTF, DTG, сублимация, тиснение, гравировка и бирки.',
-    url: `${siteConfig.url}/branding/`,
+    url: `${siteConfig.url}/branding`,
   }),
   getFAQSchema(faqItems),
 ];

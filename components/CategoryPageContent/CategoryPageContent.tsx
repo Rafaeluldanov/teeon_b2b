@@ -390,13 +390,13 @@ export default async function CategoryPageContent({ category: cat }: Props) {
       <JsonLd data={[
         getBreadcrumbSchema([
           { name: 'Главная', url: siteConfig.url },
-          { name: 'Каталог', url: `${siteConfig.url}/catalog/` },
-          { name: cat.name, url: `${siteConfig.url}/catalog/${cat.slug}/` },
+          { name: 'Каталог', url: `${siteConfig.url}/catalog` },
+          { name: cat.name, url: `${siteConfig.url}/catalog/${cat.slug}` },
         ]),
         getServiceSchema({
           name: cat.h1,
           description: cat.pageDesc,
-          url: `${siteConfig.url}/catalog/${cat.slug}/`,
+          url: `${siteConfig.url}/catalog/${cat.slug}`,
         }),
         ...(cat.faq && cat.faq.length > 0 ? [getFAQSchema(cat.faq)] : []),
       ]} />

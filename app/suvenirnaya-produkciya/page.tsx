@@ -6,7 +6,7 @@ import { siteConfig } from '@/lib/seo';
 import { getBreadcrumbSchema, getServiceSchema } from '@/lib/schema';
 import styles from './suvenirnaya-produkciya.module.css';
 
-const pageUrl = `${siteConfig.url}/suvenirnaya-produkciya/`;
+const pageUrl = `${siteConfig.url}/suvenirnaya-produkciya`;
 
 export const metadata: Metadata = {
   title: giftsData.seoTitle,

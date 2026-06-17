@@ -17,9 +17,9 @@ import { getFAQSchema } from '@/lib/schema';
 export const metadata: Metadata = {
   title: siteConfig.defaultTitle,
   description: siteConfig.defaultDescription,
-  alternates: { canonical: `${siteConfig.url}/` },
+  alternates: { canonical: siteConfig.url },
   openGraph: {
-    url: `${siteConfig.url}/`,
+    url: siteConfig.url,
     title: siteConfig.defaultTitle,
     description: siteConfig.defaultDescription,
   },

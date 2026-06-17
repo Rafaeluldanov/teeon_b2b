@@ -9,7 +9,7 @@ import OptimizedImageWithFallback from '@/components/OptimizedImageWithFallback/
 import styles from './kepki.module.css';
 
 const cat = getCategoryBySlug('kepki')!;
-const pageUrl = `${siteConfig.url}/catalog/${cat.slug}/`;
+const pageUrl = `${siteConfig.url}/catalog/${cat.slug}`;
 
 export const metadata: Metadata = {
   title: cat.seo.title,
@@ -362,7 +362,7 @@ export default async function KepkiPage() {
       <JsonLd data={[
         getBreadcrumbSchema([
           { name: 'Главная', url: siteConfig.url },
-          { name: 'Каталог', url: `${siteConfig.url}/catalog/` },
+          { name: 'Каталог', url: `${siteConfig.url}/catalog` },
           { name: 'Кепки и бейсболки', url: pageUrl },
         ]),
         getServiceSchema({

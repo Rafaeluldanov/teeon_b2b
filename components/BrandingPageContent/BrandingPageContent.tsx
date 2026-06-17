@@ -409,13 +409,13 @@ export default async function BrandingPageContent({ method: m }: Props) {
       <JsonLd data={[
         getBreadcrumbSchema([
           { name: 'Главная', url: siteConfig.url },
-          { name: 'Брендирование', url: `${siteConfig.url}/branding/` },
-          { name: m.title, url: `${siteConfig.url}/branding/${m.slug}/` },
+          { name: 'Брендирование', url: `${siteConfig.url}/branding` },
+          { name: m.title, url: `${siteConfig.url}/branding/${m.slug}` },
         ]),
         getServiceSchema({
           name: m.h1,
           description: m.shortDescription,
-          url: `${siteConfig.url}/branding/${m.slug}/`,
+          url: `${siteConfig.url}/branding/${m.slug}`,
         }),
         ...(m.faq && m.faq.length > 0 ? [getFAQSchema(m.faq)] : []),
       ]} />

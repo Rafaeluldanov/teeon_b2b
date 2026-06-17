@@ -8,9 +8,9 @@ export const metadata: Metadata = {
   title: 'О компании TEEON | Производство промо-одежды и мерча',
   description:
     'TEEON — производство промо-одежды и корпоративного мерча. Собственный швейный цех, брендирование, контроль качества, работа с B2B-заказами под ключ.',
-  alternates: { canonical: `${siteConfig.url}/about/` },
+  alternates: { canonical: `${siteConfig.url}/about` },
   openGraph: {
-    url: `${siteConfig.url}/about/`,
+    url: `${siteConfig.url}/about`,
     title: 'О компании TEEON | Производство промо-одежды и мерча',
     description:
       'TEEON — производство промо-одежды и корпоративного мерча. Собственный швейный цех, брендирование, контроль качества, работа с B2B-заказами под ключ.',
@@ -23,7 +23,7 @@ export default function Page() {
       <JsonLd data={[
         getBreadcrumbSchema([
           { name: 'Главная', url: siteConfig.url },
-          { name: 'О компании', url: `${siteConfig.url}/about/` },
+          { name: 'О компании', url: `${siteConfig.url}/about` },
         ]),
         getOrganizationSchema(),
       ]} />
